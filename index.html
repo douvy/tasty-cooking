@@ -9,6 +9,13 @@
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://pro.fontawesome.com">
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="css/style.min.css" as="style">
+    <link rel="preload" href="js/recipes.js" as="script">
+    <link rel="preload" href="assets/img/sesame-green-beans.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="assets/img/guacamole.jpg" as="image" fetchpriority="high">
+    
     <!-- Favicon -->
     <link rel="icon" href="assets/img/favicon.png">
     <!-- CSS (includes Tailwind) -->
@@ -403,6 +410,6 @@
             </ul>
         </div>
     </footer>
-<script src="js/recipes.js"></script>
+<script src="js/recipes.min.js"></script>
 </body>
 </html>
