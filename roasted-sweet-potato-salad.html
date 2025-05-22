@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <html data-wf-domain="www.tasty.cooking">
+        <title>Tasty Cooking</title>
+        <meta content="tasty cooking." name="description">
+        <meta content="Roasted Sweet Potato Salad" property="og:title"/>
+        <meta content="https://www.tasty.cooking/assets/img/roasted-sweet-potato-salad.jpg" property="og:image"/>
+    <!--Favicon-->
+    <link rel="icon" href="assets/img/favicon.png">
+    <!--CSS (includes Tailwind)-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <!--Font Awesome Pro-->
+    <link href="css/all.css" rel="stylesheet"> <!--load all styles-->
+    <script defer src="js/all.js"></script> <!--load all styles-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+</head>
+
+<body class="bg-gray-900 text-gray-200">
+    <header class="absolute top-0 left-0 w-full z-30 bg-black bg-opacity-50">
+        <div class="container mx-auto flex justify-between items-center p-4 sm:pl-0 sm:pr-0">
+            <!-- Logo and Navigation -->
+            <div class="flex items-center text-sm text-light-green">
+                <nav class="space-x-4 uppercase relative inline-block ml-3 sm:ml-0 text-sm">
+                    <a href="index" class="hover:text-gray-300">Recipes</a>
+                    <!-- More nav items -->
+                </nav>
+            </div>
+    
+            <!-- Connect Button -->
+            <div class="ml-auto inline-block uppercase text-sm text-light-green">
+                <i class="fas fa-utensils fa-lg"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative">
+        <img src="assets/img/roasted-sweet-potato-salad.jpg" alt="Roasted Sweet Potato Salad" class="w-full h-96 object-cover">
+        <div class="absolute bottom-0 left-0 bg-light-green mb-5 ml-4 sm:ml-16 pb-5 pt-5 px-6 py-2">
+            <h1 class="text-black text-xl uppercase font-bold">Roasted Sweet Potato Salad</h1>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section class="py-8 px-4 bg-black">
+        <div class="container mx-auto">
+            <div class="flex items-center justify-start space-x-4 mb-4">
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-light-green text-md sm:text-xl mr-2"></i>
+                    <p class="text-sm sm:text-lg font-bold text-light-gray">PREP: 10 MIN / READY: 50 MIN</p>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-utensils text-light-green text-md sm:text-xl mr-2"></i>
+                    <p class="text-sm sm:text-lg font-bold text-light-gray">4</p>
+                </div>
+            </div>
+            <!-- Tags Section -->
+            <div class="mb-3 flex flex-wrap gap-2">
+                <span class="bg-gray text-light-green px-2 py-1 rounded-sm text-sm">Gluten-Free</span>
+                <span class="bg-gray text-light-green px-2 py-1 rounded-sm text-sm">Healthy</span>
+                <span class="bg-gray text-light-green px-2 py-1 rounded-sm text-sm">Vegan</span>
+                <span class="bg-gray text-light-green px-2 py-1 rounded-sm text-sm">Vegetable</span>
+                <span class="bg-gray text-light-green px-2 py-1 rounded-sm text-sm">Vegetarian</span>
+            </div>
+            <div class="max-w-3xl text-light-gray">
+                <p class="leading-8">Potato salad is often a traditional dish with strong preferences. This version is unique with no mayo, using sweet potatoes instead of russet and Korean pickled radish instead of pickle relish. It's tasty and colorful.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ingredients Section -->
+    <section class="bg-light-green text-black py-8 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold mb-3 uppercase">Ingredients</h2>
+            <ul class="list-disc pl-6 leading-9">
+                <li>2 lb purple sweet potatoes (6 medium), scrubbed, halved lengthwise</li>
+                <li>2 tsp avocado oil</li>
+                <li>1 cup carrot matchsticks (3 in × 1/4 in)</li>
+                <li>¼ cup thin half-moon slices white or yellow onion</li>
+                <li>7 ounces <a href="#" id="openModal" class="text-blue underline">yellow pickled radish</a>, cut into 1/4-inch half-moon slices (2 cups)</li>
+                <li>2 tbsp whole grain mustard</li>
+                <li>1 tsp kosher salt</li>
+                <li>1 lemon</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="py-8 px-4 mb-4 bg-black">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold mb-4 uppercase text-light-green">Instructions</h2>
+            <ol class="list-decimal pl-6 text-light-gray leading-9">
+                <li class="mb-4">Preheat the oven to 350ºF.</li>
+                <li class="mb-4">Place sweet potatoes cut-sides down on a baking sheet, rub with oil, and roast until tender, 30-40 minutes.</li>
+                <li class="mb-4">While roasting, put carrots and onion in a bowl. Sprinkle with salt, toss, and massage until pliable. Rinse, drain, and return to the bowl. Add pickles, mustard, lemon zest, and juice. Mix well and set aside.</li>
+                <li class="mb-4">Once sweet potatoes are cool enough to handle, scoop the flesh into the bowl (or chop skins if preferred) and fold into the dressing. Season with salt and lemon juice. Serve immediately.</li>
+                <li class="mb-4">Store in an airtight container in the fridge for up to 1 week.</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="myModal" class="hidden fixed inset-0 bg-white bg-opacity-25 flex items-center justify-center z-50 sm:p-8">
+        <div class="bg-black text-light-gray rounded-sm shadow-lg p-6 max-w-4xl w-full sm:mx-8 sm:h-auto h-screen overflow-y-auto relative">
+            <button id="closeModal" class="absolute top-4 right-4 bg-transparent border border-light-gray-all text-light-gray py-2 px-4 rounded-sm">Close</button>
+            <h1 class="text-xl uppercase text-white border-dark-gray-b pb-4 font-bold mb-4 text-left">Yellow Pickled Radish</h1>
+            <h2 class="text-lg uppercase text-white font-bold mb-2">Ingredients</h2>
+            <ul class="list-disc pl-6 leading-9">
+                <li>1 cup rice vinegar</li>
+                <li>1.5 cups water</li>
+                <li>¼ cup agave syrup</li>
+                <li>2 tsp salt</li>
+                <li>¼ tsp turmeric</li>
+                <li>1 long daikon radish or 1 Korean radish, peeled & cut into strips, rounds, or half moons</li>
+            </ul>
+            <h2 class="text-lg uppercase text-white font-bold mb-2 mt-6">Instructions</h2>
+            <ol class="list-decimal pl-6 text-light-gray leading-9">
+                <li class="mb-4">In a small pot, mix rice vinegar, water, agave, salt, and turmeric. Bring to a boil, then turn off the heat.</li>
+                <li class="mb-4">Place cut daikon radish in a large glass container and pour the vinegar mixture over it. Let it cool completely, then secure the lid and refrigerate for at least 24 hours before use.</li>
+            </ol>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the link that opens the modal
+        var btns = document.querySelectorAll("#openModal");
+
+        // Get the button that closes the modal
+        var closeBtn = document.getElementById("closeModal");
+
+        // When the user clicks the link, open the modal 
+        btns.forEach(function(btn) {
+            btn.onclick = function(event) {
+                event.preventDefault();
+                modal.classList.remove("hidden");
+            }
+        });
+
+        // When the user clicks on the button, close the modal
+        closeBtn.onclick = function() {
+            modal.classList.add("hidden");
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.classList.add("hidden");
+            }
+        }
+
+        // When the user presses the Escape key, close the modal
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                modal.classList.add("hidden");
+            }
+        });
+    });
+</script>
+
+    <footer class="fixed bottom-0 left-0 right-0 bg-black w-full border-t border-dark-gray-top z-50 pt-1 pb-1">
+        <div class="container mx-auto flex items-center justify-between px-4 sm:pl-0 sm:pr-0">
+            <ul class="text-xs font-normal text-gray-400 flex items-center gap-3">
+                <li class="inline-block mr-2 pt-1 pb-1">
+                    <a href="index" rel="noopener noreferrer">HOME</a>
+                </li>
+                <!-- Add more list items here as needed -->
+            </ul>
+        </div>
+    </footer>
+      
+<script src="js/mobile.js"></script>
+</body>
+</html>

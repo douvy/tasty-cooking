@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <html data-wf-domain="www.tasty.cooking">
+        <title>Tasty Cooking</title>
+        <meta content="tasty cooking." name="description">
+        <meta content="Romesco" property="og:title"/>
+        <meta content="https://www.tasty.cooking/assets/img/romesco.jpg" property="og:image"/>
+    <!--Favicon-->
+    <link rel="icon" href="assets/img/favicon.png">
+    <!--CSS (includes Tailwind)-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <!--Font Awesome Pro-->
+    <link href="css/all.css" rel="stylesheet"> <!--load all styles-->
+    <script defer src="js/all.js"></script> <!--load all styles-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+</head>
+
+<body class="bg-gray-900 text-gray-200">
+    <header class="absolute top-0 left-0 w-full z-30 bg-black bg-opacity-50">
+        <div class="container mx-auto flex justify-between items-center p-4 sm:pl-0 sm:pr-0">
+            <!-- Logo and Navigation -->
+            <div class="flex items-center text-sm text-light-green">
+                <nav class="space-x-4 uppercase relative inline-block ml-3 sm:ml-0 text-sm">
+                    <a href="index" class="hover:text-gray-300">Recipes</a>
+                    <!-- More nav items -->
+                </nav>
+            </div>
+    
+            <!-- Connect Button -->
+            <div class="ml-auto inline-block uppercase text-sm text-light-green">
+                <i class="fas fa-utensils fa-lg"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative">
+        <img src="assets/img/romesco.jpg" alt="Romesco" class="w-full h-96 object-cover">
+        <div class="absolute bottom-0 left-0 bg-light-green mb-5 ml-4 sm:ml-16 pb-5 pt-5 px-6 py-2">
+            <h1 class="text-black text-xl uppercase font-bold">Romesco</h1>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section class="py-8 px-4 bg-black">
+        <div class="container mx-auto">
+            <div class="flex items-center justify-start space-x-4 mb-4">
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-light-green text-md sm:text-xl mr-2"></i>
+                    <p class="text-sm sm:text-lg font-bold text-light-gray">PREP: 20 MIN / READY: ~1 HR</p>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-utensils text-light-green text-md sm:text-xl mr-2"></i>
+                    <p class="text-sm sm:text-lg font-bold text-light-gray">16</p>
+                </div>
+            </div>
+            <!-- Tags Section -->
+            <div class="mb-3 flex flex-wrap gap-2">
+                <span class="bg-gray text-light-green px-2 py-1 rounded-sm text-sm">Gluten-Free</span>
+                <span class="bg-gray text-light-green px-2 py-1 rounded-sm text-sm">Healthy</span>
+                <span class="bg-gray text-light-green px-2 py-1 rounded-sm text-sm">Vegan</span>
+                <span class="bg-gray text-light-green px-2 py-1 rounded-sm text-sm">Vegetarian</span>
+            </div>
+            <div class="max-w-3xl text-light-gray">
+                <p class="leading-8">The almonds connect this condiment to its roots in Catalonia, where it’s used as a sauce for fish and chicken. A go-to dipping sauce for frites, as well as a garnish for roasted asparagus. Its uses are unlimited.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ingredients Section -->
+    <section class="bg-light-green text-black py-8 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold mb-3 uppercase">Ingredients</h2>
+            <h2 class="text-lg font-bold mt-5 uppercase">makes 2 cups</h2>
+            <ul class="list-disc pl-6 leading-9">
+                <li>¼ cup almonds</li>
+                <li>¼ cup hazelnuts</li>
+                <li>4 red bell peppers</li>
+                <li>1½ lb Roma tomatoes</li>
+                <li>¼ cup chopped fresh flat-leaf parsley</li>
+                <li>2 cloves <a href="#" id="openModal" class="text-blue underline">garlic confit </a></li>
+                <li>½ cup extra-virgin olive oil</li>
+                <li>3 tbsp red wine vinegar</li>
+                <li>1 tsp kosher salt</li>
+                <li>Freshly ground black pepper</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="py-8 px-4 mb-4 bg-black">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold mb-4 uppercase text-light-green">Instructions</h2>
+            <ol class="list-decimal pl-6 text-light-gray leading-9">
+                <li class="mb-4">Preheat the oven to 350°F.</li>
+                <li class="mb-4">On a rimmed baking sheet, spread out the almonds and hazelnuts in an even layer. Toast until lightly browned and aromatic, 10-12 minutes. Remove from oven and let cool.</li>
+                <li class="mb-4">Increase the oven temperature to 450°F.</li>
+                <li class="mb-4">Place the bell peppers and tomatoes on a rimmed baking sheet and roast, turning occasionally, until charred on all sides and starting to soften. Alternatively, you can use a grill or a grill pan. Transfer the vegetables to a bowl, cover with a kitchen towel, and allow them to steam. When cool enough to handle, slip off the skins with a towel and remove the seeds.</li>
+                <li class="mb-4">In a food processor, combine the cooled almonds and hazelnuts, roasted vegetables, parsley, garlic confit, and olive oil. Process to make a coarse sauce with some chunks remaining. Add the vinegar and season with salt and pepper.</li>
+            </ol>
+        </div>
+    </section>
+
+    <footer class="fixed bottom-0 left-0 right-0 bg-black w-full border-t border-dark-gray-top z-50 pt-1 pb-1">
+        <div class="container mx-auto flex items-center justify-between px-4 sm:pl-0 sm:pr-0">
+            <ul class="text-xs font-normal text-gray-400 flex items-center gap-3">
+                <li class="inline-block mr-2 pt-1 pb-1">
+                    <a href="index" rel="noopener noreferrer">HOME</a>
+                </li>
+                <!-- Add more list items here as needed -->
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="myModal" class="hidden fixed inset-0 bg-white bg-opacity-25 flex items-center justify-center z-50 sm:p-8">
+        <div class="bg-black text-light-gray rounded-sm shadow-lg p-6 max-w-4xl w-full sm:mx-8 sm:h-auto h-screen overflow-y-auto relative">
+            <button id="closeModal" class="absolute top-4 right-4 bg-transparent border border-light-gray-all text-light-gray py-2 px-4 rounded-sm">Close</button>
+            <h1 class="text-xl uppercase text-white border-dark-gray-b pb-4 font-bold mb-4 text-left">Garlic Confit</h1>
+            <h2 class="text-lg uppercase text-white font-bold mb-2">Ingredients</h2>
+            <h2 class="text-base font-bold mt-5 uppercase text-white">makes 4 cups</h2>
+            <ul class="list-disc pl-6 leading-9">
+                <li>2 cups extra-virgin olive oil, plus more as needed</li>
+                <li>8 heads garlic, cloves separated and peeled</li>
+                <li>12 fresh thyme sprigs</li>
+                <li>3 bay leaves, bruised</li>
+            </ul>
+            <h2 class="text-lg uppercase text-white font-bold mb-2 mt-6">Instructions</h2>
+            <ol class="list-decimal pl-6 text-light-gray leading-9">
+                <li class="mb-4">Preheat the oven to 350°F.</li>
+                <li class="mb-4">In a medium baking dish, combine the olive oil, garlic, thyme, and bay leaves. The garlic should be completely covered by about 1 inch of oil. Bake until the garlic cloves are soft, fragrant, and lightly browned but still hold their shape, 45 minutes to 1 hour. Remove from the oven and let cool to room temperature.</li>
+                <li class="mb-4">Store in an airtight container in the refrigerator for up to 2 months, completely covered with olive oil to prevent air from reaching them.</li>
+            </ol>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the link that opens the modal
+        var btns = document.querySelectorAll("#openModal");
+
+        // Get the button that closes the modal
+        var closeBtn = document.getElementById("closeModal");
+
+        // When the user clicks the link, open the modal 
+        btns.forEach(function(btn) {
+            btn.onclick = function(event) {
+                event.preventDefault();
+                modal.classList.remove("hidden");
+            }
+        });
+
+        // When the user clicks on the button, close the modal
+        closeBtn.onclick = function() {
+            modal.classList.add("hidden");
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.classList.add("hidden");
+            }
+        }
+
+        // When the user presses the Escape key, close the modal
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                modal.classList.add("hidden");
+            }
+        });
+    });
+</script>
+      
+<script src="js/mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Tasty Cooking</title>
+    <meta content="tasty cooking • recipes collection" property="og:title"/>
+    <meta content="https://www.tasty.cooking/assets/img/hero.png" property="og:image"/>
+    <!-- Favicon -->
+    <link rel="icon" href="assets/img/favicon.png">
+    <!-- CSS (includes Tailwind) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <!-- Font Awesome Pro -->
+    <link href="css/all.css" rel="stylesheet"> <!--load all styles-->
+    <script defer src="js/all.js"></script> <!--load all styles-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+</head>
+<body>
+    <header class="container mx-auto px-4 sticky absolute top-0 left-0 w-full z-30 bg-black bg-opacity-100 flex justify-between items-center p-4 px-8 pl-2 sm:pl-0 pr-6">
+        <!-- Logo and Navigation -->
+        <div class="flex items-center justify-between md:space-x-4 text-sm md:ml-4">
+            <!-- Spacer div to push navigation to the edge -->
+            <div class="flex-grow md:hidden"></div>
+        </div>
+    
+        <nav class="space-x-4 uppercase relative inline-block ml-0 sm:ml-0 text-sm hidden md:block">
+            <a href="index" class="hover:text-gray-300">Recipes</a>
+            <!-- More nav items -->
+        </nav>
+    
+        <!-- Search -->
+        <div class="flex justify-center w-full ml-0 sm:-ml-14" id="search">
+            <div class="mx-auto text-base relative z-10 w-full">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                        <i class="fas fa-search text-darker-gray"></i>
+                    </span>
+                    <input type="text" placeholder="Search recipes" class="w-full pl-10 pr-4 py-2 rounded-sm bg-black text-white placeholder-gray-50 focus:outline-none" id="search-bar" autocomplete="off">
+                </div>
+                <div id="search-results" class="absolute left-0 w-full bg-black text-white mt-1 rounded-sm shadow-lg z-50 hidden">
+                    <!-- Dynamic search results will be displayed here -->
+                </div>
+            </div>
+        </div>
+    
+    
+        <!-- Connect Button -->
+        <div class="ml-auto inline-block uppercase text-sm hidden md:inline-block">
+            <i class="fad fa-utensils fa-lg"></i>
+        </div>
+    </header>
+
+    <section class="py-8 pt-0 mt-0 sm:mt-0">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex items-center">
+                    <h2 class="text-light-green text-2xl"><span id="recipe-count">9</span> Recipes</h2>
+                </div>
+                <div class="flex space-x-4">
+                    <!-- Tags Dropdown -->
+                    <div class="relative text-left">
+                        <div>
+                            <button id="tags-dropdown-button" class="dropdown-button inline-flex justify-center w-full rounded-sm border border-dark-gray-all shadow-sm px-4 py-2 bg-black text-sm font-medium text-gray">
+                                Tags
+                                <svg class="ml-1 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M5.293 9.293a1 1 0 011.414 0L10 12.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="tags-dropdown-menu" class="tags-dropdown-menu hidden origin-top-right absolute right-0 mt-2 w-56 rounded-sm shadow-lg bg-dark-gray ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="tags-options-menu">
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-tag="breakfast">Breakfast</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-tag="condiments">Condiments</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-tag="gluten-free">Gluten-Free</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-tag="healthy">Healthy</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-tag="meat">Meat</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-tag="quick">Quick</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-tag="seafood">Seafood</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-tag="spicy">Spicy</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-tag="vegan">Vegan</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-tag="vegetable">Vegetable</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-tag="vegetarian">Vegetarian</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Sort Dropdown -->
+                    <div class="relative inline-block text-left hidden sm:inline-block">
+                        <div>
+                            <button id="dropdown-button" class="dropdown-button inline-flex justify-center w-full rounded-sm border border-dark-gray-all shadow-sm px-4 py-2 bg-black text-sm font-medium text-gray">
+                                Sort: <span class="ml-2">Default</span>
+                                <svg class="ml-1 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd" d="M5.293 9.293a1 1 0 011.414 0L10 12.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 010-1.414z" clip-rule="evenodd"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div id="dropdown-menu" class="dropdown-menu hidden origin-top-right absolute right-0 mt-2 w-56 rounded-sm shadow-lg bg-dark-gray ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+                            <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900 bg-gray text-white" role="menuitem" data-sort="default">Default</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-light-green hover:text-gray-900" role="menuitem" data-sort="alphabetical">Alphabetical</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="selected-tags" class="flex flex-wrap items-center mb-0">
+                <!-- Dynamic tag labels will be inserted here -->
+            </div>
+            <div id="recipe-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 mb-7">
+                
+                <!-- recipe 1 -->
+                <a href="sesame-green-beans" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy quick vegan vegetable vegetarian">
+                    <img src="assets/img/sesame-green-beans.jpg" alt="Sesame Green Beans" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Sesame Green Beans</div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- recipe 2 -->
+                <a href="guacamole" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="condiments gluten-free healthy quick vegan vegetarian">
+                    <img src="assets/img/guacamole.jpg" alt="Guacamole" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Guacamole</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 3 -->
+                <a href="roasted-cauliflower" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy quick vegan vegetable vegetarian">
+                    <img src="assets/img/roasted-cauliflower.jpg" alt="Romesco" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Roasted Cauliflower</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 4 -->
+                <a href="roasted-broccolini" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="meat vegetable spicy">
+                    <img src="assets/img/grilled-broccolini.jpg" alt="Grilled Broccolini" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Roasted Broccolini</div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- recipe 5 -->
+                <a href="charred-brussels-sprouts" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy meat quic vegetable">
+                    <img src="assets/img/charred-brussels-sprouts.jpg" alt="Charred Brussels Sprouts" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Charred Brussels Sprouts</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- recipe 6 -->
+                <a href="honey-butter-pancakes" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="breakfast">
+                    <img src="assets/img/pancakes.jpg" alt="Honey Butter Pancakes" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Honey Butter Pancakes</div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- recipe 7 -->
+                <a href="cajun-honey-butter-salmon" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free quick seafood spicy">
+                    <img src="assets/img/cajun-salmon.jpg" alt="Cajun Salmon" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Cajun Honey-Butter Salmon</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 8 -->
+                <a href="roasted-chicken" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy meat">
+                    <img src="assets/img/roasted-chicken.jpg" alt="Roasted Chicken" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Roasted Chicken</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 9 -->
+                <a href="avocado-wraps" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="healthy quick vegan vegetarian">
+                    <img src="assets/img/black-bean-avocado-wraps.jpg" alt="Black Bean Avocado Wraps" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Black Bean Avocado Wraps</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 10 -->
+
+                <!-- recipe 11 -->
+                <a href="sesame-orange-chicken" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="meat quick spicy">
+                    <img src="assets/img/spicy-orange-sesame-chicken.jpg" alt="Spicy Orange Sesame Chicken" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Sesame Orange Chicken</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 12 -->
+                <a href="japanese-tebasaki-wings" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free meat spicy">
+                    <img src="assets/img/japanese-wings.jpg" alt="Japanese Chicken Wings" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Japanese Tebasaki Wings</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 13 -->
+                <a href="pineapple-ginger-smoothie" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy quick vegan vegetarian">
+                    <img src="assets/img/pineapple-ginger-smoothie.jpg" alt="Pineapple Ginger Smoothie" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Pineapple Ginger Smoothie</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 14 -->
+                <a href="salsa" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="condiments gluten-free healthy quick spicy">
+                    <img src="assets/img/salsa.jpg" alt="Salsa" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Salsa</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 15 -->
+                <a href="roasted-sweet-potato-salad" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy vegan vegetable vegetarian">
+                    <img src="assets/img/roasted-sweet-potato-salad.jpg" alt="Roasted Sweet Potato Salad" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Roasted Sweet Potato Salad</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 16 -->
+                <a href="falafels" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy vegan vegetarian">
+                    <img src="assets/img/falafals.jpg" alt="Falafels" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Crispy Baked Falafels</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 17 -->
+                <a href="spicy-kimchi-broccoli-rabe" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy quick spicy vegan vegetable vegetarian">
+                    <img src="assets/img/spicy-kimchi-broccoli-rabe.jpg" alt="Falafels" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Spicy Kimchi Broccoli Rabe</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 18 -->
+                <a href="california-za'atar.html" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="condiments gluten-free healthy quick vegan vegetarian">
+                    <img src="assets/img/za'atar.jpg" alt="Za'atar" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">California Za'atar</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 19 -->
+                <a href="soffrito" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="condiments gluten-free healthy quick vegan vegetarian">
+                    <img src="assets/img/soffrito.jpg" alt="Soffrito" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Soffrito</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 20 -->
+                <a href="chimichurri" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="condiments gluten-free vegan vegetarian">
+                    <img src="assets/img/chimichurri.jpg" alt="Chimichurri" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Chimichurri</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 21 -->
+                <a href="mojo-de-ajo" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="condiments gluten-free vegan vegetarian">
+                    <img src="assets/img/mojo-de-ajo.jpg" alt="Mojo de Ajo" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Mojo de Ajo</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 22 -->
+                <a href="romesco" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="condiments gluten-free vegan vegetarian">
+                    <img src="assets/img/romesco.jpg" alt="Romesco" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Romesco</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 23 -->
+                <a href="quesadillas" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="healthy quick vegan vegetarian">
+                    <img src="assets/img/quesadillas.jpg" alt="Quesadillas" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Rice & Black Bean Quesadillas</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 24 -->
+                <a href="nashville-hot-chicken" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="meat spicy">
+                    <img src="assets/img/nashville-chicken.jpg" alt="Nashville Chicken" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Nashville Hot Chicken</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 25 -->
+                <a href="white-bean-wraps" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="healthy vegan vegetarian">
+                    <img src="assets/img/white-bean-wraps.jpg" alt="White Bean Wraps" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">White Bean Wraps w/ Cucumber & Mint</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="garlic-confit" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="condiments gluten-free healthy vegan vegetarian">
+                    <img src="assets/img/garlic-confit.jpg" alt="Garlic Confit" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Garlic Confit</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 26 -->
+                <a href="pineapple-kimchi" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="condiments gluten-free healthy spicy vegan vegetarian">
+                    <img src="assets/img/pineapple-kimchi.jpg" alt="Pineapple Kimchi" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Pineapple Kimchi</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 27 -->
+                <a href="pomodoro-sauce" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="condiments gluten-free healthy vegan vegetarian">
+                    <img src="assets/img/pomodoro.jpg" alt="Pomodoro Sauce" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Pomodoro Sauce</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 28 -->
+                <a href="spaghetti-pomodoro" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="condiments gluten-free healthy vegan vegetarian">
+                    <img src="assets/img/spaghetti-pomodoro.jpg" alt="Spaghetti Pomodoro" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Spaghetti Pomodoro</div>
+                        </div>
+                    </div>
+                </a>
+                <!-- recipe 29 -->
+                <a href="grilled-buffalo-wings" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free meat quick spicy">
+                    <img src="assets/img/grilled-buffalo-wings.jpg" alt="Grilled Buffalo Wings" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
+                        <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
+                            <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Grilled Buffalo Wings</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <footer class="fixed bottom-0 left-0 right-0 bg-black w-full border-t border-dark-gray-top z-50 pt-1 pb-1">
+        <div class="container mx-auto flex items-center justify-between px-4 sm:pl-4 sm:pr-0">
+            <ul class="text-xs font-normal text-gray-400 flex items-center gap-3">
+                <li class="inline-block mr-2 pt-1 pb-1">
+                    <a href="index" rel="noopener noreferrer">HOME</a>
+                </li>
+                <!-- Add more list items here as needed -->
+            </ul>
+        </div>
+    </footer>
+<script src="js/recipes.js"></script>
+</body>
+</html>
