@@ -317,7 +317,7 @@ nav a {
 #search-bar:focus {
   outline: none !important;
   box-shadow: none !important;
-  border-color: #d7e0cc !important;
+  border-color: #24262a !important;
 }
 /* Center text */
 .text-container {
