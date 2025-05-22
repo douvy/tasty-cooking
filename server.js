@@ -8,6 +8,37 @@ const PORT = process.env.PORT || 3000;
 // Enable compression for all responses
 app.use(compression());
 
+// Security headers middleware
+app.use((req, res, next) => {
+  // Protect against XSS attacks
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  
+  // Prevent MIME type sniffing
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  
+  // Control iframe embedding
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  
+  // Set referrer policy
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  
+  // Enable HTTP Strict Transport Security (HSTS)
+  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+  
+  // Set permitted sources for content
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; " +
+    "script-src 'self' https://cdn.tailwindcss.com 'unsafe-inline'; " +
+    "style-src 'self' https://fonts.googleapis.com https://pro.fontawesome.com 'unsafe-inline'; " +
+    "img-src 'self' data:; " +
+    "font-src 'self' https://fonts.gstatic.com https://pro.fontawesome.com; " +
+    "connect-src 'self';"
+  );
+  
+  next();
+});
+
 // Set cache headers for static assets
 const setCache = function(req, res, next) {
   // Skip caching for HTML files
