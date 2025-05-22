@@ -1,8 +1,4 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
-  "outputDirectory": ".",
-  "builds": [
-    { "src": "server.js", "use": "@vercel/node" }
-  ]
+  "trailingSlash": false
 }

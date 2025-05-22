@@ -4,8 +4,7 @@
   "description": "Tasty cooking recipes website",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "echo 'No build step required'"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2"
