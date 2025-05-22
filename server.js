@@ -16,16 +16,24 @@ const setCache = function(req, res, next) {
     return next();
   }
   
-  // Cache static assets for 1 week (604800 seconds)
-  const period = 60 * 60 * 24 * 7; // 7 days
+  // Cache durations
+  const longPeriod = 60 * 60 * 24 * 30; // 30 days for immutable content
+  const mediumPeriod = 60 * 60 * 24 * 7; // 7 days
+  const shortPeriod = 60 * 60 * 24; // 1 day
   
   // Use different cache durations based on file type
-  if (req.path.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
-    res.setHeader('Cache-Control', `public, max-age=${period}`);
+  if (req.path.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
+    // Images are highly cacheable with strong validation
+    res.setHeader('Cache-Control', `public, max-age=${longPeriod}, stale-while-revalidate=${mediumPeriod}`);
   } else if (req.path.match(/\.(css|js)$/i)) {
-    res.setHeader('Cache-Control', `public, max-age=${period}`);
+    // CSS and JS with a medium cache duration
+    res.setHeader('Cache-Control', `public, max-age=${mediumPeriod}, stale-while-revalidate=${shortPeriod}`);
+  } else if (req.path.match(/\.(woff|woff2|ttf|eot)$/i)) {
+    // Fonts with a long cache duration
+    res.setHeader('Cache-Control', `public, max-age=${longPeriod}, stale-while-revalidate=${mediumPeriod}`);
   } else {
-    res.setHeader('Cache-Control', 'public, max-age=3600'); // 1 hour for other files
+    // Other assets with a short cache duration
+    res.setHeader('Cache-Control', `public, max-age=${shortPeriod}, stale-while-revalidate=3600`);
   }
   next();
 };
