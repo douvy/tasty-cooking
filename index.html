@@ -4,17 +4,40 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Tasty Cooking</title>
-    <meta content="tasty cooking • recipes collection" property="og:title"/>
-    <meta content="https://www.tasty.cooking/assets/img/hero.png" property="og:image"/>
+    <meta name="description" content="A collection of delicious and easy-to-follow recipes with a clean, modern web interface.">
+    <meta name="keywords" content="recipes, cooking, food, healthy recipes, quick meals, vegetarian, vegan, gluten-free">
+    <meta name="author" content="Tasty Cooking">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.tasty.cooking/">
+    <meta property="og:title" content="Tasty Cooking • Recipes Collection">
+    <meta property="og:description" content="A collection of delicious and easy-to-follow recipes with a clean, modern web interface.">
+    <meta property="og:image" content="https://www.tasty.cooking/assets/img/hero.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.tasty.cooking/">
+    <meta property="twitter:title" content="Tasty Cooking • Recipes Collection">
+    <meta property="twitter:description" content="A collection of delicious and easy-to-follow recipes with a clean, modern web interface.">
+    <meta property="twitter:image" content="https://www.tasty.cooking/assets/img/hero.png">
     <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://pro.fontawesome.com">
     
     <!-- Preload critical assets -->
     <link rel="preload" href="css/style.min.css" as="style">
-    <link rel="preload" href="js/recipes.js" as="script">
+    <link rel="preload" href="js/recipes.min.js" as="script">
     <link rel="preload" href="assets/img/sesame-green-beans.jpg" as="image" fetchpriority="high">
     <link rel="preload" href="assets/img/guacamole.jpg" as="image" fetchpriority="high">
+    
+    <!-- PWA support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Tasty Cooking">
+    <link rel="apple-touch-icon" href="assets/img/favicon.png">
     
     <!-- Favicon -->
     <link rel="icon" href="assets/img/favicon.png">
