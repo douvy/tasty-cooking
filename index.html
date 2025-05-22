@@ -58,11 +58,15 @@
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://pro.fontawesome.com">
     
+    <!-- Preload fonts first -->
+    <link rel="preload" href="assets/fonts/GT-Flexa-Standard-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/WindsorBold.woff2" as="font" type="font/woff2" crossorigin>
+    
     <!-- Preload critical assets -->
     <link rel="preload" href="css/style.min.css" as="style">
     <link rel="preload" href="js/recipes.min.js" as="script">
-    <link rel="preload" href="assets/img/sesame-green-beans.jpg" as="image" fetchpriority="high">
-    <link rel="preload" href="assets/img/guacamole.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="assets/img/sesame-green-beans.jpg" as="image">
+    <link rel="preload" href="assets/img/guacamole.jpg" as="image">
     
     <!-- PWA support -->
     <link rel="manifest" href="/manifest.json">
@@ -73,9 +77,10 @@
     
     <!-- Favicon -->
     <link rel="icon" href="assets/img/favicon.png">
+    <!-- Load critical CSS -->
+    <link href="css/style.min.css" rel="stylesheet">
     <!-- CSS (includes Tailwind) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="css/style.min.css" rel="stylesheet">
     <!-- Custom fonts with font-display swap -->
     <!-- Font Awesome Pro -->
     <link href="css/all.css" rel="stylesheet"> <!--load all styles-->
@@ -191,8 +196,7 @@
                          srcset="assets/img/sesame-green-beans.jpg 800w"
                          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                          alt="Sesame Green Beans" 
-                         class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75" 
-                         loading="lazy">
+                         class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
                     <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
                         <div class="w-9/12 mx-auto border-dark-brown-all py-2 bg-[#e2ded8] transition-colors duration-300 group-hover:bg-[#f8f7f5]">
                             <div class="font-bold text-[#141416] text-xs uppercase pt-2 pb-2 recipe-title">Sesame Green Beans</div>
@@ -202,7 +206,7 @@
                 
                 <!-- recipe 2 -->
                 <a href="guacamole" class="bg-dark-gray border-divider-all hover:border-light-grayish-orange-all rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group transition-all duration-300 transform hover:scale-[1.02]" data-tags="condiments gluten-free healthy quick vegan vegetarian">
-                    <img src="assets/img/guacamole.jpg" alt="Guacamole" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75" loading="lazy">
+                    <img src="assets/img/guacamole.jpg" alt="Guacamole" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
                     <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
                         <div class="w-9/12 mx-auto border-dark-brown-all py-2 bg-[#e2ded8] transition-colors duration-300 group-hover:bg-[#f8f7f5]">
                              <div class="font-bold text-[#141416] text-xs uppercase pt-2 pb-2 recipe-title">Guacamole</div>
@@ -211,7 +215,7 @@
                 </a>
                 <!-- recipe 3 -->
                 <a href="roasted-cauliflower" class="bg-dark-gray border-divider-all rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy quick vegan vegetable vegetarian">
-                    <img src="assets/img/roasted-cauliflower.jpg" alt="Romesco" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
+                    <img src="assets/img/roasted-cauliflower.jpg" alt="Romesco" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75" loading="lazy">
                     <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
                         <div class="w-9/12 mx-auto border-dark-brown-all py-2 bg-[#e2ded8] transition-colors duration-300 group-hover:bg-[#f8f7f5]">
                              <div class="font-bold text-[#141416] text-xs uppercase pt-2 pb-2 recipe-title">Roasted Cauliflower</div>
@@ -485,6 +489,15 @@
         });
     });
   }
+  
+  // Add support for native lazy loading with fallback
+  document.addEventListener('DOMContentLoaded', function() {
+    // All images after the first two should use lazy loading
+    const allImages = document.querySelectorAll('#recipe-grid img');
+    for (let i = 2; i < allImages.length; i++) {
+      allImages[i].setAttribute('loading', 'lazy');
+    }
+  });
 </script>
 </body>
 </html>
