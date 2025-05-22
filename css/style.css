@@ -1,5 +1,14 @@
+@font-face {
+  font-family: 'GT Flexa';
+  src: url('/assets/fonts/GT-Flexa-Standard-Regular.woff2') format('woff2'),
+       url('/assets/fonts/GT-Flexa-Standard-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
-  font-family: 'Space Grotesk', arial;
+  font-family: 'GT Flexa', arial;
   letter-spacing: 1px;
   background-color: #000;
   color: #929292;
@@ -48,7 +57,7 @@ footer a:hover {
 }
 /*global styles*/
 h1,h2,h3,h4,h5,h6 {
-  font-family: 'Space Grotesk', arial;
+  font-family: 'GT Flexa', arial;
  color: #222222;
 }
 a {
