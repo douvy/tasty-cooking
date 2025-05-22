@@ -235,8 +235,8 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #d7e0cc;
-  outline-offset: 2px;
+  outline: 1px solid #d7e0cd;
+  outline-offset: 1px;
   border-radius: 1px;
 }
 
@@ -245,9 +245,9 @@ textarea:focus-visible {
 #search-bar:focus-visible,
 [data-tag]:focus-visible,
 [data-sort]:focus-visible {
-  outline: 2px solid #d7e0cc;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(215, 224, 204, 0.25);
+  outline: 1px solid #d7e0cd;
+  outline-offset: 1px;
+  box-shadow: none;
 }
 
 .border-lime-btn {
