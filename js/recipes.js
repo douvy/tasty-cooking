@@ -294,9 +294,9 @@ function updateHighlightedResult(results) {
     });
 }
 
-// Change search bar background on focus
+// Focus/blur handling for search bar
 searchBar.addEventListener('focus', function() {
-    searchBar.classList.add('bg-gray');
+    // No class change on focus
 });
 
 searchBar.addEventListener('blur', function() {

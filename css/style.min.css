@@ -236,7 +236,7 @@ section h2 {
 /* Improved accessibility - focus styles */
 a:focus-visible,
 button:focus-visible,
-input:focus-visible,
+input:focus-visible:not(#search-bar),
 select:focus-visible,
 textarea:focus-visible {
   outline: 1px solid #d7e0cd;
@@ -246,7 +246,6 @@ textarea:focus-visible {
 
 /* Ensure focus styles show on all interactive elements */
 .dropdown-button:focus-visible,
-#search-bar:focus-visible,
 [data-tag]:focus-visible,
 [data-sort]:focus-visible {
   outline: 1px solid #d7e0cd;
@@ -298,12 +297,15 @@ nav a {
 #search-bar {
   border: 1px solid #303030;
   background-color: #000000 !important;
+  z-index: 10; /* This should be higher than the z-index of .background-circle */
 }
 #search-bar::placeholder {
   color: #5d5d5d;
 }
-#search-bar {
-  z-index: 10; /* This should be higher than the z-index of .background-circle */
+#search-bar:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: #303030 !important;
 }
 /* Center text */
 .text-container {
