@@ -37,13 +37,10 @@ body {
   margin-left: 0px;
 }
 footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   width: 100%;
-  background-color: black;
-  border-top: 1px solid #333;
+  background-color: #0a0b0d;
+  border-top: 1px solid #24262a;
   z-index: 50;
 }
 .border-divider-b {
@@ -94,6 +91,9 @@ a:hover {
 .text-light-green {
   color: #d7e0cc !important;
 }
+.text-light-green-bright {
+  color: #e8f5d8 !important;
+}
 
 /* Enhanced typography for headings with Windsor Bold */
 h1.text-light-green {
@@ -113,6 +113,11 @@ h2.text-light-green {
   position: relative;
   text-transform: none !important;
   top: 4px; /* Nudge text down slightly without changing box dimensions */
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+}
+.group:hover .recipe-title {
+  color: #e8f5d8 !important;
 }
 
 /* Recipe page header styles */
@@ -141,7 +146,8 @@ section h2 {
 
 @media (max-width: 768px) {
   .recipe-title {
-    font-size: .9rem !important;
+    font-size: 1rem !important;
+    letter-spacing: 0.04em;
   }
 }
 
@@ -244,18 +250,18 @@ button:focus-visible,
 input:focus-visible:not(#search-bar),
 select:focus-visible,
 textarea:focus-visible {
-  outline: 1px solid #d7e0cd;
-  outline-offset: 1px;
-  border-radius: 1px;
+  outline: 2px solid #d7e0cd;
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 /* Ensure focus styles show on all interactive elements */
 .dropdown-button:focus-visible,
 [data-tag]:focus-visible,
 [data-sort]:focus-visible {
-  outline: 1px solid #d7e0cd;
-  outline-offset: 1px;
-  box-shadow: none;
+  outline: 2px solid #d7e0cd;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px rgba(215, 224, 204, 0.25);
 }
 
 .border-lime-btn {
@@ -303,6 +309,7 @@ nav a {
   border: 1px solid #24262a;
   background-color: #000000 !important;
   z-index: 10; /* This should be higher than the z-index of .background-circle */
+  transition: all 0.3s ease;
 }
 #search-bar::placeholder {
   color: #5d5d5d;
@@ -310,7 +317,7 @@ nav a {
 #search-bar:focus {
   outline: none !important;
   box-shadow: none !important;
-  border-color: #24262a !important;
+  border-color: #d7e0cc !important;
 }
 /* Center text */
 .text-container {
@@ -469,6 +476,7 @@ table tr.dark-gray-hover:hover {
   border-left: 1px solid #d7e0cc;
   border-top: 1px solid #d7e0cc;
   border-right: 1px solid #d7e0cc;
+  transition: all 0.3s ease;
 }
 
 .border-light-gray-all {
@@ -518,14 +526,14 @@ table tr.dark-gray-hover:hover {
   }
 }
 #selected-tags {
-  margin-top: -10px; /* Reduced margin for a more subtle line break */
+  margin-top: -8px; /* Reduced margin for a more subtle line break */
   width: 100%;
   justify-content: left; /* Align tags to the left */
   padding-left: 0rem; /* Add some padding to align with other elements */
-  margin-bottom: -6px;
+  margin-bottom: -4px;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 0; /* .5rem for row spacing, 0 for column spacing */
+  gap: 0.75rem 0.5rem; /* Improved spacing between tags */
 }
 #selected-tags span {
   white-space: nowrap; /* Prevent tags from splitting onto two lines */
