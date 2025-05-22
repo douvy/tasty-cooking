@@ -198,17 +198,36 @@ tagsDropdownMenu.addEventListener('click', (event) => {
 // Initial count update
 updateRecipeCount();
 
-// Add lazy loading, srcset and responsiveness to all recipe images
+// Add lazy loading, WebP support, and responsiveness to all recipe images
 document.querySelectorAll('#recipe-grid img').forEach(img => {
     img.setAttribute('loading', 'lazy');
     
     // Add sizes attribute for responsive loading
     img.setAttribute('sizes', '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw');
     
-    // Add srcset for responsive images
+    // Add WebP support with picture element
     const imgSrc = img.getAttribute('src');
-    if (imgSrc && !img.hasAttribute('srcset')) {
-        img.setAttribute('srcset', `${imgSrc} 800w`);
+    if (imgSrc && !img.parentNode.tagName.toLowerCase() === 'picture') {
+        // Create the WebP version path
+        const imgName = imgSrc.split('/').pop().split('.')[0];
+        const webpSrc = `assets/img/webp/${imgName}.webp`;
+        
+        // Create picture element
+        const picture = document.createElement('picture');
+        
+        // Add WebP source
+        const source = document.createElement('source');
+        source.setAttribute('srcset', webpSrc);
+        source.setAttribute('type', 'image/webp');
+        picture.appendChild(source);
+        
+        // Clone current image as fallback
+        const fallbackImg = img.cloneNode(true);
+        fallbackImg.setAttribute('srcset', `${imgSrc} 800w`);
+        picture.appendChild(fallbackImg);
+        
+        // Replace the original img with picture
+        img.parentNode.replaceChild(picture, img);
     }
 });
 
