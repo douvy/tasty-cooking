@@ -280,6 +280,11 @@ button {
 nav {
   z-index: 20; /* any value higher than the background circle */
 }
+
+nav a {
+  display: inline-flex;
+  align-items: center;
+}
 .max-w-360px {
   max-width: 360px;
 }
