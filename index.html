@@ -13,7 +13,7 @@
     <link rel="icon" href="assets/img/favicon.png">
     <!-- CSS (includes Tailwind) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
     <!-- Google Fonts with font-display swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -118,7 +118,12 @@
                 
                 <!-- recipe 1 -->
                 <a href="sesame-green-beans" class="bg-dark-gray rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy quick vegan vegetable vegetarian">
-                    <img src="assets/img/sesame-green-beans.jpg" alt="Sesame Green Beans" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75" loading="lazy">
+                    <img src="assets/img/sesame-green-beans.jpg" 
+                         srcset="assets/img/sesame-green-beans.jpg 800w"
+                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                         alt="Sesame Green Beans" 
+                         class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75" 
+                         loading="lazy">
                     <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
                         <div class="w-9/12 mx-auto bg-dark-gray py-2 transition-colors duration-300 group-hover:bg-black">
                             <div class="font-bold text-light-green text-xs uppercase pt-2 pb-2 recipe-title">Sesame Green Beans</div>
