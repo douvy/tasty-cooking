@@ -26,6 +26,10 @@ body {
   width: 100%;
   overflow-x: hidden; /* Prevent horizontal scroll */
 }
+.font-windsor-bold {
+  font-family: 'Windsor Bold', arial;
+  font-weight: bold;
+}
 #selected-tags {
   display: flex;
   align-items: center;

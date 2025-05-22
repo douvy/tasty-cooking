@@ -91,10 +91,6 @@
     <header class="container mx-auto px-4 sticky absolute top-0 left-0 w-full z-30 bg-black bg-opacity-100 flex justify-between items-center p-4 px-8 pl-2 sm:pl-0 pr-6">
         <!-- Logo and Navigation -->
         <div class="flex items-center justify-between md:space-x-4 text-sm md:ml-4">
-            <!-- Mobile menu button -->
-            <button id="mobile-menu-button" class="md:hidden text-gray-400 hover:text-white focus:outline-none">
-                <i class="fas fa-bars fa-lg"></i>
-            </button>
             <!-- Spacer div to push navigation to the edge -->
             <div class="flex-grow md:hidden"></div>
         </div>
@@ -107,19 +103,6 @@
             <!-- More nav items -->
         </nav>
         
-        <!-- Mobile menu - hidden by default -->
-        <div id="mobile-menu" class="fixed inset-0 bg-black bg-opacity-95 z-50 hidden flex flex-col items-center justify-center">
-            <button id="close-mobile-menu" class="absolute top-4 right-4 text-gray-400 hover:text-white">
-                <i class="fas fa-times fa-lg"></i>
-            </button>
-            <nav class="flex flex-col items-center space-y-6 text-lg">
-                <a href="index" class="text-light-green hover:text-white transition-colors">Recipes</a>
-                <a href="#breakfast" class="text-light-green hover:text-white transition-colors" data-tag="breakfast">Breakfast</a>
-                <a href="#vegetarian" class="text-light-green hover:text-white transition-colors" data-tag="vegetarian">Vegetarian</a>
-                <a href="#quick" class="text-light-green hover:text-white transition-colors" data-tag="quick">Quick Meals</a>
-                <a href="#spicy" class="text-light-green hover:text-white transition-colors" data-tag="spicy">Spicy</a>
-            </nav>
-        </div>
     
         <!-- Search -->
         <div class="flex justify-center w-full ml-0 sm:-ml-14" id="search">
