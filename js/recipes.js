@@ -198,9 +198,11 @@ tagsDropdownMenu.addEventListener('click', (event) => {
 // Initial count update
 updateRecipeCount();
 
-// Add lazy loading to all recipe images
+// Add lazy loading and responsiveness to all recipe images
 document.querySelectorAll('#recipe-grid img').forEach(img => {
     img.setAttribute('loading', 'lazy');
+    // Add sizes attribute for responsive loading
+    img.setAttribute('sizes', '(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw');
 });
 
 // Intelligent Search Functionality
