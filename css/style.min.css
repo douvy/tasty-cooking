@@ -16,6 +16,15 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Cheee Wowie';
+  src: url('/assets/fonts/Cheee-Wowie.woff2') format('woff2'),
+       url('/assets/fonts/Cheee-Wowie.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
   font-family: 'GT Flexa', arial;
   letter-spacing: 1px;
@@ -28,6 +37,9 @@ body {
 .font-windsor-bold {
   font-family: 'Windsor Bold', arial;
   font-weight: bold;
+}
+.font-cheee-wowie {
+  font-family: 'Cheee Wowie', arial;
 }
 #selected-tags {
   display: flex;
