@@ -86,7 +86,7 @@ function addTagLabel(tag) {
 
     // Add tag label
     const tagLabel = document.createElement('span');
-    tagLabel.className = 'inline-flex items-center px-3 py-1 rounded-sm text-xs bg-gray capitalize text-light-green mr-2 cursor-pointer hover:bg-light-gray';
+    tagLabel.className = 'inline-flex items-center px-3 py-1 rounded-sm text-xs bg-gray capitalize text-light-grayish-orange mr-2 cursor-pointer hover:bg-light-gray';
     tagLabel.innerHTML = `${tag} <button type="button" class="ml-2 text-gray" aria-label="Remove tag"><i class="fas fa-times font-light"></i></button>`;
     selectedTagsContainer.appendChild(tagLabel);
 

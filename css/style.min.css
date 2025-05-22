@@ -88,21 +88,21 @@ a {
 a:hover {
  color: #2f81f7;
 }
-.text-light-green {
-  color: #d7e0cc !important;
+.text-light-grayish-orange {
+  color: #e2d0c2 !important;
 }
-.text-light-green-bright {
-  color: #e8f5d8 !important;
+.text-light-grayish-orange-bright {
+  color: #f5e1d0 !important;
 }
 
 /* Enhanced typography for headings with Windsor Bold */
-h1.text-light-green {
+h1.text-light-grayish-orange {
   font-size: 2.5rem;
   line-height: 1.2;
   margin-bottom: 1.5rem;
 }
 
-h2.text-light-green {
+h2.text-light-grayish-orange {
   line-height: 1.3;
 }
 
@@ -168,8 +168,8 @@ section h2 {
   font-size: 1.1rem;
   margin-bottom: 0.75rem;
 }
-.bg-light-green {
-  background-color: #d7e0cc !important;
+.bg-light-grayish-orange {
+  background-color: #e8d8cf !important;
 }
 .text-gray {
   color: #929292;
@@ -189,11 +189,11 @@ section h2 {
 .text-blue {
   color: #2081e2;
 }
-.bg-light-green {
-  background-color: #d7e0cc;
+.bg-light-grayish-orange {
+  background-color: #e2d0c2;
   transition: .5s;
 }
-.bg-light-green:hover {
+.bg-light-grayish-orange:hover {
   background-color: #fff;
 }
 .bg-gray {
@@ -398,7 +398,7 @@ table tr.dark-gray-hover:hover {
   }
   
   /* Ensure text is visible */
-  .text-light-green,
+  .text-light-grayish-orange,
   .text-light-gray,
   .text-gray,
   h1, h2, h3, h4, h5, h6,
@@ -468,7 +468,7 @@ table tr.dark-gray-hover:hover {
   border-top: 1px solid #24262a;
   border-right: 1px solid #24262a;
 }
-.border-light-green-all {
+.border-light-grayish-orange-all {
   border-bottom: 1px solid #d7e0cc;
   border-left: 1px solid #d7e0cc;
   border-top: 1px solid #d7e0cc;
