@@ -19,7 +19,6 @@
 body {
   font-family: 'GT Flexa', arial;
   letter-spacing: 1px;
-  background-color: #000;
   color: #929292;
   background-color: #000;
   min-height: 100vh;
@@ -49,6 +48,9 @@ footer {
 }
 .border-divider-b {
   border-bottom: 1px solid #303030;
+}
+.border-divider-all {
+  border: 1px solid #303030;
 }
 .container {
   max-width: 100%;
