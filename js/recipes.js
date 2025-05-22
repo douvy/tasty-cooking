@@ -198,6 +198,11 @@ tagsDropdownMenu.addEventListener('click', (event) => {
 // Initial count update
 updateRecipeCount();
 
+// Add lazy loading to all recipe images
+document.querySelectorAll('#recipe-grid img').forEach(img => {
+    img.setAttribute('loading', 'lazy');
+});
+
 // Intelligent Search Functionality
 searchBar.addEventListener('input', function() {
     const query = this.value.toLowerCase();
