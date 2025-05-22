@@ -87,43 +87,44 @@
     <a href="#recipe-grid" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-black focus:text-light-green focus:outline-none focus:ring-2 focus:ring-light-green">
         Skip to content
     </a>
-    
-    <header class="container mx-auto px-4 sticky absolute top-0 left-0 w-full z-30 bg-black bg-opacity-100 flex justify-between items-center p-4 px-8 pl-2 sm:pl-0 pr-6">
-        <!-- Logo and Navigation -->
-        <div class="flex items-center justify-between md:space-x-4 text-sm md:ml-4">
-            <!-- Spacer div to push navigation to the edge -->
-            <div class="flex-grow md:hidden"></div>
-        </div>
-    
-        <nav class="space-x-4 relative inline-block ml-0 sm:ml-0 hidden md:block">
-            <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
-                <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
-                <span style="font-family: 'Windsor Bold', serif; position: relative; top: 2px;" class="text-xl text-[#d7e0cc]">Tasty Cooking</span>
-            </a>
-            <!-- More nav items -->
-        </nav>
+    <div class="container-fluid border-divider-b sticky absolute top-0 left-0 z-30">
+        <header class="container mx-auto px-4 w-full bg-black bg-opacity-100 flex justify-between items-center p-4 px-8 pl-2 sm:pl-0 pr-6">
+            <!-- Logo and Navigation -->
+            <div class="flex items-center justify-between md:space-x-4 text-sm md:ml-4">
+                <!-- Spacer div to push navigation to the edge -->
+                <div class="flex-grow md:hidden"></div>
+            </div>
         
-    
-        <!-- Search -->
-        <div class="flex justify-center w-full ml-0 sm:-ml-14" id="search">
-            <div class="mx-auto text-base relative z-10 w-full">
-                <div class="relative">
-                    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                        <i class="fas fa-search text-darker-gray"></i>
-                    </span>
-                    <input type="text" placeholder="Search recipes" class="w-full pl-10 pr-4 py-2 rounded-sm bg-black text-white placeholder-gray-50 focus:outline-none focus:ring-0 focus:border-none" id="search-bar" autocomplete="off">
-                </div>
-                <div id="search-results" class="absolute left-0 w-full bg-black text-white mt-1 rounded-sm shadow-lg z-50 hidden">
-                    <!-- Dynamic search results will be displayed here -->
+            <nav class="space-x-4 relative inline-block ml-0 sm:ml-0 hidden md:block">
+                <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
+                    <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
+                    <span style="font-family: 'Windsor Bold', serif; position: relative; top: 2px;" class="text-xl text-[#d7e0cc]">Tasty Cooking</span>
+                </a>
+                <!-- More nav items -->
+            </nav>
+            
+        
+            <!-- Search -->
+            <div class="flex justify-center w-full ml-0 sm:-ml-14" id="search">
+                <div class="mx-auto text-base relative z-10 w-full">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="fas fa-search text-darker-gray"></i>
+                        </span>
+                        <input type="text" placeholder="Search recipes" class="w-full pl-10 pr-4 py-2 rounded-sm bg-black text-white placeholder-gray-50 focus:outline-none focus:ring-0 focus:border-none" id="search-bar" autocomplete="off">
+                    </div>
+                    <div id="search-results" class="absolute left-0 w-full bg-black text-white mt-1 rounded-sm shadow-lg z-50 hidden">
+                        <!-- Dynamic search results will be displayed here -->
+                    </div>
                 </div>
             </div>
-        </div>
-    
-        <!-- Connect Button -->
-        <div class="ml-auto inline-block uppercase text-sm hidden md:inline-block">
-            <i class="fad fa-utensils fa-lg"></i>
-        </div>
-    </header>
+        
+            <!-- Connect Button -->
+            <div class="ml-auto inline-block uppercase text-sm hidden md:inline-block">
+                <i class="fad fa-utensils fa-lg"></i>
+            </div>
+        </header>
+    </div>
 
     <section class="py-8 pt-4 mt-0 sm:mt-0">
         <div class="container mx-auto px-4">

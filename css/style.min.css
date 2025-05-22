@@ -47,6 +47,9 @@ footer {
   border-top: 1px solid #333;
   z-index: 50;
 }
+.border-divider-b {
+  border-bottom: 1px solid #303030;
+}
 .container {
   max-width: 100%;
 }
