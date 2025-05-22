@@ -100,8 +100,9 @@ h2.text-light-green {
 /* Recipe title enhancements */
 .recipe-title {
   font-family: 'Windsor Bold', serif;
-  font-size: 0.85rem !important;
-  letter-spacing: 0.5px;
+  font-size: .95rem !important;
+  position: relative;
+  top: 4px; /* Nudge text down slightly without changing box dimensions */
 }
 
 /* Recipe page header styles */

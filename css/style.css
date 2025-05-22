@@ -100,7 +100,7 @@ h2.text-light-green {
 /* Recipe title enhancements */
 .recipe-title {
   font-family: 'Windsor Bold', serif;
-  font-size: 0.85rem !important;
+  font-size: .85rem !important;
   letter-spacing: 0.5px;
 }
 
