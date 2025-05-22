@@ -320,6 +320,33 @@ table tr.dark-gray-hover:hover {
 }
 
 /* Print styles for recipe pages */
+/* Save recipe button and notification styles */
+.save-recipe-btn {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.save-recipe-btn:hover {
+  transform: scale(1.1);
+}
+
+.save-recipe-btn:active {
+  transform: scale(0.95);
+}
+
+.saved-indicator {
+  transition: opacity 0.3s ease;
+}
+
+.toast-notification {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.toast-notification.opacity-0 {
+  opacity: 0;
+}
+
 @media print {
   /* Hide elements not needed for printing */
   header, 
@@ -333,7 +360,10 @@ table tr.dark-gray-hover:hover {
   .dropdown-button,
   #dropdown-menu,
   #tags-dropdown-menu,
-  #selected-tags {
+  #selected-tags,
+  .save-recipe-btn,
+  .saved-indicator,
+  .toast-notification {
     display: none !important;
   }
   
