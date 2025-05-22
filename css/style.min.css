@@ -100,8 +100,9 @@ h2.text-light-green {
 /* Recipe title enhancements */
 .recipe-title {
   font-family: 'Windsor Bold', serif;
-  font-size: .95rem !important;
+  font-size: 1.2rem !important;
   position: relative;
+  text-transform: none !important;
   top: 4px; /* Nudge text down slightly without changing box dimensions */
 }
 
@@ -110,7 +111,29 @@ section h1.text-black {
   font-family: 'Windsor Bold', serif;
   font-size: 1.5rem !important;
   letter-spacing: 0.5px;
-  text-transform: uppercase;
+  text-transform: none !important;
+}
+
+/* Override uppercase styling for all recipe headings */
+h1.uppercase, 
+h2.uppercase, 
+h3.uppercase,
+.recipe-section h2,
+.ingredients h2,
+.instructions h2,
+section h2 {
+  text-transform: none !important;
+}
+
+/* Override uppercase styling for prep/ready time */
+.text-light-gray {
+  text-transform: none !important;
+}
+
+@media (max-width: 768px) {
+  .recipe-title {
+    font-size: .9rem !important;
+  }
 }
 
 @media (min-width: 768px) {
