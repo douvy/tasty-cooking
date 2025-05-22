@@ -116,9 +116,6 @@ h2.text-light-green {
   letter-spacing: 0.03em;
   transition: all 0.3s ease;
 }
-.group:hover .recipe-title {
-  color: #e8f5d8 !important;
-}
 
 /* Recipe page header styles */
 section h1.text-black {
@@ -492,6 +489,9 @@ table tr.dark-gray-hover:hover {
   border-top: 1px solid #24262a;
   border-right: 1px solid #24262a;
 }
+.border-dark-brown-all {
+  border: 1px solid #b6ad9d;
+} 
 .border-dark-gray-top-bottom {
   border-bottom: 1px solid #24262a;
   border-top: 1px solid #24262a;
