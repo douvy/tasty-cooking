@@ -198,6 +198,60 @@ tagsDropdownMenu.addEventListener('click', (event) => {
 // Initial count update
 updateRecipeCount();
 
+// Mobile menu functionality
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const closeMenuButton = document.getElementById('close-mobile-menu');
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (mobileMenuButton && mobileMenu && closeMenuButton) {
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden'); // Prevent scrolling when menu is open
+    });
+
+    closeMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    });
+
+    // Handle mobile menu category links
+    document.querySelectorAll('#mobile-menu a[data-tag]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const tag = link.getAttribute('data-tag');
+            
+            // Close mobile menu
+            mobileMenu.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            
+            // Clear existing tags
+            selectedTagsContainer.innerHTML = '';
+            
+            // Reset all tag buttons in dropdown
+            document.querySelectorAll('[data-tag]').forEach(el => {
+                el.classList.remove('bg-gray', 'text-white');
+            });
+            
+            // Find and activate the tag in the dropdown
+            document.querySelectorAll(`[data-tag="${tag}"]`).forEach(el => {
+                el.classList.add('bg-gray', 'text-white');
+            });
+            
+            // Add the tag label
+            addTagLabel(tag);
+            
+            // Filter recipes
+            filterRecipes();
+            
+            // Scroll to recipes section
+            window.scrollTo({
+                top: document.querySelector('#recipe-grid').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        });
+    });
+}
+
 // Add lazy loading, WebP support, and responsiveness to all recipe images
 document.querySelectorAll('#recipe-grid img').forEach(img => {
     img.setAttribute('loading', 'lazy');

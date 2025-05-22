@@ -1,11 +1,15 @@
 // Service Worker for Tasty Cooking
-const CACHE_NAME = 'tasty-cooking-v1';
+const CACHE_NAME = 'tasty-cooking-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/css/style.min.css',
   '/js/recipes.min.js',
-  '/assets/img/favicon.png'
+  '/js/all.js',
+  '/assets/img/favicon.png',
+  '/manifest.json',
+  '/assets/fonts/GT-Flexa-Standard-Regular.woff2',
+  '/assets/fonts/WindsorBold.woff2'
 ];
 
 // Install event - cache core assets

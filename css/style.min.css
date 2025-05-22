@@ -229,6 +229,27 @@ section h2 {
   color: #000000;
 }
 
+/* Improved accessibility - focus styles */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #d7e0cc;
+  outline-offset: 2px;
+  border-radius: 1px;
+}
+
+/* Ensure focus styles show on all interactive elements */
+.dropdown-button:focus-visible,
+#search-bar:focus-visible,
+[data-tag]:focus-visible,
+[data-sort]:focus-visible {
+  outline: 2px solid #d7e0cc;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(215, 224, 204, 0.25);
+}
+
 .border-lime-btn {
   border: 1px solid #ade252;
 }
