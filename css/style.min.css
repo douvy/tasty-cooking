@@ -318,6 +318,88 @@ table tr.dark-gray-hover:hover {
 .border-dark-gray {
   border-bottom: 1px solid #303030;
 }
+
+/* Print styles for recipe pages */
+@media print {
+  /* Hide elements not needed for printing */
+  header, 
+  footer, 
+  nav,
+  button,
+  #search,
+  #mobile-menu,
+  #mobile-menu-button,
+  #search-results,
+  .dropdown-button,
+  #dropdown-menu,
+  #tags-dropdown-menu,
+  #selected-tags {
+    display: none !important;
+  }
+  
+  /* Reset background colors for printing */
+  body, 
+  section, 
+  div {
+    background-color: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* Ensure text is visible */
+  .text-light-green,
+  .text-light-gray,
+  .text-gray,
+  h1, h2, h3, h4, h5, h6,
+  p, li, span {
+    color: black !important;
+  }
+  
+  /* Optimize layout for printing */
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* Improve recipe layout for print */
+  .ingredients,
+  .instructions {
+    page-break-inside: avoid;
+    margin-top: 1em !important;
+  }
+  
+  /* Add page breaks before major sections */
+  .instructions {
+    page-break-before: always;
+  }
+  
+  /* Ensure images print well */
+  img {
+    max-width: 50% !important;
+    page-break-inside: avoid;
+  }
+  
+  /* Add helpful URL after links */
+  a:after {
+    content: " (" attr(href) ")";
+    font-size: 90%;
+  }
+  
+  /* Improve spacing */
+  section {
+    margin-bottom: 1em !important;
+  }
+  
+  /* Add a border to the recipe title for emphasis */
+  h1 {
+    border-bottom: 1px solid #000 !important;
+    padding-bottom: 0.5em !important;
+  }
+}
+
 .border-dark-gray-r {
   border-right: 1px solid #303030;
 }
