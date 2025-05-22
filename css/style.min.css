@@ -71,7 +71,7 @@ footer a:hover {
 }
 /*global styles*/
 h1,h2,h3,h4,h5,h6 {
-  font-family: 'Windsor Bold', serif !important;
+  font-family: 'Windsor Bold', serif;
   color: #222222;
   letter-spacing: 0.5px;
   margin-bottom: 0.75rem;
