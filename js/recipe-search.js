@@ -44,7 +44,8 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Pomodoro Sauce", link: "pomodoro-sauce", img: "assets/img/pomodoro.jpg" },
         { title: "Spaghetti Pomodoro", link: "spaghetti-pomodoro", img: "assets/img/spaghetti-pomodoro.jpg" },
         { title: "Grilled Buffalo Wings", link: "grilled-buffalo-wings", img: "assets/img/grilled-buffalo-wings.jpg" },
-        { title: "Cucumber Salad", link: "cucumber-salad", img: "assets/img/cucumber-salad.jpg" }
+        { title: "Cucumber Salad", link: "cucumber-salad", img: "assets/img/cucumber-salad.jpg" },
+        { title: "Sweet Potato Cakes", link: "sweet-potato-cakes", img: "assets/img/sweet-potato-cakes.jpg" }
     ];
     
     let currentIndex = -1;
