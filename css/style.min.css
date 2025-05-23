@@ -316,7 +316,6 @@ nav a {
 }
 #search-bar {
   border: 1px solid #24262a;
-  background-color: #000000 !important;
   z-index: 10; /* This should be higher than the z-index of .background-circle */
   transition: all 0.3s ease;
 }

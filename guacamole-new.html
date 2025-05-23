@@ -7,8 +7,8 @@
     <html data-wf-domain="www.tasty.cooking">
         <title>Tasty Cooking</title>
         <meta content="tasty cooking." name="description">
-        <meta content="Pineapple Kimchi" property="og:title"/>
-        <meta content="https://www.tasty.cooking/assets/img/pineapple-kimchi.jpg" property="og:image"/>
+        <meta content="Guacamole" property="og:title"/>
+        <meta content="https://www.tasty.cooking/assets/img/guacamole.jpg" property="og:image"/>
     <!--Favicon-->
     <link rel="icon" href="assets/img/favicon.png">
     <!--CSS (includes Tailwind)-->
@@ -29,7 +29,6 @@
 <body>
     <div class="container-fluid border-divider-b z-30 bg-black bg-opacity-80 absolute top-0 left-0 right-0">
         <header class="container mx-auto flex flex-wrap items-center p-4 px-4">
-            <!-- Logo and Navigation -->
             <!-- Logo and Navigation - Mobile version -->
             <div class="flex items-center justify-between text-sm md:hidden">
                 <!-- Spacer div to push navigation to the edge -->
@@ -42,8 +41,8 @@
                     <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
                     <span class="font-cheee-wowie text-xl text-[#e2ded8]">Tasty Cooking</span>
                 </a>
-            </div>    
-            <!-- Connect Button -->
+            </div>
+            
             <!-- Search -->
             <div class="flex justify-center w-full -ml-2 sm:ml-0 md:flex md:w-auto md:ml-auto md:mr-4" id="search">
                 <div class="mx-auto text-base relative z-10 w-full sm:w-11/12">
@@ -57,20 +56,23 @@
                         <!-- Dynamic search results will be displayed here -->
                     </div>
                 </div>
-            </div>        </div>
-    </header>
+            </div>
+        </header>
     </div>
-    
+    </div>
 
     <!-- Hero Section -->
     <section class="relative -mt-0 pt-0">
-        <img src="assets/img/pineapple-kimchi.jpg" alt="Pineapple Kimchi" class="w-full h-96 object-cover">
+        <img src="assets/img/guacamole.jpg" alt="Guacamole" class="w-full h-96 object-cover">
         <div class="absolute bottom-0 left-0 right-0">
             <div class="container mx-auto px-4">
-                <div class="bg-light-grayish-orange mb-5 inline-block pb-5 pt-5 px-6 py-2 border-dark-brown-all">            <h1 class="text-black text-xl font-bold" style="text-transform: none !important;">Pineapple Kimchi</h1>
+                <div class="bg-light-grayish-orange mb-5 inline-block pb-5 pt-5 px-6 py-2 border-dark-brown-all">
+                    <h1 class="text-black text-xl font-bold">Sesame Green Beans</h1>
                 </div>
             </div>
         </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -80,39 +82,40 @@
             <div class="flex items-center justify-start space-x-4 mb-2">
                 <div class="flex items-center">
                     <i class="fas fa-clock text-light-grayish-orange text-md sm:text-xl mr-2"></i>
-                    <p class="text-sm sm:text-lg font-bold text-light-gray">PREP: 30 MIN / READY: 2 DAYS</p>
+                    <p class="text-sm sm:text-lg font-bold text-light-gray">Prep: 10 min / Ready: 15 min</p>
                 </div>
                 <div class="flex items-center">
                     <i class="fas fa-utensils text-light-grayish-orange text-md sm:text-xl mr-2"></i>
-                    <p class="text-sm sm:text-lg font-bold text-light-gray">2 QUARTS</p>
+                    <p class="text-sm sm:text-lg font-bold text-light-gray">4</p>
                 </div>
             </div>
             <!-- Tags Section -->
             <div class="mb-3 flex flex-wrap gap-2">
-                <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Condiments</span>
                 <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Gluten-Free</span>
                 <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Healthy</span>
-                <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Spicy</span>
+                <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Quick</span>
                 <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Vegan</span>
+                <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Vegetable</span>
                 <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Vegetarian</span>
             </div>
             <div class="max-w-3xl text-light-gray">
-                <p class="mb-0 leading-7">Pineapple kimchi combines the sweetness of pineapple with the savory, spicy, and tangy flavors of traditional kimchi. This unique twist on kimchi enhances the pineapple's natural acidity, balancing it with salt and heat for a deliciously complex flavor profile. It's especially delicious in fried rice.</p>
+                <p class="leading-7">Relies on a simple sesame seed dressing that’s salty, nutty, and slightly sweet. Cook the green beans briefly to maintain their crispness.</p>
             </div>
         </div>
     </section>
 
+
     <!-- Ingredients Section -->
     <section class="bg-light-grayish-orange text-black py-8">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-3" style="text-transform: none !important;">Ingredients</h2>
-            <p class="mb-2 leading-7"></p><i>Note: The weights here are important.</i></p>
-            <ul class="list-disc pl-6 leading-8 mt-4">
-                <li>1.5 pounds peeled, cored, and cubed (1-inch) ripe pineapple</li>
-                <li>28 grams (3 tbsp plus 1 tsp) Diamond Crystal kosher salt</li>
-                <li>17 ounces coarsely grated white onion</li>
-                <li>11 ounces coarsely grated Korean radish or daikon</li>
-                <li>5 tbsp gochugaru (Korean chili flakes)</li>
+            <h2 class="text-3xl font-bold mb-3">Ingredients</h2>
+            <ul class="list-disc pl-6 leading-8">
+                <li>1 lb green beans, trimmed and cut into 1-inch pieces (4 cups)</li>
+                <li>1 tbsp toasted sesame seeds, crushed in a mortar and pestle</li>
+                <li>2 tbsp soy sauce</li>
+                <li>2 tbsp tahini</li>
+                <li>1 tsp agave or maple syrup</li>
+                <li>kosher salt</li>
             </ul>
         </div>
     </section>
@@ -120,11 +123,10 @@
     <!-- Instructions Section -->
     <section class="py-8 mb-2">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-2 text-light-gray" style="text-transform: none !important;">Instructions</h2>
+            <h2 class="text-3xl font-bold mb-2 text-light-gray">Instructions</h2>
             <ol class="list-decimal pl-6 text-light-gray leading-8">
-                <li class="mb-2">Put the pineapple in a large mixing bowl, sprinkle on the salt, and toss well. Let stand until the pineapple starts to give up some liquid, about 10 minutes. Add the onion, radish, and gochugaru and stir well.</li>
-                <li class="mb-2">Transfer to a clean 2-quart glass jar. Use a spoon to push down on the mixture, so the liquid rises to submerge or nearly submerge the pineapple. Cover with plastic wrap, pressing it against the surface of the mixture, then add a small weight. Cover tightly with a lid and let it ferment at room temperature until it sours slightly, 2 to 4 days, burping the container after 3 days.</li>
-                <li class="mb-2">After it's fermented to your liking, store it in the fridge for up to 6 weeks.</li>
+                <li class="mb-2">Set up a large bowl of ice water. In a large pot of salted boiling water, cook the green beans for 1 min, 30 seconds until slightly tender. Transfer beans to the ice water with a strainer to cool, then drain and pat dry.</li>
+                <li class="mb-2">In a medium bowl, mix together sesame seeds, soy sauce, tahini, syrup, and 1 teaspoon of salt. Toss the beans in the sauce, seasoning with additional salt if needed. Serve immediately or store in an airtight container in the fridge for up to 1 week.</li>
             </ol>
         </div>
     </section>
@@ -135,12 +137,13 @@
                 <li class="inline-block mr-2 pt-2 pb-2">
                     <a href="index" rel="noopener noreferrer" class="text-lg font-windsor-bold">Home</a>
                 </li>
-            <li class="inline-block pt-2 pb-2 ml-auto">
-                <a href="https://github.com/douvy/tasty-cooking" target="_blank" rel="noopener noreferrer" class="text-lg font-windsor-bold">Star on <i class="fab fa-github"></i></a>
-            </li>
+                <li class="inline-block pt-2 pb-2 ml-auto">
+                    <a href="https://github.com/douvy/tasty-cooking" target="_blank" rel="noopener noreferrer" class="text-lg font-windsor-bold">Star on <i class="fab fa-github"></i></a>
+                </li>
             </ul>
         </div>
     </footer>
+    
       
 <script src="js/recipe-search.js"></script>
 </body>
