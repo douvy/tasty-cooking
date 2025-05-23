@@ -320,7 +320,7 @@ nav a {
   transition: all 0.3s ease;
 }
 #search-bar::placeholder {
-  color: #5d5d5d;
+  color: #8b919d;
 }
 #search-bar:focus {
   outline: none !important;
