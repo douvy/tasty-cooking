@@ -1,8 +1,7 @@
 # Tasty Cooking
 
-A beautiful, fast, and accessible recipe collection website with a clean, modern design. Tasty Cooking provides an elegant platform for discovering and sharing delicious recipes with a focus on performance, accessibility, and visual appeal with no clutter.
+A modern recipe collection website optimized for performance, accessibility, and visual appeal with no clutter.
 
-[![GitHub stars](https://img.shields.io/github/stars/username/tasty-cooking?style=social)](https://github.com/douvy/tasty-cooking)
 
 ## [Live Demo](https://www.tasty.cooking/)
 
