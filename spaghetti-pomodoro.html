@@ -14,6 +14,7 @@
     <!--CSS (includes Tailwind)-->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <!--Google Fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,37 +27,54 @@
 </head>
 
 <body>
-    <header class="absolute top-0 left-0 w-full z-30 bg-black bg-opacity-50">
-        <div class="container mx-auto flex justify-between items-center p-4 sm:pl-0 sm:pr-0">
-            <!-- Logo and Navigation -->
-            <div class="flex items-center text-sm text-light-grayish-orange">
-                <nav class="space-x-4 relative inline-block ml-3 sm:ml-0">
-                    <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
-                        <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
-                        <span class=" font-cheee-wowie text-xl text-[#e2ded8]">Tasty Cooking</span>
-                    </a>
-                    <!-- More nav items -->
-                </nav>
+    <div class="container-fluid border-divider-b z-30 bg-black bg-opacity-80 absolute top-0 left-0 right-0">
+        <header class="container mx-auto flex flex-wrap items-center p-4 px-4">
+            <!-- Logo and Navigation - Mobile version -->
+            <div class="flex items-center justify-between text-sm md:hidden">
+                <!-- Spacer div to push navigation to the edge -->
+                <div class="flex-grow"></div>
             </div>
-    
-            <!-- Connect Button -->
-            <div class="ml-auto inline-block uppercase text-sm text-light-grayish-orange">
-                <i class="fas fa-utensils fa-lg"></i>
+            
+            <!-- Logo and Navigation - Desktop version -->
+            <div class="hidden md:block md:flex-none md:mr-auto">
+                <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
+                    <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
+                    <span class="font-cheee-wowie text-xl text-[#e2ded8]">Tasty Cooking</span>
+                </a>
             </div>
-        </div>
-    </header>
+            
+            <!-- Search -->
+            <div class="flex justify-center w-full -ml-2 sm:ml-0 md:flex md:w-auto md:ml-auto md:mr-4" id="search">
+                <div class="mx-auto text-base relative z-10 w-full sm:w-11/12">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="fas fa-search text-darker-gray"></i>
+                        </span>
+                        <input type="text" placeholder="Search recipes" class="w-full md:w-64 pl-10 pr-4 py-2 rounded-sm bg-black text-white placeholder-gray-50 focus:outline-none focus:ring-0 focus:border-none" id="search-bar" autocomplete="off">
+                    </div>
+                    <div id="search-results" class="absolute left-0 w-full bg-black text-white mt-1 rounded-sm shadow-lg z-50 hidden">
+                        <!-- Dynamic search results will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
 
     <!-- Hero Section -->
-    <section class="relative">
+    <section class="relative -mt-0 pt-0">
         <img src="assets/img/spaghetti-pomodoro.jpg" alt="SpaghettiPomodoro" class="w-full h-96 object-cover">
-        <div class="absolute bottom-0 left-0 bg-light-grayish-orange mb-5 ml-4 sm:ml-16 pb-5 pt-5 px-6 py-2 border-dark-brown-all">
-            <h1 class="text-black text-xl font-bold" style="text-transform: none !important;">Spaghetti Pomodoro</h1>
+        <div class="absolute bottom-0 left-0 right-0">
+            <div class="container mx-auto px-4">
+                <div class="bg-light-grayish-orange mb-5 inline-block pb-5 pt-5 px-6 py-2 border-dark-brown-all">
+                    <h1 class="text-black text-xl font-bold">Spaghetti Pomodoro</h1>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Description Section -->
-    <section class="py-8 px-4">
-        <div class="container mx-auto">
+    <section class="py-8 pt-6 mt-0 sm:mt-0">
+        <div class="container mx-auto px-4">
             <div class="flex items-center justify-start space-x-4 mb-2">
                 <div class="flex items-center">
                     <i class="fas fa-clock text-light-grayish-orange text-md sm:text-xl mr-2"></i>
@@ -75,16 +93,16 @@
                 <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Vegetarian</span>
             </div>
             <div class="max-w-3xl text-light-gray">
-                <p class="leading-7">A tomato sauce of just good-quality ripe tomatoes, olive oil, sea salt, and basil is still the best pasta recipe, and also the simplest. This recipe makes just enough for two servings, as it is easier to nail it in a smaller quantity. Don’t forget the finishing oil! Holding back on the oil added in the beginning of the dish so that you can drizzle in a little high-quality olive oil at the end allows the green olive flavor to permeate the dish.</p>
+                <p class="leading-7">A tomato sauce of just good-quality ripe tomatoes, olive oil, sea salt, and basil is still the best pasta recipe, and also the simplest. This recipe makes just enough for two servings, as it is easier to nail it in a smaller quantity. Don't forget the finishing oil! Holding back on the oil added in the beginning of the dish so that you can drizzle in a little high-quality olive oil at the end allows the green olive flavor to permeate the dish.</p>
             </div>
         </div>
     </section>
 
 
     <!-- Ingredients Section -->
-    <section class="bg-light-grayish-orange text-black py-8 px-4">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold mb-3" style="text-transform: none !important;">Ingredients</h2>
+    <section class="bg-light-grayish-orange text-black py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-3">Ingredients</h2>
             <ul class="list-disc pl-6 leading-8">
                 <li>¾ cup <a href="#" id="openModal" class="text-blue underline">Pomodoro Sauce</a></li>
                 <li>6 fresh basil leaves</li>
@@ -99,28 +117,28 @@
     </section>
 
     <!-- Instructions Section -->
-    <section class="py-8 px-4 mb-2">
-        <div class="container mx-auto">
-            <h2 class="text-3xl font-bold mb-2 text-light-gray" style="text-transform: none !important;">Instructions</h2>
+    <section class="py-8 mb-2">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-2 text-light-gray">Instructions</h2>
             <ol class="list-decimal pl-6 text-light-gray leading-8">
                 <li class="mb-2">Bring a large pot of salted water to a boil over high heat.</li>
                 <li class="mb-2">Place the pomodoro sauce in a 10-in [25-cm] stainless-steel sauté pan over medium-high heat and slowly bring up to a simmer. Stir three of the basil leaves and the oregano (if using) into the sauce. Taste for salt and adjust as necessary. The sauce should just reduce slightly. Remove from the heat while the pasta cooks.</li>
                 <li class="mb-2">Drop the pasta into the boiling water and cook at a rolling boil for 4 minutes, stirring often. It is done when a noodle will drape over your tongs when raised out of the water. It will still be very firm. (I know it says 7 to 9 minutes on the box—ignore it.) Using the tongs, remove the spaghetti from the boiling water, transferring it directly to the sauce.</li>
-                <li class="mb-2">Place the pan over medium-high heat, and cook the spaghetti in the sauce. Splash in additional pasta water as necessary, 1 Tbsp at a time, to keep the sauce at the ideal thickness (not too thin to ladle over pasta and not so solid that it can’t be ladled over) and continue to cook for 2 minutes. Turn off the heat. Tear the remaining three basil leaves into the sauce. Add the olive oil, toss, and taste for seasoning again. The spaghetti should be well seasoned, with a fruity olive oil overtone. You can add crushed red pepper flakes if you like it spicy.</li>
+                <li class="mb-2">Place the pan over medium-high heat, and cook the spaghetti in the sauce. Splash in additional pasta water as necessary, 1 Tbsp at a time, to keep the sauce at the ideal thickness (not too thin to ladle over pasta and not so solid that it can't be ladled over) and continue to cook for 2 minutes. Turn off the heat. Tear the remaining three basil leaves into the sauce. Add the olive oil, toss, and taste for seasoning again. The spaghetti should be well seasoned, with a fruity olive oil overtone. You can add crushed red pepper flakes if you like it spicy.</li>
                 <li class="mb-2">Divide the pasta among two plates. Serve immediately, offering Parmesan at the table.</li>
             </ol>
         </div>
     </section>
     
     <footer class="bg-[#0a0b0d] w-full border-t border-dark-gray-top z-50 pt-3 pb-3">
-        <div class="container mx-auto flex items-center justify-between px-4 sm:pl-4 sm:pr-0">
+        <div class="container mx-auto flex items-center justify-between px-4">
             <ul class="text-xs font-normal text-gray-400 flex items-center w-full">
                 <li class="inline-block mr-2 pt-2 pb-2">
                     <a href="index" rel="noopener noreferrer" class="text-lg font-windsor-bold">Home</a>
                 </li>
-            <li class="inline-block pt-2 pb-2 ml-auto">
-                <a href="https://github.com/douvy/tasty-cooking" target="_blank" rel="noopener noreferrer" class="text-lg font-windsor-bold">Star on <i class="fab fa-github"></i></a>
-            </li>
+                <li class="inline-block pt-2 pb-2 ml-auto">
+                    <a href="https://github.com/douvy/tasty-cooking" target="_blank" rel="noopener noreferrer" class="text-lg font-windsor-bold">Star on <i class="fab fa-github"></i></a>
+                </li>
             </ul>
         </div>
     </footer>
@@ -187,7 +205,7 @@
     });
 </script>
     
-      
+<script src="js/recipe-search.js"></script>
 <script src="js/mobile.js"></script>
 </body>
 
