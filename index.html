@@ -93,30 +93,29 @@
         Skip to content
     </a>
     <div class="container-fluid border-divider-b sticky absolute top-0 left-0 z-30 bg-[#0a0b0d]">
-        <header class="container mx-auto px-4 w-full bg-opacity-100 flex justify-between items-center p-4 px-8 pl-2 sm:pl-0 pr-6">
-            <!-- Logo and Navigation -->
-            <div class="flex items-center justify-between md:space-x-4 text-sm md:ml-4">
+        <header class="container mx-auto flex flex-wrap items-center p-4 px-4">
+            <!-- Logo and Navigation - Mobile version -->
+            <div class="flex items-center justify-between text-sm md:hidden">
                 <!-- Spacer div to push navigation to the edge -->
-                <div class="flex-grow md:hidden"></div>
+                <div class="flex-grow"></div>
             </div>
-        
-            <nav class="space-x-4 relative inline-block ml-0 sm:ml-0 hidden md:block">
+            
+            <!-- Logo and Navigation - Desktop version -->
+            <div class="hidden md:block md:flex-none md:mr-auto">
                 <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
                     <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
-                    <span class=" font-cheee-wowie text-xl text-[#e2ded8]">Tasty Cooking</span>
+                    <span class="font-cheee-wowie text-xl text-[#e2ded8]">Tasty Cooking</span>
                 </a>
-                <!-- More nav items -->
-            </nav>
+            </div>
             
-        
             <!-- Search -->
-            <div class="flex justify-center w-full ml-0 sm:-ml-14" id="search">
-                <div class="mx-auto text-base relative z-10 w-full">
+            <div class="flex justify-center w-full -ml-2 sm:ml-0 md:flex md:w-auto md:ml-auto md:mr-4" id="search">
+                <div class="mx-auto text-base relative z-10 w-full sm:w-11/12">
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                             <i class="fas fa-search text-darker-gray"></i>
                         </span>
-                        <input type="text" placeholder="Search recipes" class="w-full pl-10 pr-4 py-2 rounded-sm bg-black text-white placeholder-gray-50 focus:outline-none focus:ring-0 focus:border-none" id="search-bar" autocomplete="off">
+                        <input type="text" placeholder="Search recipes" class="w-full md:w-64 pl-10 pr-4 py-2 rounded-sm bg-black text-white placeholder-gray-50 focus:outline-none focus:ring-0 focus:border-none" id="search-bar" autocomplete="off">
                     </div>
                     <div id="search-results" class="absolute left-0 w-full bg-black text-white mt-1 rounded-sm shadow-lg z-50 hidden">
                         <!-- Dynamic search results will be displayed here -->
@@ -124,10 +123,6 @@
                 </div>
             </div>
         
-            <!-- Connect Button -->
-            <div class="ml-auto inline-block uppercase text-sm hidden md:inline-block">
-                <i class="fad fa-utensils fa-lg"></i>
-            </div>
         </header>
     </div>
 
