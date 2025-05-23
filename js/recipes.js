@@ -127,15 +127,33 @@ function removeActiveState(tag) {
 function filterRecipes() {
     const selectedTags = Array.from(selectedTagsContainer.children).map(tag => tag.textContent.trim().split(' ')[0]);
     const recipes = document.querySelectorAll('#recipe-grid > a');
+    let visibleCount = 0;
 
     recipes.forEach(recipe => {
         const recipeTags = recipe.getAttribute('data-tags').split(' ');
         if (selectedTags.every(tag => recipeTags.includes(tag))) {
             recipe.style.display = '';
+            visibleCount++;
         } else {
             recipe.style.display = 'none';
         }
     });
+
+    // Show or hide the "No results" message
+    let noResultsMsg = document.getElementById('no-results-message');
+    if (visibleCount === 0) {
+        if (!noResultsMsg) {
+            noResultsMsg = document.createElement('div');
+            noResultsMsg.id = 'no-results-message';
+            noResultsMsg.className = 'text-center py-16 text-white text-lg';
+            noResultsMsg.innerHTML = '<p>No recipes match the selected filters.</p><p class="mt-2 text-sm text-gray">Try removing some tags to see more results.</p>';
+            recipeGrid.appendChild(noResultsMsg);
+        } else {
+            noResultsMsg.style.display = '';
+        }
+    } else if (noResultsMsg) {
+        noResultsMsg.style.display = 'none';
+    }
 
     updateRecipeCount();
 }
@@ -252,7 +270,12 @@ searchBar.addEventListener('input', function() {
                 searchResults.appendChild(div);
             });
         } else {
-            searchResults.classList.add('hidden');
+            // Add a "no matches" message to the dropdown
+            searchResults.classList.remove('hidden');
+            const noMatchesDiv = document.createElement('div');
+            noMatchesDiv.className = 'px-4 py-3 text-gray text-center';
+            noMatchesDiv.textContent = 'No matching recipes found';
+            searchResults.appendChild(noMatchesDiv);
         }
     } else {
         searchResults.classList.add('hidden');
