@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <html data-wf-domain="www.tasty.cooking">
+        <title>Tasty Cooking</title>
+        <meta content="tasty cooking." name="description">
+        <meta content="Eggplant with Buttermilk Sauce" property="og:title"/>
+        <meta content="https://www.tasty.cooking/assets/img/eggplant-with-buttermilk-sauce.jpg" property="og:image"/>
+    <!--Favicon-->
+    <link rel="icon" href="assets/img/favicon.png">
+    <!--CSS (includes Tailwind)-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <!--Font Awesome Pro-->
+    <link href="css/all.css" rel="stylesheet"> <!--load all styles-->
+    <script defer src="js/all.js"></script> <!--load all styles-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+</head>
+
+<body class="bg-black text-gray-200">
+    <div class="container-fluid border-divider-b z-30 bg-black bg-opacity-80 absolute top-0 left-0 right-0">
+        <header class="container mx-auto flex flex-wrap items-center p-4 px-4">
+            <!-- Logo and Navigation -->
+            <!-- Logo and Navigation - Mobile version -->
+            <div class="flex items-center justify-between text-sm md:hidden">
+                <!-- Spacer div to push navigation to the edge -->
+                <div class="flex-grow"></div>
+            </div>
+            
+            <!-- Logo and Navigation - Desktop version -->
+            <div class="hidden md:block md:flex-none md:mr-auto">
+                <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
+                    <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
+                    <span class="font-cheee-wowie text-xl text-[#e2ded8]">Tasty Cooking</span>
+                </a>
+            </div>    
+            <!-- Connect Button -->
+            <!-- Search -->
+            <div class="flex justify-center w-full -ml-2 sm:ml-0 md:flex md:w-auto md:ml-auto md:mr-4" id="search">
+                <div class="mx-auto text-base relative z-10 w-full sm:w-11/12">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="far fa-search text-white fa-sm"></i>
+                        </span>
+                        <input type="text" placeholder="Search recipes" class="w-full md:w-64 pl-10 pr-4 py-2 rounded-sm bg-[#33353c] text-white placeholder-gray-50 focus:outline-none focus:ring-0 focus:border-none" id="search-bar" autocomplete="off">
+                    </div>
+                    <div id="search-results" class="absolute left-0 w-full bg-[#1e2025] text-white mt-1 rounded-sm shadow-lg z-50 hidden">
+                        <!-- Dynamic search results will be displayed here -->
+                    </div>
+                </div>
+            </div>        </div>
+    </header>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative -mt-0 pt-0">
+        <img src="assets/img/eggplant-with-buttermilk-sauce.jpg" alt="Eggplant with Buttermilk Sauce" class="w-full h-96 object-cover">
+        <div class="absolute bottom-0 left-0 right-0">
+            <div class="container mx-auto px-4">
+                <div class="bg-light-grayish-orange mb-5 inline-block pb-5 pt-5 px-6 py-2 border-dark-brown-all">            <h1 class="text-black text-xl font-bold" style="text-transform: none !important;">Eggplant w/ Buttermilk Sauce</h1>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section class="py-8 pt-6 mt-0 sm:mt-0">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap items-center gap-6 mb-5">
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">Prep: 15 min</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-hourglass-half text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">Ready: 1 hr</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-utensils text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">4</span>
+                </div>
+            </div>
+            <!-- Tags Section -->
+            <div class="mb-4 flex flex-wrap">
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-1 cursor-pointer hover:bg-[#3b3d44]">Vegetable</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-1 cursor-pointer hover:bg-[#3b3d44]">Vegetarian</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-1 cursor-pointer hover:bg-[#3b3d44]">Gluten-Free</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-1 cursor-pointer hover:bg-[#3b3d44]">Healthy</span>
+            </div>
+            <div class="max-w-3xl text-light-gray">
+                <p class="leading-7">A rustically elegant starter with roasted eggplant, creamy buttermilk sauce, pomegranate seeds, and za'atar. Perfect with warm bread or pita.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Ingredients Section -->
+    <section class="bg-light-grayish-orange text-black py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-3" style="text-transform: none !important;">Ingredients</h2>
+            <ul class="list-disc pl-6 leading-8 mb-4">
+                <li>2 large and long eggplants</li>
+                <li>⅓ cup olive oil</li>
+                <li>1½ tsp lemon thyme leaves, plus a few whole sprigs to garnish</li>
+                <li>Maldon sea salt and black pepper</li>
+                <li>1 pomegranate</li>
+                <li>1 tsp <a href="#" id="openModal" class="text-blue underline">za'atar</a></li>
+            </ul>
+            <h3 class="text-xl font-semibold mb-2">Sauce</h3>
+            <ul class="list-disc pl-6 leading-8">
+                <li>9 tbsp buttermilk</li>
+                <li>½ cup Greek yogurt</li>
+                <li>1½ tbsp olive oil, plus a drizzle to finish</li>
+                <li>1 small garlic clove, crushed</li>
+                <li>pinch of salt</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="py-8 mb-2">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-2 text-light-gray" style="text-transform: none !important;">Instructions</h2>
+            <ol class="list-decimal pl-6 text-light-gray leading-8">
+                <li class="mb-2">Preheat the oven to 200°F. Cut the eggplants in half lengthways, cutting straight through the green stalk. Use a small sharp knife to make three or four parallel incisions in the cut side of each eggplant half, without cutting through to the skin. Repeat at a 45-degree angle to get a diamond-shaped pattern.</li>
+                <li class="mb-2">Place the eggplant halves, cut-side up, on a baking sheet lined with parchment paper. Brush them with olive oil - keep on brushing until all of the oil has been absorbed by the flesh. Sprinkle with the lemon thyme leaves and some salt and pepper.</li>
+                <li class="mb-2">Roast for 35 to 40 minutes, at which point the flesh should be soft, flavorful and nicely browned. Remove from the oven and allow to cool down completely.</li>
+                <li class="mb-2">While the eggplants are in the oven, cut the pomegranate into two horizontally. Hold one half over a bowl, with the cut side against your palm, and use the back of a wooden spoon to gently knock on the pomegranate skin. Continue beating with increasing power until the seeds start coming out naturally and falling through your fingers into the bowl. Sift through the seeds to remove any bits of white skin or membrane.</li>
+                <li class="mb-2">To make the sauce: Whisk together all of the sauce ingredients. Taste for seasoning, then keep cold until needed.</li>
+                <li class="mb-2">To serve, spoon plenty of buttermilk sauce over the eggplant halves without covering the stalks. Sprinkle za'atar and plenty of pomegranate seeds on top and garnish with lemon thyme. Finish with a drizzle of olive oil.</li>
+            </ol>
+        </div>
+    </section>
+    
+    <footer class="bg-[#0a0b0d] w-full border-t border-dark-gray-top z-50 pt-3 pb-3">
+        <div class="container mx-auto flex items-center justify-between px-4">
+            <ul class="text-xs font-normal text-gray-400 flex items-center w-full">
+                <li class="inline-block mr-2 pt-2 pb-2">
+                    <a href="index" rel="noopener noreferrer" class="text-lg font-windsor-bold">Home</a>
+                </li>
+            <li class="inline-block pt-2 pb-2 ml-auto">
+                <a href="https://github.com/douvy/tasty-cooking" target="_blank" rel="noopener noreferrer" class="text-lg font-windsor-bold">Star on <i class="fab fa-github"></i></a>
+            </li>
+            </ul>
+        </div>
+    </footer>
+    
+      
+    <!-- Modal -->
+    <div id="myModal" class="hidden fixed inset-0 bg-white bg-opacity-25 flex items-center justify-center z-50 sm:p-8">
+        <div class="bg-black text-light-gray rounded-sm shadow-lg p-6 max-w-4xl w-full sm:mx-8 sm:h-auto h-screen overflow-y-auto relative">
+            <button id="closeModal" class="absolute top-4 right-4 bg-transparent border border-light-gray-all text-light-gray py-2 px-4 rounded-sm">Close</button>
+            <h1 class="text-xl text-white border-dark-gray-b pb-4 font-bold mb-2 text-left">California Za'atar</h1>
+            <h2 class="text-lg uppercase text-white font-bold mb-2">Ingredients</h3>
+            <h2 class="text-base font-bold mt-5 uppercase text-white">makes 1.25 cups</h3>
+            <ul class="list-disc pl-6 leading-8 mb-4">
+                <li>¼ cup sesame seeds</li>
+                <li>1 garlic clove</li>
+                <li>¼ cup dried thyme</li>
+                <li>¼ cup dried oregano</li>
+                <li>1 tsp finely grated lemon zest</li>
+                <li>2 tsp ground sumac (optional)</li>
+                <li>1 cup extra-virgin olive oil</li>
+                <li>Kosher salt</li>
+            </ul>
+            <h2 class="text-lg uppercase text-white font-bold mb-2 mt-6">Instructions</h3>
+            <ol class="list-decimal pl-6 text-light-gray leading-8">
+                <li class="mb-2">Toast sesame seeds in a dry frying pan over medium heat until fragrant and beginning to brown, about 3 minutes. Let cool.</li>
+                <li class="mb-2">Using a microplane, grate the garlic into a small bowl. Add thyme, oregano, toasted sesame seeds, lemon zest, sumac (if using), and olive oil. Stir to combine and season with salt.</li>
+                <li class="mb-2">Store in an airtight container in the refrigerator for up to 1 week.</li>
+            </ol>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the link that opens the modal
+        var btns = document.querySelectorAll("#openModal");
+
+        // Get the button that closes the modal
+        var closeBtn = document.getElementById("closeModal");
+
+        // When the user clicks the link, open the modal 
+        btns.forEach(function(btn) {
+            btn.onclick = function(event) {
+                event.preventDefault();
+                modal.classList.remove("hidden");
+            }
+        });
+
+        // When the user clicks on the button, close the modal
+        closeBtn.onclick = function() {
+            modal.classList.add("hidden");
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.classList.add("hidden");
+            }
+        }
+
+        // When the user presses the Escape key, close the modal
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                modal.classList.add("hidden");
+            }
+        });
+    });
+</script>
+      
+<script src="js/recipe-search.js"></script>
+</body>
+
+</html>
