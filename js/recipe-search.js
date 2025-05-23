@@ -74,7 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // On desktop, ensure search results width matches search bar width
                 if (window.innerWidth >= 768) {
-                    searchResults.style.width = (searchBar.offsetWidth + 30) + 'px';
+                    searchResults.style.width = searchBar.offsetWidth + 'px';
+                } else {
+                    searchResults.style.width = '100%';
                 }
                 
                 // Create result items
@@ -139,6 +141,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', function(event) {
         if (!searchBar.contains(event.target) && !searchResults.contains(event.target)) {
             searchResults.classList.add('hidden');
+        }
+    });
+    
+    // Add window resize listener to adjust search results width
+    window.addEventListener('resize', () => {
+        // Update search results width when window is resized
+        if (searchResults && !searchResults.classList.contains('hidden')) {
+            if (window.innerWidth >= 768) {
+                searchResults.style.width = searchBar.offsetWidth + 'px';
+            } else {
+                searchResults.style.width = '100%';
+            }
         }
     });
     
