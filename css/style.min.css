@@ -561,16 +561,19 @@ table tr.dark-gray-hover:hover {
 }
 /* Example for Sort Dropdown */
 #dropdown-menu a:hover {
-  background-color: #24262a; /* Adjust as needed */
+  background-color: #25272c;
   color: white;
+}
+/* Ensure active items keep their background color when hovered */
+#dropdown-menu a.bg-\[\#141519\]:hover,
+#tags-dropdown-menu a.bg-\[\#141519\]:hover {
+  background-color: #141519 !important;
 }
 
 /* Example for Tags Dropdown */
 .dropdown-menu a:hover,
-.tags-dropdown-menu a:hover,
-.dropdown-menu a.bg-gray,
-.tags-dropdown-menu a.bg-gray {
-    background-color: #25272c; /* Adjust as needed */
+.tags-dropdown-menu a:hover {
+    background-color: #25272c;
     color: white;
 }
 .bg-gray-blue {
