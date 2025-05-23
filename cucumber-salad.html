@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <html data-wf-domain="www.tasty.cooking">
+        <title>Tasty Cooking</title>
+        <meta content="tasty cooking." name="description">
+        <meta content="Cucumber salad w/ smashed garlic and ginger" property="og:title"/>
+        <meta content="https://www.tasty.cooking/assets/img/cucumber-salad.jpg" property="og:image"/>
+    <!--Favicon-->
+    <link rel="icon" href="assets/img/favicon.png">
+    <!--CSS (includes Tailwind)-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <!--Font Awesome Pro-->
+    <link href="css/all.css" rel="stylesheet"> <!--load all styles-->
+    <script defer src="js/all.js"></script> <!--load all styles-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid border-divider-b z-30 bg-black bg-opacity-80 absolute top-0 left-0 right-0">
+        <header class="container mx-auto flex flex-wrap items-center p-4 px-4">
+            <!-- Logo and Navigation -->
+            <!-- Logo and Navigation - Mobile version -->
+            <div class="flex items-center justify-between text-sm md:hidden">
+                <!-- Spacer div to push navigation to the edge -->
+                <div class="flex-grow"></div>
+            </div>
+            
+            <!-- Logo and Navigation - Desktop version -->
+            <div class="hidden md:block md:flex-none md:mr-auto">
+                <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
+                    <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
+                    <span class="font-cheee-wowie text-xl text-[#e2ded8]">Tasty Cooking</span>
+                </a>
+            </div>    
+            <!-- Connect Button -->
+            <!-- Search -->
+            <div class="flex justify-center w-full -ml-2 sm:ml-0 md:flex md:w-auto md:ml-auto md:mr-4" id="search">
+                <div class="mx-auto text-base relative z-10 w-full sm:w-11/12">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="far fa-search text-white fa-sm"></i>
+                        </span>
+                        <input type="text" placeholder="Search recipes" class="w-full md:w-64 pl-10 pr-4 py-2 rounded-sm bg-[#33353c] text-white placeholder-gray-50 focus:outline-none focus:ring-0 focus:border-none" id="search-bar" autocomplete="off">
+                    </div>
+                    <div id="search-results" class="absolute left-0 w-full bg-[#1e2025] text-white mt-1 rounded-sm shadow-lg z-50 hidden">
+                        <!-- Dynamic search results will be displayed here -->
+                    </div>
+                </div>
+            </div>        </div>
+    </header>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative -mt-0 pt-0">
+        <img src="assets/img/cucumber-salad.jpg" alt="Cucumber salad w/ smashed garlic and ginger" class="w-full h-96 object-cover">
+        <div class="absolute bottom-0 left-0 right-0">
+            <div class="container mx-auto px-4">
+                <div class="bg-light-grayish-orange mb-5 inline-block pb-5 pt-5 px-6 py-2 border-dark-brown-all">            <h1 class="text-black text-xl font-bold" style="text-transform: none !important;">Cucumber salad w/ smashed garlic and ginger</h1>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section class="py-8 pt-6 mt-0 sm:mt-0">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-start space-x-4 mb-2">
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-light-grayish-orange text-md sm:text-xl mr-2"></i>
+                    <p class="text-sm sm:text-lg font-bold text-light-gray">Prep: 20 min / Ready: 1 hr 15 min</p>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-utensils text-light-grayish-orange text-md sm:text-xl mr-2"></i>
+                    <p class="text-sm sm:text-lg font-bold text-light-gray">4-6</p>
+                </div>
+            </div>
+            <!-- Tags Section -->
+            <div class="mb-3 flex flex-wrap gap-2">
+                <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Condiments</span>
+                <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Gluten-Free</span>
+                <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Healthy</span>
+                <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Vegan</span>
+                <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Vegetable</span>
+                <span class="bg-gray text-light-grayish-orange px-2 py-1 rounded-sm text-sm">Vegetarian</span>
+            </div>
+            <div class="max-w-3xl text-light-gray">
+                <p class="leading-7">A fresh salad that pairs perfectly with rich, hearty dishes. This crisp cucumber salad brings brightness to any meal.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Ingredients Section -->
+    <section class="bg-light-grayish-orange text-black py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-3" style="text-transform: none !important;">Ingredients</h2>
+            <h3 class="text-lg font-semibold mb-2">dressing</h3>
+            <ul class="list-disc pl-6 leading-8 mb-4">
+                <li>3 tbsp rice wine vinegar</li>
+                <li>2 tsp sugar</li>
+                <li>2 tbsp sunflower oil</li>
+                <li>2 tsp toasted sesame oil</li>
+            </ul>
+            <h3 class="text-lg font-semibold mb-2">salad</h3>
+            <ul class="list-disc pl-6 leading-8">
+                <li>1 small red onion, very thinly sliced</li>
+                <li>1½ inches fresh ginger, peeled and sliced</li>
+                <li>1 tsp Maldon sea salt</li>
+                <li>2 large garlic cloves, peeled</li>
+                <li>4 small (or 8 mini) cucumbers (1¼ lbs), peeled</li>
+                <li>1 tbsp toasted sesame seeds</li>
+                <li>3 tbsp chopped cilantro</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="py-8 mb-2">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-2 text-light-gray" style="text-transform: none !important;">Instructions</h2>
+            <ol class="list-decimal pl-6 text-light-gray leading-8">
+                <li class="mb-2">Whisk together all dressing ingredients in a medium mixing bowl. Add the sliced red onion, mix well and leave aside to marinate for about an hour.</li>
+                <li class="mb-2">Place the ginger and salt in a mortar and pound well with a pestle. Add the garlic and continue pounding until well crushed and broken into pieces (stop before it becomes a paste).</li>
+                <li class="mb-2">Use a spatula to scrape the mortar contents into the bowl with the onion and dressing. Stir together.</li>
+                <li class="mb-2">Cut the cucumbers lengthways in half, then cut each half on an angle into ¼-inch-thick slices.</li>
+                <li class="mb-2">Add the cucumber to the bowl, followed by the sesame seeds and cilantro. Stir well and leave to sit for 10 minutes.</li>
+                <li class="mb-2">Before serving, stir the salad again, tip out some of the liquid that has accumulated at the bottom of the bowl and adjust the seasoning.</li>
+            </ol>
+        </div>
+    </section>
+    
+    <footer class="bg-[#0a0b0d] w-full border-t border-dark-gray-top z-50 pt-3 pb-3">
+        <div class="container mx-auto flex items-center justify-between px-4">
+            <ul class="text-xs font-normal text-gray-400 flex items-center w-full">
+                <li class="inline-block mr-2 pt-2 pb-2">
+                    <a href="index" rel="noopener noreferrer" class="text-lg font-windsor-bold">Home</a>
+                </li>
+            <li class="inline-block pt-2 pb-2 ml-auto">
+                <a href="https://github.com/douvy/tasty-cooking" target="_blank" rel="noopener noreferrer" class="text-lg font-windsor-bold">Star on <i class="fab fa-github"></i></a>
+            </li>
+            </ul>
+        </div>
+    </footer>
+    
+      
+<script src="js/recipe-search.js"></script>
+</body>
+
+</html>

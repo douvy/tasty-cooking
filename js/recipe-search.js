@@ -43,7 +43,8 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Pineapple Kimchi", link: "pineapple-kimchi", img: "assets/img/pineapple-kimchi.jpg" },
         { title: "Pomodoro Sauce", link: "pomodoro-sauce", img: "assets/img/pomodoro.jpg" },
         { title: "Spaghetti Pomodoro", link: "spaghetti-pomodoro", img: "assets/img/spaghetti-pomodoro.jpg" },
-        { title: "Grilled Buffalo Wings", link: "grilled-buffalo-wings", img: "assets/img/grilled-buffalo-wings.jpg" }
+        { title: "Grilled Buffalo Wings", link: "grilled-buffalo-wings", img: "assets/img/grilled-buffalo-wings.jpg" },
+        { title: "Cucumber Salad", link: "cucumber-salad", img: "assets/img/cucumber-salad.jpg" }
     ];
     
     let currentIndex = -1;
