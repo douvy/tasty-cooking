@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <html data-wf-domain="www.tasty.cooking">
+        <title>Tasty Cooking</title>
+        <meta content="tasty cooking." name="description">
+        <meta content="Ratatouille" property="og:title"/>
+        <meta content="https://www.tasty.cooking/assets/img/ratatouille.jpg" property="og:image"/>
+    <!--Favicon-->
+    <link rel="icon" href="assets/img/favicon.png">
+    <!--CSS (includes Tailwind)-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <!--Font Awesome Pro-->
+    <link href="css/all.css" rel="stylesheet"> <!--load all styles-->
+    <script defer src="js/all.js"></script> <!--load all styles-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid border-divider-b z-30 bg-black bg-opacity-80 absolute top-0 left-0 right-0">
+        <header class="container mx-auto flex flex-wrap items-center p-4 px-4">
+            <!-- Logo and Navigation -->
+            <!-- Logo and Navigation - Mobile version -->
+            <div class="flex items-center justify-between text-sm md:hidden">
+                <!-- Spacer div to push navigation to the edge -->
+                <div class="flex-grow"></div>
+            </div>
+            
+            <!-- Logo and Navigation - Desktop version -->
+            <div class="hidden md:block md:flex-none md:mr-auto">
+                <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
+                    <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
+                    <span class="font-cheee-wowie text-xl text-[#e2ded8]">Tasty Cooking</span>
+                </a>
+            </div>    
+            <!-- Connect Button -->
+            <!-- Search -->
+            <div class="flex justify-center w-full -ml-2 sm:ml-0 md:flex md:w-auto md:ml-auto md:mr-4" id="search">
+                <div class="mx-auto text-base relative z-10 w-full sm:w-11/12">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="far fa-search text-white fa-sm"></i>
+                        </span>
+                        <input type="text" placeholder="Search recipes" class="w-full md:w-64 pl-10 pr-4 py-2 rounded-sm bg-[#33353c] text-white placeholder-gray-50 focus:outline-none focus:ring-0 focus:border-none" id="search-bar" autocomplete="off">
+                    </div>
+                    <div id="search-results" class="absolute left-0 w-full bg-[#1e2025] text-white mt-1 rounded-sm shadow-lg z-50 hidden">
+                        <!-- Dynamic search results will be displayed here -->
+                    </div>
+                </div>
+            </div>        </div>
+    </header>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative -mt-0 pt-0">
+        <img src="assets/img/ratatouille.jpg" alt="Ratatouille" class="w-full h-96 object-cover">
+        <div class="absolute bottom-0 left-0 right-0">
+            <div class="container mx-auto px-4">
+                <div class="bg-light-grayish-orange mb-5 inline-block pb-5 pt-5 px-6 py-2 border-dark-brown-all">            <h1 class="text-black text-xl font-bold" style="text-transform: none !important;">Ratatouille</h1>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section class="py-8 pt-6 mt-0 sm:mt-0">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap items-center gap-6 mb-5">
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">Prep: 25 min</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-hourglass-half text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">Ready: 1 hr 45 min</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-utensils text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">4</span>
+                </div>
+            </div>
+            <!-- Tags Section -->
+            <div class="mb-4 flex flex-wrap">
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-1 cursor-pointer hover:bg-[#3b3d44]">Vegetable</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-1 cursor-pointer hover:bg-[#3b3d44]">Vegan</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-1 cursor-pointer hover:bg-[#3b3d44]">Vegetarian</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-1 cursor-pointer hover:bg-[#3b3d44]">Gluten-Free</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-1 cursor-pointer hover:bg-[#3b3d44]">Healthy</span>
+            </div>
+            <div class="max-w-3xl text-light-gray">
+                <p class="leading-7">A delicious version of ratatouille with perfectly soft, caramelized vegetables. Get all your prep done first - the technique is everything.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Ingredients Section -->
+    <section class="bg-light-grayish-orange text-black py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-3" style="text-transform: none !important;">Ingredients</h2>
+            <ul class="list-disc pl-6 leading-8">
+                <li>7 tbsp avocado oil</li>
+                <li>2 small onions, cut into 1¼-inch dice</li>
+                <li>4 garlic cloves, sliced</li>
+                <li>½ fresh green chile, thinly sliced</li>
+                <li>2 small red peppers, cut into 1¼-inch dice</li>
+                <li>½ small butternut squash, peeled and cut into 1¼-inch dice</li>
+                <li>1 small parsnip, peeled and cut into 1¼-inch dice</li>
+                <li>1 cup French beans, trimmed</li>
+                <li>1 medium zucchini, cut into 1¼-inch dice</li>
+                <li>½ large eggplant, peeled and cut into 1¼-inch dice</li>
+                <li>1 small potato, peeled and cut into 1¼-inch dice</li>
+                <li>2 medium tomatoes, peeled and chopped</li>
+                <li>½ tbsp sugar</li>
+                <li>1 tbsp tomato paste</li>
+                <li>salt and black pepper</li>
+                <li>1 cup water</li>
+                <li>chopped cilantro to garnish (optional)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="py-8 mb-2">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-2 text-light-gray" style="text-transform: none !important;">Instructions</h2>
+            <ol class="list-decimal pl-6 text-light-gray leading-8">
+                <li class="mb-2">Pour two-thirds of the oil into a large heavy casserole dish or pot and place on medium-high heat. Add the onions and fry for 5 minutes, stirring occasionally.</li>
+                <li class="mb-2">Stir in the garlic, chile and red peppers and fry for another 5 minutes. Add the squash and parsnip and continue frying for 5 minutes.</li>
+                <li class="mb-2">Using a slotted spoon, lift the vegetables out of the pot and into a medium bowl, leaving as much oil in the pot as possible. Top this up with the remaining oil.</li>
+                <li class="mb-2">Add the French beans, zucchini and eggplant to the hot oil and fry for 5 minutes, stirring occasionally.</li>
+                <li class="mb-2">Return the contents of the bowl to the pot. Add the potato, tomatoes, sugar, tomato paste and plenty of salt and pepper. Stir well, then pour in the water, or just enough to half-cover the vegetables.</li>
+                <li class="mb-2">Cover with a lid and leave to simmer gently for 30 minutes. Taste the vegetables and add more salt and pepper, if you like.</li>
+                <li class="mb-2">Preheat the oven to 400°F. Use a slotted spoon to gently lift the vegetables from the pot and into a large, deep roasting pan to make a layer about 1¼ inches thick.</li>
+                <li class="mb-2">Pour the liquid over the vegetables and place in the oven to cook for 30 minutes. At this point all the vegetables should be very soft and most of the liquid evaporated. Garnish with cilantro, if you like, and serve.</li>
+            </ol>
+        </div>
+    </section>
+    
+    <footer class="bg-[#0a0b0d] w-full border-t border-dark-gray-top z-50 pt-3 pb-3">
+        <div class="container mx-auto flex items-center justify-between px-4">
+            <ul class="text-xs font-normal text-gray-400 flex items-center w-full">
+                <li class="inline-block mr-2 pt-2 pb-2">
+                    <a href="index" rel="noopener noreferrer" class="text-lg font-windsor-bold">Home</a>
+                </li>
+            <li class="inline-block pt-2 pb-2 ml-auto">
+                <a href="https://github.com/douvy/tasty-cooking" target="_blank" rel="noopener noreferrer" class="text-lg font-windsor-bold">Star on <i class="fab fa-github"></i></a>
+            </li>
+            </ul>
+        </div>
+    </footer>
+    
+      
+<script src="js/recipe-search.js"></script>
+</body>
+
+</html>
