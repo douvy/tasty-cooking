@@ -364,6 +364,11 @@ tagsDropdownMenu.addEventListener('click', (event) => {
 // Initial count update
 updateRecipeCount();
 
+// Make sure to update the count when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    updateRecipeCount();
+});
+
 // Mobile menu functionality removed
 
 // Add lazy loading, WebP support, and responsiveness to all recipe images
