@@ -74,11 +74,12 @@
 <body>
     <div class="container-fluid border-divider-b z-30 bg-black bg-opacity-80 absolute top-0 left-0 right-0">
         <header class="container mx-auto flex flex-wrap items-center p-4 px-4">
-            <!-- Logo and Navigation -->
             <!-- Logo and Navigation - Mobile version -->
-            <div class="flex items-center justify-between text-sm md:hidden">
-                <!-- Spacer div to push navigation to the edge -->
-                <div class="flex-grow"></div>
+            <div class="flex items-center justify-between text-sm md:hidden w-full" style="margin-bottom: 1.1rem;">
+                <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
+                    <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
+                    <span class="font-cheee-wowie text-xl text-[#e2ded8]">Tasty Cooking</span>
+                </a>
             </div>
             
             <!-- Logo and Navigation - Desktop version -->
@@ -87,8 +88,8 @@
                     <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
                     <span class="font-cheee-wowie text-xl text-[#e2ded8]">Tasty Cooking</span>
                 </a>
-            </div>    
-            <!-- Connect Button -->
+            </div>
+            
             <!-- Search -->
             <div class="flex justify-center w-full -ml-2 sm:ml-0 md:flex md:w-auto md:ml-auto md:mr-4" id="search">
                 <div class="mx-auto text-base relative z-10 w-full sm:w-11/12">
@@ -102,8 +103,8 @@
                         <!-- Dynamic search results will be displayed here -->
                     </div>
                 </div>
-            </div>        </div>
-    </header>
+            </div>
+        </header>
     </div>
     
     <!-- Hero Section -->
