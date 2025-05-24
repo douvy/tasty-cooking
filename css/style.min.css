@@ -537,14 +537,14 @@ table tr.dark-gray-hover:hover {
   }
 }
 #selected-tags {
-  margin-top: -4px; /* Reduced margin for a more subtle line break */
+  margin-top: 0px; /* Reduced margin for a more subtle line break */
   width: 100%;
   justify-content: left; /* Align tags to the left */
   padding-left: 0rem; /* Add some padding to align with other elements */
-  margin-bottom: 4px;
+  margin-bottom: 0px;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 0.5rem; /* Improved spacing between tags */
+  gap: 0rem .5rem 0rem .5rem; /* Improved spacing between tags */
 }
 #selected-tags span {
   white-space: nowrap; /* Prevent tags from splitting onto two lines */
