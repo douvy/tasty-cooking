@@ -412,8 +412,9 @@ searchBar.addEventListener('input', function() {
             searchResults.classList.remove('hidden');
             filteredRecipes.forEach(recipe => {
                 const div = document.createElement('div');
-                div.className = 'px-4 py-2 cursor-pointer hover:bg-gray flex items-center space-x-2 border-b border-dark-gray-all';
-                div.innerHTML = `<img src="${recipe.imgSrc}" alt="${recipe.title}" class="w-5 h-5 rounded-sm"> <span class="text-gray capitalize truncate">${recipe.title.toLowerCase()}</span>`;
+                // Add bottom border to all items except the last one
+                div.className = 'px-4 py-2 cursor-pointer hover:bg-[#25272c] flex items-center space-x-2 border-b border-[#34373d]';
+                div.innerHTML = `<img src="${recipe.imgSrc}" alt="${recipe.title}" class="w-5 h-5 rounded-sm"> <span class="text-white capitalize truncate">${recipe.title.toLowerCase()}</span>`;
                 div.addEventListener('click', () => {
                     window.location.href = recipe.link;
                 });
@@ -423,7 +424,7 @@ searchBar.addEventListener('input', function() {
             // Add a "no matches" message to the dropdown
             searchResults.classList.remove('hidden');
             const noMatchesDiv = document.createElement('div');
-            noMatchesDiv.className = 'px-4 py-3 text-gray text-center';
+            noMatchesDiv.className = 'px-4 py-3 text-white text-center';
             noMatchesDiv.textContent = 'No matching recipes found';
             searchResults.appendChild(noMatchesDiv);
         }
