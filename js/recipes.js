@@ -279,8 +279,8 @@ function filterRecipes() {
         if (!noResultsMsg) {
             noResultsMsg = document.createElement('div');
             noResultsMsg.id = 'no-results-message';
-            noResultsMsg.className = 'text-center py-16 text-white text-lg';
-            noResultsMsg.innerHTML = '<p>No recipes match the selected filters.</p><p class="mt-2 text-sm text-gray">Try removing some tags to see more results.</p>';
+            noResultsMsg.className = 'text-center py-16 text-white w-full';
+            noResultsMsg.innerHTML = '<p class="text-xl font-windsor-bold">No recipes match the selected filters</p><p class="mt-2 text-base">Try removing some tags to see more results</p>';
             recipeGrid.appendChild(noResultsMsg);
         } else {
             noResultsMsg.style.display = '';
