@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { title: "Black Bean Avocado Wraps", link: "avocado-wraps", img: "assets/img/black-bean-avocado-wraps.jpg" },
         { title: "Sesame Orange Chicken", link: "sesame-orange-chicken", img: "assets/img/spicy-orange-sesame-chicken.jpg" },
         { title: "Japanese Tebasaki Wings", link: "japanese-tebasaki-wings", img: "assets/img/japanese-wings.jpg" },
+        { title: "Crunchy Pappardelle", link: "crunchy-pappardelle", img: "assets/img/crunchy-pappardelle.jpg" },
         { title: "Pineapple Ginger Smoothie", link: "pineapple-ginger-smoothie", img: "assets/img/pineapple-ginger-smoothie.jpg" },
         { title: "Salsa", link: "salsa", img: "assets/img/salsa.jpg" },
         { title: "Roasted Sweet Potato Salad", link: "roasted-sweet-potato-salad", img: "assets/img/roasted-sweet-potato-salad.jpg" },

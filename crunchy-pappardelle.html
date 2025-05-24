@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <html data-wf-domain="www.tasty.cooking">
+        <title>Tasty Cooking</title>
+        <meta content="tasty cooking." name="description">
+        <meta content="Crunchy pappardelle" property="og:title"/>
+        <meta content="https://www.tasty.cooking/assets/img/crunchy-pappardelle.jpg" property="og:image"/>
+    <!--Favicon-->
+    <link rel="icon" href="assets/img/favicon.png">
+    <!--CSS (includes Tailwind)-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <!--Font Awesome Pro-->
+    <link href="css/all.css" rel="stylesheet"> <!--load all styles-->
+    <script defer src="js/all.js"></script> <!--load all styles-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid border-divider-b z-30 bg-black bg-opacity-80 absolute top-0 left-0 right-0">
+        <header class="container mx-auto flex items-center p-4 px-4">
+            <!-- Logo and Navigation - Mobile version -->
+            <div class="flex items-center md:hidden" style="width: auto; margin-right: 18px;">
+                <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
+                    <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-8 w-auto">
+                </a>
+            </div>
+            
+            <!-- Logo and Navigation - Desktop version -->
+            <div class="hidden md:block md:flex-none md:mr-auto">
+                <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
+                    <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
+                    <span class="font-cheee-wowie text-xl text-white">Tasty Cooking</span>
+                </a>
+            </div>
+            
+            <!-- Search -->
+            <div class="flex-1 md:flex-none md:ml-auto" id="search">
+                <div class="text-base relative z-10 w-full">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="far fa-search text-white fa-sm"></i>
+                        </span>
+                        <input type="text" placeholder="Search recipes" class="w-full md:w-64 pl-10 pr-4 py-2 rounded-sm bg-[#33353c] text-white placeholder-gray-50 focus:outline-none focus:ring-0 focus:border-none" id="search-bar" autocomplete="off">
+                    </div>
+                    <div id="search-results" class="absolute left-0 w-full bg-[#1e2025] text-white mt-1 rounded-sm shadow-lg z-50 hidden">
+                        <!-- Dynamic search results will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative -mt-0 pt-0">
+        <img src="assets/img/crunchy-pappardelle.jpg" alt="Crunchy pappardelle" class="w-full h-96 object-cover">
+        <div class="absolute bottom-0 left-0 right-0">
+            <div class="container mx-auto px-4">
+                <div class="bg-light-grayish-orange mb-5 inline-block pb-5 pt-5 px-6 py-2 border-dark-brown-all">            <h1 class="text-black text-xl font-bold" style="text-transform: none !important;">Crunchy Pappardelle</h1>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section class="py-8 pt-6 mt-0 sm:mt-0">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap items-center gap-6 mb-5">
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">Prep: 20 min</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-hourglass-half text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">Ready: 40 min</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-utensils text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">2</span>
+                </div>
+            </div>
+            <!-- Tags Section -->
+            <div class="mb-2 flex flex-wrap">
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-3">Vegetable</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-3">Vegetarian</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-3">Healthy</span>
+            </div>
+            <div class="max-w-3xl text-light-gray">
+                <p class="leading-7">Crispy panko breadcrumbs add delightful texture to this creamy mushroom and broccolini pasta. The sauce dries out easily, so add pasta cooking liquid to keep it runny before serving.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Ingredients Section -->
+    <section class="bg-light-grayish-orange text-black py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-3" style="text-transform: none !important;">Ingredients</h2>
+            <ul class="list-disc pl-6 leading-8">
+                <li>1/4 cup olive oil</li>
+                <li>3 1/2 cups button mushrooms, halved</li>
+                <li>7 tbsp white wine</li>
+                <li>1 bay leaf</li>
+                <li>3 thyme sprigs, leaves picked and chopped</li>
+                <li>1/2 tsp sugar</li>
+                <li>2/3 cup heavy cream</li>
+                <li>salt and black pepper</li>
+                <li>grated zest of 1 lemon</li>
+                <li>1 garlic clove, crushed</li>
+                <li>3 tbsp chopped parsley</li>
+                <li>3 tbsp panko</li>
+                <li>1 bunch broccolini</li>
+                <li>9 oz dried pappardelle</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="py-8 mb-2">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-2 text-light-gray" style="text-transform: none !important;">Instructions</h2>
+            <ol class="list-decimal pl-6 text-light-gray leading-8">
+                <li class="mb-2">Bring a large pot of salted water and a small pot of salted water to a boil. Heat the olive oil over medium-high heat in a large saucepan and sauté the mushrooms until they start taking on color, stirring occasionally.</li>
+                <li class="mb-2">Add the wine, bay leaf, thyme and sugar. Bring to the boil and reduce the liquid by two-thirds. Add the cream and stir to mix. Taste and add plenty of salt and pepper. Keep warm.</li>
+                <li class="mb-2">Mix together the lemon zest, garlic and parsley. In a pan over medium heat, toast the panko until golden, stirring occasionally.</li>
+                <li class="mb-2">Pick any leaves from the broccolini, then cut into 2 1/2-inch-long pieces (stalks and florets). If the stalks are thick, cut them along the center in half or into quarters. Blanch in the small pot of boiling water for 2 minutes and drain.</li>
+                <li class="mb-2">Add the pasta to the large pot of boiling water. When the pasta is just ready, add the broccolini to the cream sauce to reheat. Drain the pappardelle, keeping some of the cooking liquid, and stir with the cream sauce; add half of the parsley mix. If the sauce seems dry, add some of the reserved cooking liquid.</li>
+                <li class="mb-2">Transfer the pasta to a serving bowl. Stir the rest of the parsley mix into the panko and sprinkle generously over the pappardelle, then serve immediately.</li>
+            </ol>
+        </div>
+    </section>
+    
+    <footer class="bg-[#0a0b0d] w-full border-t border-dark-gray-top z-50 pt-3 pb-3">
+        <div class="container mx-auto flex items-center justify-between px-4">
+            <ul class="text-xs font-normal text-gray-400 flex items-center w-full">
+                <li class="inline-block mr-2 pt-2 pb-2">
+                    <a href="index" rel="noopener noreferrer" class="text-lg font-windsor-bold">Home</a>
+                </li>
+            <li class="inline-block pt-2 pb-2 ml-auto">
+                <a href="https://github.com/douvy/tasty-cooking" target="_blank" rel="noopener noreferrer" class="text-lg font-windsor-bold">Star on <i class="fab fa-github"></i></a>
+            </li>
+            </ul>
+        </div>
+    </footer>
+    
+      
+<script src="js/recipe-search.js"></script>
+</body>
+
+</html>
