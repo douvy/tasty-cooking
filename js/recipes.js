@@ -380,7 +380,7 @@ document.querySelectorAll('#recipe-grid img').forEach(img => {
     
     // Add WebP support with picture element
     const imgSrc = img.getAttribute('src');
-    if (imgSrc && !img.parentNode.tagName.toLowerCase() === 'picture') {
+    if (imgSrc && img.parentNode.tagName.toLowerCase() !== 'picture') {
         // Create the WebP version path
         const imgName = imgSrc.split('/').pop().split('.')[0];
         const webpSrc = `assets/img/webp/${imgName}.webp`;

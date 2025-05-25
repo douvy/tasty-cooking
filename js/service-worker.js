@@ -5,7 +5,7 @@ const ASSETS_TO_CACHE = [
   '/index.html',
   '/css/style.min.css',
   '/js/recipes.min.js',
-  '/js/all.js',
+  '/js/recipe-search.min.js',
   '/assets/img/favicon.png',
   '/manifest.json',
   '/assets/fonts/GT-Flexa-Standard-Regular.woff2',
