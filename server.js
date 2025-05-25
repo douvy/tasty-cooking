@@ -101,6 +101,55 @@ app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
-});
+// Create HTTP server instance
+const http = require('http');
+const server = http.createServer(app);
+
+// Configure port range and retry settings
+const BASE_PORT = PORT;
+const MAX_PORT = BASE_PORT + 100; // Try ports 3000-3100
+const MAX_RETRIES = 10;
+
+/**
+ * Start server on specified port, with automatic port increment if port is in use
+ * @param {number} port - Port to attempt to use
+ * @param {number} retries - Number of retries attempted so far
+ */
+function startServer(port, retries = 0) {
+  // Safety check to prevent trying too many ports
+  if (port > MAX_PORT) {
+    console.error(`Error: Could not find an available port in range ${BASE_PORT}-${MAX_PORT}`);
+    process.exit(1);
+  }
+  
+  // Safety check to prevent too many retries
+  if (retries >= MAX_RETRIES) {
+    console.error(`Error: Failed to start server after ${MAX_RETRIES} attempts`);
+    process.exit(1);
+  }
+
+  // Attempt to start server on port
+  server.listen(port);
+  
+  // Handle server errors
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${port} is already in use, trying port ${port + 1}...`);
+      server.close();
+      // Try next port
+      startServer(port + 1, retries + 1);
+    } else {
+      console.error('Server error:', err);
+      process.exit(1);
+    }
+  });
+  
+  // Server started successfully
+  server.on('listening', () => {
+    const actualPort = server.address().port;
+    console.log(`Server running at http://localhost:${actualPort}`);
+  });
+}
+
+// Start the server
+startServer(BASE_PORT);
