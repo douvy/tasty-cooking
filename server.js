@@ -29,10 +29,10 @@ app.use((req, res, next) => {
   res.setHeader(
     'Content-Security-Policy',
     "default-src 'self'; " +
-    "script-src 'self' https://cdn.tailwindcss.com 'unsafe-inline'; " +
+    "script-src 'self' https://cdn.tailwindcss.com https://kit.fontawesome.com 'unsafe-inline'; " +
     "style-src 'self' https://fonts.googleapis.com https://pro.fontawesome.com 'unsafe-inline'; " +
     "img-src 'self' data:; " +
-    "font-src 'self' https://fonts.gstatic.com https://pro.fontawesome.com; " +
+    "font-src 'self' https://fonts.gstatic.com https://pro.fontawesome.com https://ka-f.fontawesome.com; " +
     "connect-src 'self';"
   );
   
