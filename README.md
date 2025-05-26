@@ -35,10 +35,10 @@ Tasty Cooking was built with these principles in mind:
   - **Windsor Bold** for headings: A classic serif with personality that adds warmth and character
   - **GT Flexa** for body text: A modern sans-serif that ensures excellent readability at all sizes
 
-- **Color Palette**: Our colors are inspired by natural cooking ingredients:
-  - Dark charcoal background: Creates drama and makes food photos pop
-  - Warm beige accents: Adds warmth reminiscent of baked goods
-  - Strategic use of white space: Creates visual breathing room
+- **Color Palette**: Our colors are inspired by natural cooking environments:
+  - Moss green (#383d23): An earthy, organic tone that evokes nature and fresh ingredients
+  - Parchment (#e0d394): A warm, soft hue reminiscent of vintage recipe cards and natural fibers
+  - Strategic use of contrast: Creates visual hierarchy while maintaining a cohesive, natural feel
 
 - **Performance First**: Every design decision was weighed against performance impact, ensuring a fast experience even on slower connections.
 
