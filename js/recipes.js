@@ -418,7 +418,7 @@ searchBar.addEventListener('input', function() {
             filteredRecipes.forEach(recipe => {
                 const div = document.createElement('div');
                 // Add bottom border to all items except the last one
-                div.className = 'px-4 py-2 cursor-pointer hover:bg-[#25272c] flex items-center space-x-2 border-b border-[#2e3523]';
+                div.className = 'px-4 py-2 cursor-pointer hover:bg-[#222616] flex items-center space-x-2 border-b border-[#2e3523]';
                 div.innerHTML = `<img src="${recipe.imgSrc}" alt="${recipe.title}" class="w-5 h-5 rounded-sm"> <span class="text-white capitalize truncate">${recipe.title.toLowerCase()}</span>`;
                 div.addEventListener('click', () => {
                     window.location.href = recipe.link;
@@ -481,7 +481,7 @@ function updateHighlightedResult(results) {
     results.forEach((result, index) => {
         if (index === currentIndex) {
             // Apply inline style directly instead of using the bg-dark-gray class
-            result.style.backgroundColor = '#25272c';
+            result.style.backgroundColor = '#222616';
         } else {
             // Remove inline style when not selected
             result.style.backgroundColor = '';
