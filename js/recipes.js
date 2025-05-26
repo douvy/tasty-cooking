@@ -404,39 +404,69 @@ document.querySelectorAll('#recipe-grid img').forEach(img => {
     }
 });
 
-// Intelligent Search Functionality
+// Intelligent Search Functionality with scrollable container
 searchBar.addEventListener('input', function() {
     const query = this.value.toLowerCase();
     searchResults.innerHTML = '';
     currentIndex = -1; // Reset current index for keyboard navigation
     
+    // Always show results - either filtered or all
+    searchResults.classList.remove('hidden');
+    
+    // Apply max-height and make scrollable
+    const maxHeight = window.innerHeight - searchResults.getBoundingClientRect().top - 20; // 20px buffer
+    searchResults.style.maxHeight = `${maxHeight}px`;
+    searchResults.style.overflowY = 'auto';
+    
+    // Create a container for results
+    const resultsContainer = document.createElement('div');
+    resultsContainer.className = 'search-results-container w-full';
+    
     if (query) {
-        // Search results dropdown
+        // Filter recipes based on query
         const filteredRecipes = recipes.filter(recipe => recipe.title.toLowerCase().includes(query));
+        
         if (filteredRecipes.length) {
-            searchResults.classList.remove('hidden');
-            filteredRecipes.forEach(recipe => {
+            // Show filtered recipes
+            filteredRecipes.forEach((recipe, index) => {
                 const div = document.createElement('div');
-                // Add bottom border to all items except the last one
-                div.className = 'px-4 py-2 cursor-pointer hover:bg-[#222616] flex items-center space-x-2 border-b border-[#2e3523]';
+                // Add bottom border to all items
+                div.className = 'px-4 py-2 cursor-pointer hover:bg-[#222616] flex items-center space-x-2 border-b border-[#2f3525]';
+                div.setAttribute('role', 'option');
+                div.setAttribute('id', `search-result-${index}`);
+                div.setAttribute('aria-selected', 'false');
                 div.innerHTML = `<img src="${recipe.imgSrc}" alt="${recipe.title}" class="w-5 h-5 rounded-sm"> <span class="text-off-white capitalize truncate">${recipe.title.toLowerCase()}</span>`;
                 div.addEventListener('click', () => {
                     window.location.href = recipe.link;
                 });
-                searchResults.appendChild(div);
+                resultsContainer.appendChild(div);
             });
         } else {
-            // Add a "no matches" message to the dropdown
-            searchResults.classList.remove('hidden');
+            // No matches message
             const noMatchesDiv = document.createElement('div');
             noMatchesDiv.className = 'px-4 py-3 text-off-white text-center';
             noMatchesDiv.textContent = 'No matching recipes found';
-            searchResults.appendChild(noMatchesDiv);
+            noMatchesDiv.setAttribute('role', 'status');
+            noMatchesDiv.setAttribute('aria-live', 'polite');
+            resultsContainer.appendChild(noMatchesDiv);
         }
     } else {
-        // No search query - restore paginated view
-        searchResults.classList.add('hidden');
+        // No query - show all recipes
+        recipes.forEach((recipe, index) => {
+            const div = document.createElement('div');
+            // Add bottom border to all items
+            div.className = 'px-4 py-2 cursor-pointer hover:bg-[#222616] flex items-center space-x-2 border-b border-[#2f3525]';
+            div.setAttribute('role', 'option');
+            div.setAttribute('id', `search-result-${index}`);
+            div.setAttribute('aria-selected', 'false');
+            div.innerHTML = `<img src="${recipe.imgSrc}" alt="${recipe.title}" class="w-5 h-5 rounded-sm"> <span class="text-off-white capitalize truncate">${recipe.title.toLowerCase()}</span>`;
+            div.addEventListener('click', () => {
+                window.location.href = recipe.link;
+            });
+            resultsContainer.appendChild(div);
+        });
         
+        // Also update the page display
         // Reset pagination
         currentPage = 1;
         visibleRecipes = [];
@@ -452,17 +482,22 @@ searchBar.addEventListener('input', function() {
         // Reset infinite scroll
         setupInfiniteScroll();
     }
+    
+    // Add the results container to the dropdown
+    searchResults.appendChild(resultsContainer);
 });
 
 
 searchBar.addEventListener('keydown', function(event) {
-    const results = Array.from(searchResults.children);
+    const results = Array.from(searchResults.querySelectorAll('[role="option"]'));
     if (event.key === 'ArrowDown') {
+        event.preventDefault();
         if (currentIndex < results.length - 1) {
             currentIndex++;
             updateHighlightedResult(results);
         }
     } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
         if (currentIndex > 0) {
             currentIndex--;
             updateHighlightedResult(results);
@@ -473,7 +508,7 @@ searchBar.addEventListener('keydown', function(event) {
         }
     } else if (event.key === 'Escape') {
         searchResults.classList.add('hidden');
-        searchBar.classList.remove('bg-dark-gray');
+        document.body.style.overflow = '';
     }
 });
 
@@ -482,26 +517,79 @@ function updateHighlightedResult(results) {
         if (index === currentIndex) {
             // Apply inline style directly instead of using the bg-dark-gray class
             result.style.backgroundColor = '#222616';
+            result.setAttribute('aria-selected', 'true');
         } else {
             // Remove inline style when not selected
             result.style.backgroundColor = '';
+            result.setAttribute('aria-selected', 'false');
         }
     });
+    
+    // Ensure the selected item is visible (scroll into view if needed)
+    if (currentIndex > -1 && results[currentIndex]) {
+        results[currentIndex].scrollIntoView({ block: 'nearest' });
+    }
 }
 
-// Focus/blur handling for search bar
+// Focus/blur handling for search bar with scroll lock
 searchBar.addEventListener('focus', function() {
-    // No class change on focus
+    // Lock body scroll immediately on focus
+    document.body.style.overflow = 'hidden';
+    
+    // If there's text in the search bar, show results again
+    if (this.value.trim().length > 0) {
+        // Re-run the input handler to show results
+        this.dispatchEvent(new Event('input'));
+    } else {
+        // If no input yet, show all recipes (to make it faster to browse)
+        const allRecipesForSearch = recipes.slice(0, 100);
+        if (allRecipesForSearch.length > 0) {
+            searchResults.innerHTML = '';
+            searchResults.classList.remove('hidden');
+            
+            // Apply max-height and make scrollable
+            const maxHeight = window.innerHeight - searchResults.getBoundingClientRect().top - 20; // 20px buffer
+            searchResults.style.maxHeight = `${maxHeight}px`;
+            searchResults.style.overflowY = 'auto';
+            
+            // Create a container for results
+            const resultsContainer = document.createElement('div');
+            resultsContainer.className = 'search-results-container w-full';
+            
+            allRecipesForSearch.forEach((recipe, index) => {
+                const div = document.createElement('div');
+                div.className = 'px-4 py-2 cursor-pointer hover:bg-[#222616] flex items-center space-x-2 border-b border-[#2f3525]';
+                div.setAttribute('role', 'option');
+                div.setAttribute('id', `search-result-${index}`);
+                div.setAttribute('aria-selected', 'false');
+                div.innerHTML = `<img src="${recipe.imgSrc}" alt="${recipe.title}" class="w-5 h-5 rounded-sm"> <span class="text-off-white capitalize truncate">${recipe.title.toLowerCase()}</span>`;
+                div.addEventListener('click', () => {
+                    window.location.href = recipe.link;
+                });
+                resultsContainer.appendChild(div);
+            });
+            
+            searchResults.appendChild(resultsContainer);
+        }
+    }
 });
 
-searchBar.addEventListener('blur', function() {
-    searchBar.classList.remove('bg-dark-gray');
+searchBar.addEventListener('blur', function(event) {
+    // Don't unlock if we're clicking in the results
+    if (!searchResults.contains(event.relatedTarget)) {
+        // Only unlock if we're not staying within the search UI
+        setTimeout(() => {
+            if (searchResults.classList.contains('hidden')) {
+                document.body.style.overflow = '';
+            }
+        }, 100);
+    }
 });
 
 // Hide search results when clicking outside
 window.addEventListener('click', (event) => {
     if (!searchBar.contains(event.target) && !searchResults.contains(event.target)) {
         searchResults.classList.add('hidden');
-        searchBar.classList.remove('bg-dark-gray');
+        document.body.style.overflow = '';
     }
 });
