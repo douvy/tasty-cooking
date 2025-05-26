@@ -594,6 +594,47 @@
         </div>
     </footer>
 <script src="js/recipes.min.js"></script>
+<!-- Add this script to handle the "no results" state consistently with recipe pages -->
+<script>
+  // Wait until the recipes.js script has fully initialized
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchBar = document.getElementById('search-bar');
+    const searchResults = document.getElementById('search-results');
+    
+    // Skip if elements aren't found
+    if (!searchBar || !searchResults) return;
+    
+    // Save the original input event handler
+    const originalInputHandler = searchBar._onInput;
+    
+    // Add our own handler for the no-results case
+    searchBar.addEventListener('input', function(e) {
+      // Let original handler run first (handled by recipes.js)
+      
+      // Only run this code if no results were found
+      setTimeout(function() {
+        const query = searchBar.value.trim().toLowerCase();
+        if (query && searchResults.children.length === 0) {
+          // Show "no matches" message instead of hiding
+          searchResults.classList.remove('hidden');
+          
+          // On desktop, ensure search results width matches search bar width
+          if (window.innerWidth >= 768) {
+              searchResults.style.width = searchBar.offsetWidth + 'px';
+          } else {
+              searchResults.style.width = '100%';
+          }
+          
+          // Add a "no matches" message to the dropdown
+          const noMatchesDiv = document.createElement('div');
+          noMatchesDiv.className = 'px-4 py-3 text-off-white text-center';
+          noMatchesDiv.textContent = 'No matching recipes found';
+          searchResults.appendChild(noMatchesDiv);
+        }
+      }, 10); // Small delay to let the original handler complete
+    });
+  });
+</script>
 <script>
   // Register Service Worker for offline functionality
   if ('serviceWorker' in navigator) {

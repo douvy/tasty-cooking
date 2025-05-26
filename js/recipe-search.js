@@ -1,56 +1,127 @@
 // Search functionality for recipe pages
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("Recipe search script loaded");
-    
     // Variables for search functionality
     const searchBar = document.getElementById('search-bar');
     const searchResults = document.getElementById('search-results');
-    
-    console.log("Search bar element:", searchBar);
-    console.log("Search results element:", searchResults);
     
     if (!searchBar || !searchResults) {
         console.error("Critical search elements not found on page");
         return;
     }
     
-    let recipes = [
-        { title: "Sesame Green Beans", link: "sesame-green-beans", img: "assets/img/sesame-green-beans.jpg" },
-        { title: "Guacamole", link: "guacamole", img: "assets/img/guacamole.jpg" },
-        { title: "Roasted Cauliflower", link: "roasted-cauliflower", img: "assets/img/roasted-cauliflower.jpg" },
-        { title: "Roasted Broccolini", link: "roasted-broccolini", img: "assets/img/grilled-broccolini.jpg" },
-        { title: "Nashville Hot Chicken", link: "nashville-hot-chicken", img: "assets/img/nashville-chicken.jpg" },
-        { title: "Honey Butter Pancakes", link: "honey-butter-pancakes", img: "assets/img/pancakes.jpg" },
-        { title: "Charred Brussels Sprouts", link: "charred-brussels-sprouts", img: "assets/img/charred-brussels-sprouts.jpg" },
-        { title: "Cajun Honey-Butter Salmon", link: "cajun-honey-butter-salmon", img: "assets/img/cajun-salmon.jpg" },
-        { title: "Roasted Chicken", link: "roasted-chicken", img: "assets/img/roasted-chicken.jpg" },
-        { title: "Black Bean Avocado Wraps", link: "avocado-wraps", img: "assets/img/black-bean-avocado-wraps.jpg" },
-        { title: "Sesame Orange Chicken", link: "sesame-orange-chicken", img: "assets/img/spicy-orange-sesame-chicken.jpg" },
-        { title: "Japanese Tebasaki Wings", link: "japanese-tebasaki-wings", img: "assets/img/japanese-wings.jpg" },
-        { title: "Crunchy Pappardelle", link: "crunchy-pappardelle", img: "assets/img/crunchy-pappardelle.jpg" },
-        { title: "Pineapple Ginger Smoothie", link: "pineapple-ginger-smoothie", img: "assets/img/pineapple-ginger-smoothie.jpg" },
-        { title: "Salsa", link: "salsa", img: "assets/img/salsa.jpg" },
-        { title: "Roasted Sweet Potato Salad", link: "roasted-sweet-potato-salad", img: "assets/img/roasted-sweet-potato-salad.jpg" },
-        { title: "Crispy Baked Falafels", link: "falafels", img: "assets/img/falafals.jpg" },
-        { title: "Spicy Kimchi Broccoli Rabe", link: "spicy-kimchi-broccoli-rabe", img: "assets/img/spicy-kimchi-broccoli-rabe.jpg" },
-        { title: "California Za'atar", link: "california-za'atar", img: "assets/img/za'atar.jpg" },
-        { title: "Soffrito", link: "soffrito", img: "assets/img/soffrito.jpg" },
-        { title: "Chimichurri", link: "chimichurri", img: "assets/img/chimichurri.jpg" },
-        { title: "Mojo de Ajo", link: "mojo-de-ajo", img: "assets/img/mojo-de-ajo.jpg" },
-        { title: "Romesco", link: "romesco", img: "assets/img/romesco.jpg" },
-        { title: "Rice & Black Bean Quesadillas", link: "quesadillas", img: "assets/img/quesadillas.jpg" },
-        { title: "White Bean Wraps w/ Cucumber & Mint", link: "white-bean-wraps", img: "assets/img/white-bean-wraps.jpg" },
-        { title: "Garlic Confit", link: "garlic-confit", img: "assets/img/garlic-confit.jpg" },
-        { title: "Pineapple Kimchi", link: "pineapple-kimchi", img: "assets/img/pineapple-kimchi.jpg" },
-        { title: "Pomodoro Sauce", link: "pomodoro-sauce", img: "assets/img/pomodoro.jpg" },
-        { title: "Spaghetti Pomodoro", link: "spaghetti-pomodoro", img: "assets/img/spaghetti-pomodoro.jpg" },
-        { title: "Grilled Buffalo Wings", link: "grilled-buffalo-wings", img: "assets/img/grilled-buffalo-wings.jpg" },
-        { title: "Cucumber Salad", link: "cucumber-salad", img: "assets/img/cucumber-salad.jpg" },
-        { title: "Sweet Potato Cakes", link: "sweet-potato-cakes", img: "assets/img/sweet-potato-cakes.jpg" },
-        { title: "Leek Fritters", link: "leek-fritters", img: "assets/img/leek-fritters.jpg" },
-        { title: "Black Pepper Tofu", link: "black-pepper-tofu", img: "assets/img/black-pepper-tofu.jpg" },
-        { title: "Ratatouille", link: "ratatouille", img: "assets/img/ratatouille.jpg" }
-    ];
+    // Dynamic recipe list - fetched from sitemap.xml or by scanning the server
+    let recipes = [];
+    let recipesLoaded = false;
+    
+    // Fetch the sitemap to get all recipes
+    fetch('/sitemap.xml')
+        .then(response => response.text())
+        .then(xml => {
+            const parser = new DOMParser();
+            const sitemap = parser.parseFromString(xml, 'text/xml');
+            const urls = sitemap.querySelectorAll('url loc');
+            
+            // Process all URLs from the sitemap
+            urls.forEach(url => {
+                const fullUrl = url.textContent;
+                // Skip non-recipe pages like index, CSS, etc.
+                if (fullUrl.includes('index.html') || 
+                    fullUrl.includes('.css') || 
+                    fullUrl.includes('.js') || 
+                    fullUrl.includes('robots.txt') ||
+                    fullUrl.includes('manifest.json')) {
+                    return;
+                }
+                
+                // Extract the recipe slug (file name without extension)
+                const urlParts = fullUrl.split('/');
+                const slug = urlParts[urlParts.length - 1].replace('.html', '');
+                
+                if (slug) {
+                    // Derive image path from slug
+                    const imgName = slug.replace(/-/g, '-');
+                    let imgPath;
+                    
+                    // Handle special cases for image paths
+                    if (slug === 'roasted-broccolini') {
+                        imgPath = 'assets/img/grilled-broccolini.jpg';
+                    } else if (slug === 'honey-butter-pancakes') {
+                        imgPath = 'assets/img/pancakes.jpg';
+                    } else if (slug === 'sesame-orange-chicken') {
+                        imgPath = 'assets/img/spicy-orange-sesame-chicken.jpg';
+                    } else if (slug === 'nashville-hot-chicken') {
+                        imgPath = 'assets/img/nashville-chicken.jpg';
+                    } else if (slug === 'pomodoro-sauce') {
+                        imgPath = 'assets/img/pomodoro.jpg';
+                    } else {
+                        imgPath = `assets/img/${slug}.jpg`;
+                    }
+                    
+                    // Convert slug to title (capitalize first letter of each word)
+                    const title = slug.split('-').map(word => 
+                        word.charAt(0).toUpperCase() + word.slice(1)
+                    ).join(' ');
+                    
+                    recipes.push({
+                        title: title,
+                        link: slug,
+                        img: imgPath
+                    });
+                }
+            });
+            
+            // Recipes loaded successfully from sitemap
+            recipesLoaded = true;
+        })
+        .catch(error => {
+            console.error('Error loading sitemap:', error);
+            // Fall back to scanning HTML files
+            fetchRecipesFromHTML();
+        });
+    
+    // Fallback method - fetch the index page and extract recipes
+    function fetchRecipesFromHTML() {
+        fetch('/')
+            .then(response => response.text())
+            .then(html => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const recipeCards = doc.querySelectorAll('#recipe-grid > a');
+                
+                recipeCards.forEach(card => {
+                    const title = card.querySelector('.recipe-title')?.textContent || '';
+                    const link = card.getAttribute('href') || '';
+                    let img = card.querySelector('img');
+                    const imgSrc = img ? img.getAttribute('src') : '';
+                    
+                    if (title && link) {
+                        recipes.push({
+                            title: title,
+                            link: link,
+                            img: imgSrc
+                        });
+                    }
+                });
+                
+                // Recipes loaded successfully from HTML
+                recipesLoaded = true;
+            })
+            .catch(error => {
+                console.error('Error fetching recipes from HTML:', error);
+                // Fall back to basic recipes only if everything else failed
+                loadBasicRecipes();
+            });
+    }
+    
+    // Last resort fallback - just load a few basic recipes
+    function loadBasicRecipes() {
+        recipes = [
+            { title: "Sesame Green Beans", link: "sesame-green-beans", img: "assets/img/sesame-green-beans.jpg" },
+            { title: "Guacamole", link: "guacamole", img: "assets/img/guacamole.jpg" }
+        ];
+        // Using fallback recipe list
+        recipesLoaded = true;
+    }
     
     let currentIndex = -1;
 
@@ -60,19 +131,36 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listener for input
     searchBar.addEventListener('input', function() {
         const query = this.value.toLowerCase();
-        console.log("Search query:", query);
+        // Process search query
         
         // Clear previous results
         searchResults.innerHTML = '';
         currentIndex = -1;
         
         if (query.length > 0) {
+            // If recipes aren't loaded yet, show loading indicator
+            if (!recipesLoaded || recipes.length === 0) {
+                searchResults.classList.remove('hidden');
+                
+                if (window.innerWidth >= 768) {
+                    searchResults.style.width = searchBar.offsetWidth + 'px';
+                } else {
+                    searchResults.style.width = '100%';
+                }
+                
+                const loadingDiv = document.createElement('div');
+                loadingDiv.className = 'px-4 py-3 text-off-white text-center';
+                loadingDiv.textContent = 'Loading recipes...';
+                searchResults.appendChild(loadingDiv);
+                return;
+            }
+            
             // Filter recipes based on query
             const filteredRecipes = recipes.filter(recipe => 
                 recipe.title.toLowerCase().includes(query)
             );
             
-            console.log("Filtered recipes:", filteredRecipes);
+            // Process filtered recipes
             
             if (filteredRecipes.length > 0) {
                 // Make search results visible and ensure it's the right width
@@ -99,8 +187,21 @@ document.addEventListener('DOMContentLoaded', function() {
                     searchResults.appendChild(div);
                 });
             } else {
-                // Hide search results if no matches
-                searchResults.classList.add('hidden');
+                // Show "no matches" message instead of hiding
+                searchResults.classList.remove('hidden');
+                
+                // On desktop, ensure search results width matches search bar width
+                if (window.innerWidth >= 768) {
+                    searchResults.style.width = searchBar.offsetWidth + 'px';
+                } else {
+                    searchResults.style.width = '100%';
+                }
+                
+                // Add a "no matches" message to the dropdown
+                const noMatchesDiv = document.createElement('div');
+                noMatchesDiv.className = 'px-4 py-3 text-off-white text-center';
+                noMatchesDiv.textContent = 'No matching recipes found';
+                searchResults.appendChild(noMatchesDiv);
             }
         } else {
             // Hide search results if query is empty
