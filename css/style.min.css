@@ -15,15 +15,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-@font-face {
-  font-family: 'Cheee Wowie';
-  src: url('/assets/fonts/Cheee-Wowie.woff2') format('woff2'),
-       url('/assets/fonts/Cheee-Wowie.woff') format('woff');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
 body {
   font-family: 'GT Flexa', arial;
   letter-spacing: 1px;
@@ -37,9 +28,6 @@ body {
   font-family: 'Windsor Bold', arial;
   font-weight: bold;
 }
-.font-cheee-wowie {
-  font-family: 'Cheee Wowie', arial;
-}
 /* color palette */
 .bg-primary {
   background-color: #383d23;
@@ -50,7 +38,6 @@ body {
 .text-off-white {
   color: #eeece6;
 }
-
 #selected-tags {
   display: flex;
   align-items: center;
