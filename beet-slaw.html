@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8"/>
+    <html data-wf-domain="www.tasty.cooking">
+        <title>Tasty Cooking</title>
+        <meta content="tasty cooking." name="description">
+        <meta content="Beet Slaw with Pistachios and Raisins" property="og:title"/>
+        <meta content="https://www.tasty.cooking/assets/img/beet-slaw.jpg" property="og:image"/>
+    <!--Favicon-->
+    <link rel="icon" href="assets/img/favicon.png">
+    <!--CSS (includes Tailwind)-->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="css/style.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <!--Font Awesome Pro-->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-fluid border-divider-b z-30 bg-black bg-opacity-80 absolute top-0 left-0 right-0">
+        <header class="container mx-auto flex items-center p-4 px-4">
+            <!-- Logo and Navigation - Mobile version -->
+            <div class="flex items-center md:hidden" style="width: auto; margin-right: 18px;">
+                <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
+                    <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-8 w-auto">
+                </a>
+            </div>
+            
+            <!-- Logo and Navigation - Desktop version -->
+            <div class="hidden md:block md:flex-none md:mr-auto">
+                <a href="index" class="hover:text-gray-300 flex items-center whitespace-nowrap">
+                    <img src="assets/img/logo.png" alt="Tasty Cooking Logo" class="h-6 w-auto mr-3">
+                    <span class="font-cheee-wowie text-xl text-white">Tasty Cooking</span>
+                </a>
+            </div>
+            
+            <!-- Search -->
+            <div class="flex-1 md:flex-none md:ml-auto" id="search">
+                <div class="text-base relative z-10 w-full">
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="far fa-search text-white fa-sm"></i>
+                        </span>
+                        <input type="text" placeholder="Search recipes" class="w-full md:w-64 pl-10 pr-4 py-2 rounded-sm bg-[#33353c] text-white placeholder-gray-50 focus:outline-none focus:ring-0 focus:border-none" id="search-bar" autocomplete="off">
+                    </div>
+                    <div id="search-results" class="absolute left-0 w-full bg-[#1e2025] text-white mt-1 rounded-sm shadow-lg z-50 hidden">
+                        <!-- Dynamic search results will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative -mt-0 pt-0">
+        <img src="assets/img/beet-slaw.jpg" alt="Beet Slaw with Pistachios and Raisins" class="w-full h-96 object-cover">
+        <div class="absolute bottom-0 left-0 right-0">
+            <div class="container mx-auto px-4">
+                <div class="bg-light-grayish-orange mb-5 inline-block pb-5 pt-5 px-6 py-2 border-dark-brown-all">            <h1 class="text-black text-xl font-bold" style="text-transform: none !important;">Beet Slaw w/ Pistachios &amp; Raisins</h1>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Description Section -->
+    <section class="py-8 pt-6 mt-0 sm:mt-0">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap items-center gap-6 mb-5">
+                <div class="flex items-center">
+                    <i class="fas fa-clock text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">Prep: 20 min</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-hourglass-half text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">Ready: 80 min</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-utensils text-light-grayish-orange text-sm sm:text-base mr-2"></i>
+                    <span class="text-sm sm:text-lg font-bold text-light-gray">4-6</span>
+                </div>
+            </div>
+            <!-- Tags Section -->
+            <div class="mb-2 flex flex-wrap">
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-3">Healthy</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-3">Vegetable</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-3">Vegetarian</span>
+                <span class="inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#33353c] capitalize text-white mr-3 sm:mr-4 mb-3">Vegan</span>
+            </div>
+            <div class="max-w-3xl text-light-gray">
+                <p class="leading-7">A vibrant slaw featuring fresh grated beets, golden raisins, and fresh herbs served over rich pistachio butter. As the slaw sits, its juices blend with the nutty base to create an incredible natural vinaigrette.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Ingredients Section -->
+    <section class="bg-light-grayish-orange text-black py-8">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-3" style="text-transform: none !important;">Ingredients</h2>
+            <ul class="list-disc pl-6 leading-8">
+                <li>2 garlic cloves, smashed and peeled</li>
+                <li>½ cup golden raisins</li>
+                <li>2 tbsp white wine vinegar</li>
+                <li>1¼ lbs beets, peeled</li>
+                <li>2 tbsp fresh lemon juice</li>
+                <li>½ cup lightly packed flat-leaf parsley leaves</li>
+                <li>¼ cup lightly packed mint leaves</li>
+                <li>½ tsp dried chile flakes</li>
+                <li>Kosher salt and freshly ground black pepper</li>
+                <li>Extra-virgin olive oil</li>
+                <li><a href="#" id="openModal" class="text-blue underline">Pistachio Butter</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Instructions Section -->
+    <section class="py-8 mb-2">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-2 text-light-gray" style="text-transform: none !important;">Instructions</h2>
+            <ol class="list-decimal pl-6 text-light-gray leading-8">
+                <li class="mb-2">Combine the garlic, raisins, and vinegar in a large bowl and let sit for 1 hour.</li>
+                <li class="mb-2">Grate the beets on the large holes of a box grater or cut into fine julienne. Your hands will get stained, but the color fades quickly.</li>
+                <li class="mb-2">Remove the garlic from the raisins and discard. Add the beets, lemon juice, most of the parsley and mint (save the rest for finishing), and chile flakes.</li>
+                <li class="mb-2">Season with 1½ tsp salt and lots of black pepper and toss. Let sit for about 5 minutes, then taste. The slaw should be tart, spicy, peppery, and sweet. Adjust seasoning if necessary, then add ¼ cup olive oil. Toss and taste again.</li>
+                <li class="mb-2">To serve, spread a layer of pistachio butter onto each plate and top with the slaw. Finish with the reserved fresh herbs and a drizzle of olive oil.</li>
+            </ol>
+        </div>
+    </section>
+    
+    <footer class="bg-[#0a0b0d] w-full border-t border-dark-gray-top z-50 pt-3 pb-3">
+        <div class="container mx-auto flex items-center justify-between px-4">
+            <ul class="text-xs font-normal text-gray-400 flex items-center w-full">
+                <li class="inline-block mr-2 pt-2 pb-2">
+                    <a href="index" rel="noopener noreferrer" class="text-lg font-windsor-bold">Home</a>
+                </li>
+            <li class="inline-block pt-2 pb-2 ml-auto">
+                <a href="https://github.com/douvy/tasty-cooking" target="_blank" rel="noopener noreferrer" class="text-lg font-windsor-bold">Star on <i class="fab fa-github"></i></a>
+            </li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="myModal" class="hidden fixed inset-0 bg-white bg-opacity-25 flex items-center justify-center z-50 sm:p-8">
+        <div class="bg-black text-light-gray rounded-sm shadow-lg p-6 max-w-4xl w-full sm:mx-8 sm:h-auto h-screen overflow-y-auto relative">
+            <button id="closeModal" class="absolute top-4 right-4 bg-transparent border border-light-gray-all text-light-gray py-2 px-4 rounded-sm">Close</button>
+            <h1 class="text-xl text-white border-dark-gray-b pb-4 font-bold mb-2 text-left">Pistachio Butter</h1>
+            <h2 class="text-lg uppercase text-white font-bold mb-2">Ingredients</h2>
+            <ul class="list-disc pl-6 leading-8">
+                <li>1 cup pistachios (about 5 oz), lightly toasted</li>
+                <li>⅓ cup water</li>
+                <li>1 tbsp red wine vinegar</li>
+                <li>1 tsp kosher salt</li>
+                <li>3 tbsp extra-virgin olive oil</li>
+            </ul>
+            <h2 class="text-lg uppercase text-white font-bold mb-2 mt-6">Instructions</h2>
+            <ol class="list-decimal pl-6 text-light-gray leading-8">
+                <li class="mb-2">Process the pistachios in a food processor until they are as fine as possible.</li>
+                <li class="mb-2">With the motor running, pour in the water, vinegar, and salt. Process until smooth, scraping down the sides as needed.</li>
+                <li class="mb-2">With the motor still running, drizzle in the olive oil until fully incorporated.</li>
+                <li class="mb-2">Taste and adjust with more salt or vinegar as needed. Store in the refrigerator for up to 10 days.</li>
+            </ol>
+        </div>
+    </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the link that opens the modal
+        var btns = document.querySelectorAll("#openModal");
+
+        // Get the button that closes the modal
+        var closeBtn = document.getElementById("closeModal");
+
+        // When the user clicks the link, open the modal 
+        btns.forEach(function(btn) {
+            btn.onclick = function(event) {
+                event.preventDefault();
+                modal.classList.remove("hidden");
+            }
+        });
+
+        // When the user clicks on the button, close the modal
+        closeBtn.onclick = function() {
+            modal.classList.add("hidden");
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.classList.add("hidden");
+            }
+        }
+
+        // When the user presses the Escape key, close the modal
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                modal.classList.add("hidden");
+            }
+        });
+    });
+</script>
+    
+<script src="js/recipe-search.js"></script>
+<script src="js/mobile.js"></script>
+</body>
+
+</html>
