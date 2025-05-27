@@ -1,0 +1,5 @@
+Recipe Tag Analysis Report
+=========================
+
+Found 43 recipe files to analyze
+
