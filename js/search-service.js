@@ -777,7 +777,7 @@
                 searchInput.id = 'modal-search-input';
                 searchInput.type = 'text';
                 searchInput.placeholder = 'Search recipes';
-                searchInput.className = 'w-full bg-[#2e3523] text-off-white placeholder:text-[#8B9168] rounded-full py-2 pl-10 pr-4 focus:outline-none focus:ring-0 focus:border-none';
+                searchInput.className = 'w-full bg-[#2e3523] cursor-pointer hover:bg-[#323927] text-off-white placeholder:text-[#8B9168] rounded-full py-2 pl-10 pr-4 focus:outline-none focus:ring-0 focus:border-none';
                 searchInput.autocomplete = 'off';
                 
                 // Assemble search input container
