@@ -312,6 +312,7 @@
                 'beets': ['vegetable'],
                 'sweet-potato': ['vegetable'],
                 'green-sauce': ['condiments', 'spicy', 'vegetable'],
+                'radishes': ['vegetable', 'gluten-free', 'healthy'],
                 'brown-butter': ['breakfast', 'condiments', 'quick']
             };
             
@@ -343,6 +344,7 @@
                 'falafels': 'assets/img/falafals.jpg',
                 'citrus-vinaigrette': 'assets/img/citrus-vinaigrette.jpg',
                 'spiced-green-sauce': 'assets/img/spiced-green-sauce.jpg',
+                'roasted-radishes': 'assets/img/roasted-radishes.jpg',
                 'brown-butter': 'assets/img/brown-butter.jpg'
             };
             
@@ -401,6 +403,8 @@
                 'vinaigrette': ['dressing', 'salad', 'sauce', 'condiment'],
                 'spiced': ['seasoned', 'flavored', 'aromatic', 'spicy'],
                 'green sauce': ['herb sauce', 'fresh sauce', 'chimichurri', 'skhug', 'condiment'],
+                'radish': ['radishes', 'root vegetable', 'vegetable', 'garden', 'peppery'],
+                'roasted radishes': ['side dish', 'roasted vegetable', 'sweet', 'tender'],
                 'cilantro': ['coriander', 'herb', 'fresh', 'green'],
                 'parsley': ['herb', 'fresh', 'green'],
                 'chile': ['chili', 'pepper', 'spicy', 'hot'],
@@ -511,6 +515,7 @@
                 { title: "Pistachio Butter", link: "pistachio-butter", img: "assets/img/pistachio-butter.jpg", tags: ["condiments", "gluten-free", "healthy", "quick", "vegan", "vegetarian"], searchTerms: "condiment" },
                 { title: "Citrus Vinaigrette", link: "citrus-vinaigrette", img: "assets/img/citrus-vinaigrette.jpg", tags: ["condiments", "gluten-free", "healthy", "quick", "seafood", "vegetable", "vegetarian"], searchTerms: "condiment sauce dressing salad orange lemon lime" },
                 { title: "Spiced Green Sauce", link: "spiced-green-sauce", img: "assets/img/spiced-green-sauce.jpg", tags: ["condiments", "gluten-free", "healthy", "meat", "spicy", "vegan", "vegetable", "vegetarian"], searchTerms: "condiment sauce middle eastern skhug green chile cilantro parsley spices" },
+                { title: "Roasted Radishes", link: "roasted-radishes", img: "assets/img/roasted-radishes.jpg", tags: ["gluten-free", "healthy", "vegetable", "vegetarian"], searchTerms: "side dish roasted vegetable radish brown butter chile honey vinegar sweet spicy" },
                 { title: "Brown Butter", link: "brown-butter", img: "assets/img/brown-butter.jpg", tags: ["breakfast", "condiments", "gluten-free", "quick", "vegetarian"], searchTerms: "condiment sauce butter nutty noisette beurre noisette pancakes fish crepe cooking fat" },
                 { title: "Beet Slaw", link: "beet-slaw", img: "assets/img/beet-slaw.jpg", tags: ["vegetable", "vegan", "vegetarian", "healthy"], searchTerms: "vegetable side" },
                 { title: "Ratatouille", link: "ratatouille", img: "assets/img/ratatouille.jpg", tags: ["vegetable", "vegan", "vegetarian", "gluten-free", "healthy"], searchTerms: "vegetable" },
