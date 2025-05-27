@@ -1095,16 +1095,16 @@
                 // Loop through results and create UI
                 results.slice(0, this.options.maxResults).forEach(recipe => {
                     const item = document.createElement('div');
-                    item.className = 'px-4 py-2 cursor-pointer search-result-item flex items-center space-x-2 border-b border-[#2f3525] hover:bg-[#232717]';
+                    item.className = 'px-4 py-2.5 cursor-pointer search-result-item flex items-center space-x-3 border-b border-[#2f3525] hover:bg-[#232717]';
                     item.setAttribute('role', 'option');
                     
                     const image = document.createElement('img');
                     image.src = recipe.img;
                     image.alt = '';
-                    image.className = 'w-5 h-5 rounded-sm object-cover';
+                    image.className = 'w-8 h-8 rounded-sm object-cover';
                     
                     const title = document.createElement('span');
-                    title.className = 'text-off-white capitalize truncate';
+                    title.className = 'text-off-white capitalize truncate text-base';
                     title.textContent = recipe.title.toLowerCase();
                     
                     item.appendChild(image);
