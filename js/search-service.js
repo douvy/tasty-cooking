@@ -623,6 +623,8 @@
             this.options = {
                 searchBarSelector: '#search-bar',
                 searchResultsSelector: '#search-results',
+                searchButtonSelector: '#mobile-search-button',
+                searchContainerSelector: '#search',
                 debounceTime: 250,
                 maxResults: 1000, // Show all results, no practical limit
                 ...options
@@ -631,6 +633,8 @@
             // DOM elements
             this.searchBar = document.querySelector(this.options.searchBarSelector);
             this.searchResults = document.querySelector(this.options.searchResultsSelector);
+            this.searchContainer = document.querySelector(this.options.searchContainerSelector);
+            this.isMobile = window.innerWidth < 768;
             
             // Check if we have the required elements
             if (!this.searchBar || !this.searchResults) {
@@ -641,6 +645,7 @@
             this.searchResultItems = [];
             this.currentIndex = -1;
             this.searchService = window.searchServiceInstance;
+            this.searchModalOpen = false;
             
             // Initialize
             this.initialize();
@@ -651,6 +656,11 @@
             // Set up debounced search
             this.debouncedSearch = debounce(this.performSearch.bind(this), this.options.debounceTime);
             
+            // Create the mobile search modal container if on mobile
+            if (this.isMobile) {
+                this.setupMobileSearch();
+            }
+            
             // Set up event listeners
             this.setupEventListeners();
             
@@ -658,23 +668,286 @@
             if (document.activeElement === this.searchBar) {
                 this.performSearch();
             }
+            
+            // Handle window resize to toggle between mobile and desktop
+            // Debounce to improve performance
+            window.addEventListener('resize', debounce(() => {
+                const wasMobile = this.isMobile;
+                this.isMobile = window.innerWidth < 768;
+                
+                // If transitioning between mobile and desktop, reset the UI
+                if (wasMobile !== this.isMobile) {
+                    this.closeSearchDropdown();
+                    if (this.searchModalOpen) {
+                        this.closeSearchModal();
+                    }
+                    
+                    if (this.isMobile && !document.querySelector('#mobile-search-button')) {
+                        this.setupMobileSearch();
+                    } else if (!this.isMobile) {
+                        // Transitioning to desktop, restore original search content
+                        if (this.originalSearchContent && this.searchContainer) {
+                            this.searchContainer.innerHTML = this.originalSearchContent;
+                            this.searchContainer.className = 'flex-1 md:flex-none md:ml-auto md:mr-4';
+                            
+                            // Re-assign DOM elements
+                            this.searchBar = document.querySelector(this.options.searchBarSelector);
+                            this.searchResults = document.querySelector(this.options.searchResultsSelector);
+                            
+                            // Re-initialize event listeners for desktop
+                            this.setupEventListeners();
+                        }
+                    }
+                }
+            }, 150));
+        }
+        
+        // Set up mobile search UI
+        setupMobileSearch() {
+            // Create the mobile search button
+            const searchButton = document.createElement('button');
+            searchButton.id = 'mobile-search-button';
+            searchButton.className = 'w-[45px] h-[45px] bg-[#2e3523] rounded-sm flex items-center justify-center md:hidden';
+            searchButton.setAttribute('aria-label', 'Search recipes');
+            searchButton.innerHTML = '<i class="far fa-search text-[#f2ede4] fa-sm"></i>';
+            
+            // Replace the search container content with the button on mobile
+            if (this.searchContainer) {
+                // Store the original search container content
+                this.originalSearchContent = this.searchContainer.innerHTML;
+                
+                // Replace with the button
+                this.searchContainer.innerHTML = '';
+                this.searchContainer.appendChild(searchButton);
+                this.searchContainer.className = 'flex-none ml-auto';
+                
+                // Update the mobile logo section to include the text
+                const mobileLogoSection = document.querySelector('.flex.items-center.md\\:hidden');
+                if (mobileLogoSection) {
+                    const logoLink = mobileLogoSection.querySelector('a');
+                    if (logoLink && !logoLink.querySelector('span')) {
+                        // Add the text if it doesn't exist
+                        const logoText = document.createElement('span');
+                        logoText.className = 'font-windsor-bold text-2xl text-off-white h-7 ml-2';
+                        logoText.textContent = 'tasty cooking';
+                        logoLink.appendChild(logoText);
+                    }
+                }
+                
+                // Create the search modal
+                this.createSearchModal();
+                
+                // Add event listener to the button
+                searchButton.addEventListener('click', () => {
+                    this.openSearchModal();
+                });
+            }
+        }
+        
+        // Create the search modal for mobile
+        createSearchModal() {
+            // Create the modal container if it doesn't exist
+            if (!document.getElementById('search-modal')) {
+                const modal = document.createElement('div');
+                modal.id = 'search-modal';
+                modal.className = 'fixed inset-0 bg-[#3f4427] z-50 flex flex-col transform translate-y-full transition-transform duration-300 ease-in-out';
+                modal.style.height = '100%';
+                
+                // Create the modal header
+                const modalHeader = document.createElement('div');
+                modalHeader.className = 'bg-[#3f4427] border-b border-[#2f3525] p-4 flex items-center';
+                
+                // Back button
+                const backButton = document.createElement('button');
+                backButton.className = 'text-off-white mr-4';
+                backButton.innerHTML = '<i class="far fa-long-arrow-left text-xl"></i>';
+                backButton.setAttribute('aria-label', 'Close search');
+                
+                // Search input container with icon
+                const searchInputContainer = document.createElement('div');
+                searchInputContainer.className = 'flex-1 relative';
+                
+                // Search icon
+                const searchIcon = document.createElement('span');
+                searchIcon.className = 'absolute inset-y-0 left-0 flex items-center pl-3';
+                searchIcon.innerHTML = '<i class="far fa-search text-[#f2ede4] fa-sm"></i>';
+                
+                // Search input
+                const searchInput = document.createElement('input');
+                searchInput.id = 'modal-search-input';
+                searchInput.type = 'text';
+                searchInput.placeholder = 'Search recipes';
+                searchInput.className = 'w-full bg-[#2e3523] text-off-white placeholder:text-[#8B9168] rounded-sm py-2 pl-10 pr-4 focus:outline-none focus:ring-0 focus:border-none';
+                searchInput.autocomplete = 'off';
+                
+                // Assemble search input container
+                searchInputContainer.appendChild(searchIcon);
+                searchInputContainer.appendChild(searchInput);
+                
+                modalHeader.appendChild(backButton);
+                modalHeader.appendChild(searchInputContainer);
+                
+                // Create the modal body for search results
+                const modalBody = document.createElement('div');
+                modalBody.id = 'modal-search-results';
+                modalBody.className = 'flex-1 overflow-y-auto bg-[#2A2F1E]';
+                
+                // Assemble the modal
+                modal.appendChild(modalHeader);
+                modal.appendChild(modalBody);
+                document.body.appendChild(modal);
+                
+                // Event listeners
+                backButton.addEventListener('click', () => {
+                    this.closeSearchModal();
+                });
+                
+                searchInput.addEventListener('input', debounce(() => {
+                    this.performModalSearch(searchInput.value);
+                }, this.options.debounceTime));
+                
+                // Make sure the modal search results are accessible by keyboard
+                searchInput.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape') {
+                        this.closeSearchModal();
+                    }
+                });
+            }
+        }
+        
+        // Open the search modal
+        openSearchModal() {
+            const modal = document.getElementById('search-modal');
+            const modalInput = document.getElementById('modal-search-input');
+            
+            if (modal) {
+                document.body.style.overflow = 'hidden'; // Prevent body scrolling
+                modal.style.transform = 'translateY(0)';
+                this.searchModalOpen = true;
+                
+                // Show all results by default
+                setTimeout(() => {
+                    // If the search bar has a value, copy it to the modal input
+                    if (this.searchBar.value && modalInput) {
+                        modalInput.value = this.searchBar.value;
+                        this.performModalSearch(modalInput.value);
+                    } else {
+                        // Display all recipes
+                        this.performModalSearch('');
+                    }
+                }, 300);
+            }
+        }
+        
+        // Close the search modal
+        closeSearchModal() {
+            const modal = document.getElementById('search-modal');
+            
+            if (modal) {
+                modal.style.transform = 'translateY(100%)';
+                document.body.style.overflow = ''; // Restore body scrolling
+                this.searchModalOpen = false;
+                
+                // If we're already in desktop view, restore the desktop search
+                if (!this.isMobile && this.originalSearchContent && this.searchContainer) {
+                    this.searchContainer.innerHTML = this.originalSearchContent;
+                    this.searchContainer.className = 'flex-1 md:flex-none md:ml-auto md:mr-4';
+                    
+                    // Re-assign DOM elements
+                    this.searchBar = document.querySelector(this.options.searchBarSelector);
+                    this.searchResults = document.querySelector(this.options.searchResultsSelector);
+                    
+                    // Re-initialize event listeners for desktop
+                    this.setupEventListeners();
+                }
+            }
+        }
+        
+        // Perform search in the modal
+        performModalSearch(query) {
+            const resultsContainer = document.getElementById('modal-search-results');
+            
+            if (!resultsContainer) return;
+            
+            // Clear the results container
+            resultsContainer.innerHTML = '';
+            
+            if (!this.searchService) {
+                this.searchService = window.searchServiceInstance;
+                if (!this.searchService) {
+                    resultsContainer.innerHTML = '<div class="px-4 py-3 text-off-white text-center">Search service unavailable</div>';
+                    return;
+                }
+            }
+            
+            // If search service isn't loaded yet, start loading and show loading state
+            if (!this.searchService.isLoaded()) {
+                resultsContainer.innerHTML = '<div class="px-4 py-3 text-off-white text-center">Loading recipes...</div>';
+                
+                // Load recipes then search when ready
+                this.searchService.loadRecipes().then(() => {
+                    this.performModalSearch(query);
+                });
+                return;
+            }
+            
+            // Perform search
+            let results = query 
+                ? this.searchService.search(query.toLowerCase().trim()) 
+                : this.searchService.getAllRecipes();
+            
+            // Render results
+            if (results.length > 0) {
+                // Loop through results and create UI
+                results.forEach(recipe => {
+                    const item = document.createElement('div');
+                    item.className = 'px-4 py-2.5 cursor-pointer flex items-center space-x-3 border-b border-[#2f3525] hover:bg-[#232717]';
+                    
+                    const image = document.createElement('img');
+                    image.src = recipe.img;
+                    image.alt = '';
+                    image.className = 'w-10 h-10 rounded-sm object-cover';
+                    
+                    const title = document.createElement('span');
+                    title.className = 'text-off-white capitalize text-base';
+                    title.textContent = recipe.title.toLowerCase();
+                    
+                    item.appendChild(image);
+                    item.appendChild(title);
+                    
+                    item.addEventListener('click', () => {
+                        window.location.href = recipe.link;
+                    });
+                    
+                    resultsContainer.appendChild(item);
+                });
+            } else {
+                // Show no results message
+                const noResults = document.createElement('div');
+                noResults.className = 'px-4 py-6 text-off-white text-center';
+                noResults.textContent = 'No matching recipes found';
+                resultsContainer.appendChild(noResults);
+            }
         }
         
         // Set up all event listeners
         setupEventListeners() {
-            // Input and focus events trigger search
-            this.searchBar.addEventListener('input', () => this.debouncedSearch());
-            this.searchBar.addEventListener('focus', () => this.performSearch());
-            
-            // Close search when clicking outside
-            document.addEventListener('click', event => {
-                if (!this.searchBar.contains(event.target) && !this.searchResults.contains(event.target)) {
-                    this.closeSearchDropdown();
-                }
-            });
-            
-            // Keyboard navigation
-            this.searchBar.addEventListener('keydown', this.handleKeyNavigation.bind(this));
+            if (!this.isMobile) {
+                // Desktop event listeners
+                // Input and focus events trigger search
+                this.searchBar.addEventListener('input', () => this.debouncedSearch());
+                this.searchBar.addEventListener('focus', () => this.performSearch());
+                
+                // Close search when clicking outside
+                document.addEventListener('click', event => {
+                    if (!this.searchBar.contains(event.target) && !this.searchResults.contains(event.target)) {
+                        this.closeSearchDropdown();
+                    }
+                });
+                
+                // Keyboard navigation
+                this.searchBar.addEventListener('keydown', this.handleKeyNavigation.bind(this));
+            }
         }
         
         // Handle keyboard navigation in search results
@@ -805,8 +1078,6 @@
             let results = query 
                 ? this.searchService.search(query) 
                 : this.searchService.getAllRecipes();
-            
-            // Perform search operation
             
             // Render results
             this.renderSearchResults(results);

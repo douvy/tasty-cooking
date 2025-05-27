@@ -323,7 +323,7 @@ nav a {
   z-index: 10; /* This should be higher than the z-index of .background-circle */
   transition: all 0.3s ease;
 }
-#search-bar::placeholder {
+#search-bar::placeholder, #modal-search-input::placeholder {
   color: #aca896;
 }
 #search-bar:focus {
@@ -592,4 +592,42 @@ table tr.dark-gray-hover:hover {
 }
 .bg-gray-blue {
   background-color: #24262F;
+}
+
+/* Mobile search modal styles */
+#search-modal {
+  height: 100vh;
+  width: 100vw;
+  background-color: #3f4427;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+#modal-search-results {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #2A2F1E;
+}
+
+/* Mobile search button */
+#mobile-search-button {
+  width: 45px;
+  height: 45px;
+  background-color: #2e3523;
+  border-radius: 0.125rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  #search-modal, #mobile-search-button {
+    display: none;
+  }
 }
