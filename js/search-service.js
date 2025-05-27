@@ -933,7 +933,7 @@
                 
                 // Clear button
                 const clearButton = document.createElement('button');
-                clearButton.className = 'px-4 py-2 bg-[#e0d394] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-3xl text-base font-medium';
+                clearButton.className = 'px-4 py-2 bg-[#e2d7a0] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-3xl text-base font-medium';
                 clearButton.textContent = 'Clear search';
                 clearButton.addEventListener('click', () => {
                     // Clear the search input in the modal
@@ -1157,7 +1157,7 @@
                 
                 // Clear button
                 const clearButton = document.createElement('button');
-                clearButton.className = 'px-4 py-2 bg-[#e0d394] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-3xl text-base font-medium';
+                clearButton.className = 'px-4 py-2 bg-[#e2d7a0] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-3xl text-base font-medium';
                 clearButton.textContent = 'Clear search';
                 clearButton.addEventListener('click', () => {
                     // Clear the search input

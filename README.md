@@ -37,7 +37,7 @@ Tasty Cooking was built with these principles in mind:
 
 - **Color Palette**: Our colors are inspired by natural cooking environments:
   - Moss green (#383d23): An earthy, organic tone that evokes nature and fresh ingredients
-  - Parchment (#e0d394): A warm, soft hue reminiscent of vintage recipe cards and natural fibers
+  - Parchment (#e2d7a0): A warm, soft hue reminiscent of vintage recipe cards and natural fibers
   - Strategic use of contrast: Creates visual hierarchy while maintaining a cohesive, natural feel
 
 - **Performance First**: Every design decision was weighed against performance impact, ensuring a fast experience even on slower connections.
