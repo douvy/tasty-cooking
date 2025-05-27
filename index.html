@@ -181,7 +181,7 @@
                         </div>
                         <div id="dropdown-menu" class="dropdown-menu hidden origin-top-right absolute right-0 mt-2 w-56 rounded-sm shadow-lg bg-[#2A2F1E] border border-[#2e3523] focus:outline-none z-50">
                             <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                                <a href="#" class="block px-4 py-2 text-sm text-off-white bg-[#232717] hover:bg-[#232717] transition-colors duration-300" role="menuitem" data-sort="default">Default</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-off-white bg-[#232717] transition-colors duration-300" role="menuitem" data-sort="default">Default</a>
                                 <a href="#" class="block px-4 py-2 text-sm text-off-white hover:bg-[#252A19] transition-colors duration-300" role="menuitem" data-sort="alphabetical">Alphabetical</a>
                             </div>
                         </div>
@@ -226,7 +226,7 @@
                     </div>
                 </a>
                 <!-- Roasted Broccolini -->
-                <a href="roasted-broccolini" class="bg-dark-gray border-divider-all rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="meat vegetable spicy">
+                <a href="roasted-broccolini" class="bg-dark-gray border-divider-all rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy spicy vegan vegetable vegetarian">
                     <img src="assets/img/grilled-broccolini.jpg" alt="Grilled Broccolini" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
                     <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
                         <div class="w-11/12 mx-auto border-dark-brown-all py-2 bg-[#e0d394] transition-colors duration-300 group-hover:bg-[#eadfae]">
@@ -253,7 +253,7 @@
                     </div>
                 </a>
                 <!-- Charred Brussels Sprouts -->
-                <a href="charred-brussels-sprouts" class="bg-dark-gray border-divider-all rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy meat quic vegetable">
+                <a href="charred-brussels-sprouts" class="bg-dark-gray border-divider-all rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="gluten-free healthy quick vegetable">
                     <img src="assets/img/charred-brussels-sprouts.jpg" alt="Charred Brussels Sprouts" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
                     <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
                         <div class="w-11/12 mx-auto border-dark-brown-all py-2 bg-[#e0d394] transition-colors duration-300 group-hover:bg-[#eadfae]">
@@ -428,7 +428,7 @@
                     </div>
                 </a>
                 <!-- Roasted Garlic Lentil Soup -->
-                <a href="roasted-garlic-lentil-soup" class="bg-dark-gray border-divider-all rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="healthy meat spicy">
+                <a href="roasted-garlic-lentil-soup" class="bg-dark-gray border-divider-all rounded-sm overflow-hidden shadow-lg relative h-48 sm:h-64 block group" data-tags="healthy spicy">
                     <img src="assets/img/roasted-garlic-lentil-soup.jpg" alt="Roasted Garlic & Lentil Soup" class="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-75">
                     <div class="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
                         <div class="w-11/12 mx-auto border-dark-brown-all py-2 bg-[#e0d394] transition-colors duration-300 group-hover:bg-[#eadfae]">
@@ -781,8 +781,38 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target.hasAttribute('data-sort')) {
           const sortOption = e.target.getAttribute('data-sort');
           if (sortOption !== state.sortOrder) {
+            // Update the sort order state
             state.sortOrder = sortOption;
+            
+            // Update dropdown button text
+            const dropdownButton = document.getElementById('dropdown-button');
+            if (dropdownButton) {
+              const textSpan = dropdownButton.querySelector('span');
+              if (textSpan) {
+                textSpan.textContent = sortOption.charAt(0).toUpperCase() + sortOption.slice(1);
+              }
+            }
+            
+            // Update active class in dropdown items
+            const allSortOptions = elements.sortDropdown.querySelectorAll('[data-sort]');
+            allSortOptions.forEach(option => {
+              if (option.getAttribute('data-sort') === sortOption) {
+                option.classList.add('bg-[#232717]');
+                option.classList.remove('hover:bg-[#252A19]');
+              } else {
+                option.classList.remove('bg-[#232717]');
+                option.classList.add('hover:bg-[#252A19]');
+              }
+            });
+            
+            // Perform the sorting
             handleSorting(sortOption);
+            
+            // Close the dropdown after selection
+            elements.sortDropdown.classList.add('hidden');
+          } else {
+            // If the same option is clicked, just close the dropdown
+            elements.sortDropdown.classList.add('hidden');
           }
         }
       });
@@ -791,10 +821,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Filter recipes based on selected tags
   function handleTagFiltering() {
-    // Get selected tags
+    // Get selected tags using the data-tag attribute (more reliable than text content)
     const selectedTagElements = elements.tagsContainer.querySelectorAll('span');
     const selectedTags = Array.from(selectedTagElements).map(tag => 
-      tag.textContent.trim().split(' ')[0]
+      tag.getAttribute('data-tag').toLowerCase()
     );
     
     // Hide all recipes first
@@ -811,11 +841,16 @@ document.addEventListener('DOMContentLoaded', function() {
       showRecipesForPage(1);
       setupInfiniteScroll();
     } else {
+      console.log('Filtering by tags:', selectedTags);
+      
       // Apply filters
       state.filteredRecipes = state.allRecipes.filter(recipe => {
         const recipeTags = recipe.getAttribute('data-tags').split(' ');
-        return selectedTags.every(tag => recipeTags.includes(tag));
+        const result = selectedTags.every(tag => recipeTags.includes(tag));
+        return result;
       });
+      
+      console.log('Found matching recipes:', state.filteredRecipes.length);
       
       // Reset pagination
       state.currentPage = 1;
@@ -842,8 +877,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!noResultsMsg) {
         noResultsMsg = document.createElement('div');
         noResultsMsg.id = 'no-results-message';
-        noResultsMsg.className = 'text-center py-16 text-off-white w-full';
-        noResultsMsg.innerHTML = '<p class="text-xl font-windsor-bold">No recipes match the selected filters</p><p class="mt-2 text-base">Try removing some tags to see more results</p>';
+        noResultsMsg.className = 'absolute inset-0 flex flex-col items-center text-center text-off-white w-full';
+        noResultsMsg.style.paddingTop = '100px'; // Position higher on the screen
+        noResultsMsg.innerHTML = '<div class="max-w-xl mx-auto px-4"><p class="text-2xl sm:text-3xl font-windsor-bold">No recipes match the selected filters</p><p class="mt-2 text-lg sm:text-xl">Try removing some tags to see more results</p></div>';
         elements.recipeGrid.appendChild(noResultsMsg);
       } else {
         noResultsMsg.style.display = '';
@@ -862,10 +898,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Sort the recipes
     if (sortOption === 'alphabetical') {
       recipesToSort.sort((a, b) => {
-        const titleA = a.querySelector('.recipe-title').textContent;
-        const titleB = b.querySelector('.recipe-title').textContent;
+        const titleA = a.querySelector('.recipe-title').textContent.trim().toLowerCase();
+        const titleB = b.querySelector('.recipe-title').textContent.trim().toLowerCase();
         return titleA.localeCompare(titleB);
       });
+      
+      // For debugging
+      console.log('Sorted alphabetically:', recipesToSort.map(r => r.querySelector('.recipe-title').textContent.trim()));
     } else {
       // Default order (restore original order)
       const defaultOrderMap = new Map();
@@ -876,6 +915,9 @@ document.addEventListener('DOMContentLoaded', function() {
       recipesToSort.sort((a, b) => {
         return defaultOrderMap.get(a) - defaultOrderMap.get(b);
       });
+      
+      // For debugging
+      console.log('Restored to default order');
     }
     
     // Reset pagination
@@ -886,6 +928,21 @@ document.addEventListener('DOMContentLoaded', function() {
     state.allRecipes.forEach(recipe => {
       recipe.style.display = 'none';
     });
+    
+    // Reorder DOM elements to match the sorted array
+    const recipeGrid = document.getElementById('recipe-grid');
+    if (recipeGrid) {
+      // Remove all recipe cards from the DOM
+      const fragment = document.createDocumentFragment();
+      
+      // Add them back in the sorted order
+      recipesToSort.forEach(recipe => {
+        fragment.appendChild(recipe);
+      });
+      
+      // Re-append all recipes in their new order
+      recipeGrid.appendChild(fragment);
+    }
     
     if (state.filteredRecipes) {
       // When filtering, show all filtered recipes
@@ -925,6 +982,86 @@ document.addEventListener('DOMContentLoaded', function() {
     for (let i = 2; i < allImages.length; i++) {
       allImages[i].setAttribute('loading', 'lazy');
     }
+    
+    // Toggle dropdowns
+    document.getElementById('tags-dropdown-button')?.addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.getElementById('tags-dropdown-menu')?.classList.toggle('hidden');
+    });
+    
+    document.getElementById('dropdown-button')?.addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.getElementById('dropdown-menu')?.classList.toggle('hidden');
+    });
+    
+    // Handle tag selection
+    const tagsDropdownMenu = document.getElementById('tags-dropdown-menu');
+    if (tagsDropdownMenu) {
+      tagsDropdownMenu.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent closing the dropdown
+        
+        const tagLink = e.target.closest('[data-tag]');
+        if (tagLink) {
+          const tagName = tagLink.getAttribute('data-tag');
+          const tagText = tagLink.textContent.trim();
+          
+          // Check if tag is already selected
+          const selectedTagsContainer = document.getElementById('selected-tags');
+          const existingTags = Array.from(selectedTagsContainer.querySelectorAll('span')).map(tag => 
+            tag.getAttribute('data-tag')
+          );
+          
+          if (existingTags.includes(tagName)) {
+            // Tag already selected, remove it
+            const tagToRemove = selectedTagsContainer.querySelector(`span[data-tag="${tagName}"]`);
+            if (tagToRemove) {
+              selectedTagsContainer.removeChild(tagToRemove);
+              // Remove active class from dropdown item
+              tagLink.classList.remove('bg-[#232717]');
+              tagLink.classList.add('hover:bg-[#252A19]');
+            }
+          } else {
+            // Add the tag
+            const newTag = document.createElement('span');
+            newTag.className = 'inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#2e3523] capitalize text-off-white mr-3 mb-3 cursor-pointer';
+            newTag.setAttribute('data-tag', tagName);
+            newTag.innerHTML = `${tagText} <button class="ml-1.5 text-off-white hover:text-white" aria-label="Remove ${tagText} filter">&times;</button>`;
+            
+            // Make the entire tag clickable
+            newTag.addEventListener('click', function() {
+              selectedTagsContainer.removeChild(newTag);
+              // Also remove active class from dropdown item
+              const dropdownItem = document.querySelector(`#tags-dropdown-menu [data-tag="${tagName}"]`);
+              if (dropdownItem) {
+                dropdownItem.classList.remove('bg-[#232717]');
+                dropdownItem.classList.add('hover:bg-[#252A19]');
+              }
+            });
+            
+            selectedTagsContainer.appendChild(newTag);
+            
+            // Add active class to dropdown item
+            tagLink.classList.add('bg-[#232717]');
+            tagLink.classList.remove('hover:bg-[#252A19]');
+          }
+        }
+      });
+    }
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      // Don't close tags dropdown if clicking inside it or on a selected tag
+      if (!e.target.closest('#tags-dropdown-menu') && 
+          !e.target.closest('#tags-dropdown-button') && 
+          !e.target.closest('#selected-tags')) {
+        document.getElementById('tags-dropdown-menu')?.classList.add('hidden');
+      }
+      
+      // Always close sort dropdown when clicking outside
+      if (!e.target.closest('#dropdown-menu') && !e.target.closest('#dropdown-button')) {
+        document.getElementById('dropdown-menu')?.classList.add('hidden');
+      }
+    });
   });
 </script>
 </body>
