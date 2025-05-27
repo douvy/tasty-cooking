@@ -338,7 +338,8 @@
                 'california-za\'atar': 'assets/img/za\'atar.jpg',
                 'avocado-wraps': 'assets/img/black-bean-avocado-wraps.jpg',
                 'white-bean-wraps': 'assets/img/white-bean-wraps.jpg',
-                'falafels': 'assets/img/falafals.jpg'
+                'falafels': 'assets/img/falafals.jpg',
+                'citrus-vinaigrette': 'assets/img/citrus-vinaigrette.jpg'
             };
             
             return specialCases[slug] || `assets/img/${slug}.jpg`;
@@ -391,6 +392,9 @@
                 'salsa': ['mexican', 'sauce', 'dip', 'tomato'],
                 'soup': ['stew', 'liquid', 'winter', 'warm'],
                 'orange': ['citrus', 'fruit', 'juice'],
+                'lemon': ['citrus', 'fruit', 'juice', 'sour'],
+                'lime': ['citrus', 'fruit', 'juice', 'sour'],
+                'vinaigrette': ['dressing', 'salad', 'sauce', 'condiment'],
                 'tofu': ['soy', 'vegetarian', 'protein', 'bean curd'],
                 'honey': ['sweet', 'natural', 'syrup'],
                 'potato': ['potatoes', 'starch', 'vegetable'],
@@ -492,6 +496,7 @@
                 { title: "Potato Green Bean Soup", link: "potato-green-bean-soup", img: "assets/img/potato-green-bean-soup.jpg", tags: ["vegetable", "vegetarian", "healthy"], searchTerms: "soup vegetable" },
                 { title: "Roasted Garlic Lentil Soup", link: "roasted-garlic-lentil-soup", img: "assets/img/roasted-garlic-lentil-soup.jpg", tags: ["healthy", "meat", "spicy"], searchTerms: "soup" },
                 { title: "Pistachio Butter", link: "pistachio-butter", img: "assets/img/pistachio-butter.jpg", tags: ["condiments", "gluten-free", "healthy", "quick", "vegan", "vegetarian"], searchTerms: "condiment" },
+                { title: "Citrus Vinaigrette", link: "citrus-vinaigrette", img: "assets/img/citrus-vinaigrette.jpg", tags: ["condiments", "gluten-free", "healthy", "quick", "seafood", "vegetable", "vegetarian"], searchTerms: "condiment sauce dressing salad orange lemon lime" },
                 { title: "Beet Slaw", link: "beet-slaw", img: "assets/img/beet-slaw.jpg", tags: ["vegetable", "vegan", "vegetarian", "healthy"], searchTerms: "vegetable side" },
                 { title: "Ratatouille", link: "ratatouille", img: "assets/img/ratatouille.jpg", tags: ["vegetable", "vegan", "vegetarian", "gluten-free", "healthy"], searchTerms: "vegetable" },
                 { title: "Eggplant with Buttermilk Sauce", link: "eggplant-with-buttermilk-sauce", img: "assets/img/eggplant-with-buttermilk-sauce.jpg", tags: ["vegetable", "vegetarian", "gluten-free", "healthy"], searchTerms: "vegetable" },
@@ -933,7 +938,7 @@
                 
                 // Clear button
                 const clearButton = document.createElement('button');
-                clearButton.className = 'px-4 py-2 bg-[#e2d7a0] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-3xl text-base font-medium';
+                clearButton.className = 'px-4 py-2 bg-button hover:bg-button/90 text-white transition-colors duration-200 rounded-3xl text-base font-medium';
                 clearButton.textContent = 'Clear search';
                 clearButton.addEventListener('click', () => {
                     // Clear the search input in the modal
@@ -1157,7 +1162,7 @@
                 
                 // Clear button
                 const clearButton = document.createElement('button');
-                clearButton.className = 'px-4 py-2 bg-[#e2d7a0] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-3xl text-base font-medium';
+                clearButton.className = 'px-4 py-2 bg-button hover:bg-button/90 text-white transition-colors duration-200 rounded-3xl text-base font-medium';
                 clearButton.textContent = 'Clear search';
                 clearButton.addEventListener('click', () => {
                     // Clear the search input

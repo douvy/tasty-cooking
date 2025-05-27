@@ -35,6 +35,9 @@ body {
 .bg-secondary {
   background-color: #e2d7a0;
 }
+.bg-button {
+  background-color: #c96d4e;
+}
 .text-off-white {
   color: #eeece6;
 }
