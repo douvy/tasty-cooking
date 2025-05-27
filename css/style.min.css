@@ -333,10 +333,20 @@ nav a {
 #search-bar::placeholder, #modal-search-input::placeholder {
   color: #aca896;
 }
-#search-bar:focus {
-  outline: none !important;
+
+#modal-search-input:focus {
+  outline: 2px solid #d7e0cd !important;
+  outline-offset: 2px !important;
+  border-radius: 2px !important;
   box-shadow: none !important;
-  border-color: #31351c !important;
+  border-color: transparent !important;
+}
+#search-bar:focus {
+  outline: 2px solid #d7e0cd !important;
+  outline-offset: 2px !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
 }
 /* Center text */
 .text-container {
