@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
           // Add the tag
           const newTag = document.createElement('span');
-          newTag.className = 'inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-sm font-medium bg-[#2e3523] capitalize text-off-white mr-3 mb-3 cursor-pointer';
+          newTag.className = 'inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-base font-medium bg-[#2e3523] capitalize text-off-white mr-3 mb-3 cursor-pointer';
           newTag.setAttribute('data-tag', tagName);
           newTag.innerHTML = `${tagText} <button class="ml-1.5 text-off-white hover:text-white" aria-label="Remove ${tagText} filter">&times;</button>`;
           
