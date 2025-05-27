@@ -45,6 +45,9 @@ body {
   display: flex;
   align-items: center;
 }
+#selected-tags span:hover {
+  background-color: #313826;
+}
 #selected-tags span {
   margin-left: 0px;
 }
