@@ -360,7 +360,11 @@ table tr.dark-gray-hover:hover {
 .border-dark-gray {
   border-bottom: 1px solid #31351c;
 }
-
+/* Fix for footer jump when no search results */
+#recipe-grid {
+  min-height: 80vh; /* Ensure minimum height to prevent footer jump */
+  position: relative; /* For absolute positioning of the no-results message */
+}
 /* Print styles for recipe pages */
 /* Save recipe button and notification styles */
 .save-recipe-btn {
