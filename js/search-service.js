@@ -909,8 +909,8 @@
                     image.className = 'w-10 h-10 rounded-sm object-cover';
                     
                     const title = document.createElement('span');
-                    title.className = 'text-off-white capitalize text-base';
-                    title.textContent = recipe.title.toLowerCase();
+                    title.className = 'text-off-white text-base';
+                    title.textContent = recipe.title;
                     
                     item.appendChild(image);
                     item.appendChild(title);
@@ -1104,8 +1104,8 @@
                     image.className = 'w-8 h-8 rounded-sm object-cover';
                     
                     const title = document.createElement('span');
-                    title.className = 'text-off-white capitalize truncate text-base';
-                    title.textContent = recipe.title.toLowerCase();
+                    title.className = 'text-off-white truncate text-base';
+                    title.textContent = recipe.title;
                     
                     item.appendChild(image);
                     item.appendChild(title);
