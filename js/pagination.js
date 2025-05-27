@@ -187,7 +187,36 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle sort changes
     if (elements.sortDropdown) {
       elements.sortDropdown.addEventListener('click', (e) => {
+        // Blur any focused element to remove focus ring
+        if (document.activeElement) {
+          document.activeElement.blur();
+        }
+        
+        // Remove focus class from all links
+        const allLinks = elements.sortDropdown.querySelectorAll('a');
+        allLinks.forEach((link, index) => {
+          // Ensure links never get focus styling
+          link.style.outline = 'none';
+          link.style.boxShadow = 'none';
+          
+          // Don't override border-radius for first and last items
+          if (index !== 0 && index !== allLinks.length - 1) {
+            link.style.borderRadius = '0';
+          }
+        });
+        
         if (e.target.hasAttribute('data-sort')) {
+          // Ensure this specific link never gets focus styling
+          e.target.style.outline = 'none';
+          e.target.style.boxShadow = 'none';
+          
+          // Only remove border radius if it's not first or last
+          const allLinks = Array.from(elements.sortDropdown.querySelectorAll('a'));
+          const index = allLinks.indexOf(e.target);
+          if (index !== 0 && index !== allLinks.length - 1) {
+            e.target.style.borderRadius = '0';
+          }
+          
           const sortOption = e.target.getAttribute('data-sort');
           if (sortOption !== state.sortOrder) {
             // Update the sort order state

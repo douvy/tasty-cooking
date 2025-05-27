@@ -707,7 +707,7 @@
             // Create the mobile search button
             const searchButton = document.createElement('button');
             searchButton.id = 'mobile-search-button';
-            searchButton.className = 'w-[45px] h-[45px] bg-[#2e3523] rounded-sm flex items-center justify-center md:hidden';
+            searchButton.className = 'w-[45px] h-[45px] bg-[#2e3523] rounded-full flex items-center justify-center md:hidden';
             searchButton.setAttribute('aria-label', 'Search recipes');
             searchButton.innerHTML = '<i class="far fa-search text-[#f2ede4] fa-sm"></i>';
             
@@ -777,7 +777,7 @@
                 searchInput.id = 'modal-search-input';
                 searchInput.type = 'text';
                 searchInput.placeholder = 'Search recipes';
-                searchInput.className = 'w-full bg-[#2e3523] text-off-white placeholder:text-[#8B9168] rounded-sm py-2 pl-10 pr-4 focus:outline-none focus:ring-0 focus:border-none';
+                searchInput.className = 'w-full bg-[#2e3523] text-off-white placeholder:text-[#8B9168] rounded-full py-2 pl-10 pr-4 focus:outline-none focus:ring-0 focus:border-none';
                 searchInput.autocomplete = 'off';
                 
                 // Assemble search input container
@@ -906,7 +906,7 @@
                     const image = document.createElement('img');
                     image.src = recipe.img;
                     image.alt = '';
-                    image.className = 'w-10 h-10 rounded-sm object-cover';
+                    image.className = 'w-10 h-10 rounded-xl object-cover';
                     
                     const title = document.createElement('span');
                     title.className = 'text-off-white text-base';
@@ -933,7 +933,7 @@
                 
                 // Clear button
                 const clearButton = document.createElement('button');
-                clearButton.className = 'px-4 py-2 bg-[#e0d394] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-sm text-base font-medium';
+                clearButton.className = 'px-4 py-2 bg-[#e0d394] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-xl text-base font-medium';
                 clearButton.textContent = 'Clear search';
                 clearButton.addEventListener('click', () => {
                     // Clear the search input in the modal
@@ -1128,7 +1128,7 @@
                     const image = document.createElement('img');
                     image.src = recipe.img;
                     image.alt = '';
-                    image.className = 'w-8 h-8 rounded-sm object-cover';
+                    image.className = 'w-8 h-8 rounded-xl object-cover';
                     
                     const title = document.createElement('span');
                     title.className = 'text-off-white truncate text-base';
@@ -1157,7 +1157,7 @@
                 
                 // Clear button
                 const clearButton = document.createElement('button');
-                clearButton.className = 'px-4 py-2 bg-[#e0d394] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-sm text-base font-medium';
+                clearButton.className = 'px-4 py-2 bg-[#e0d394] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-xl text-base font-medium';
                 clearButton.textContent = 'Clear search';
                 clearButton.addEventListener('click', () => {
                     // Clear the search input

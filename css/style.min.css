@@ -273,16 +273,29 @@ select:focus-visible,
 textarea:focus-visible {
   outline: 2px solid #d7e0cd;
   outline-offset: 2px;
-  border-radius: 2px;
+  border-radius: 9999px; /* rounded-full */
 }
 
 /* Ensure focus styles show on all interactive elements */
 .dropdown-button:focus-visible,
+.dropdown-button:focus,
 [data-tag]:focus-visible,
-[data-sort]:focus-visible {
+[data-tag]:focus,
+[data-sort]:focus-visible,
+[data-sort]:focus {
   outline: 2px solid #d7e0cd;
   outline-offset: 2px;
+  border-radius: 9999px; /* rounded-full */
   box-shadow: 0 0 0 2px rgba(215, 224, 204, 0.25);
+}
+
+/* Custom focus class for dropdown buttons */
+.dropdown-focused {
+  outline: 2px solid #d7e0cd !important;
+  outline-offset: 2px !important;
+  border-radius: 9999px !important; /* rounded-full */
+  box-shadow: none !important;
+  border-color: transparent !important;
 }
 
 .border-lime-btn {
@@ -337,14 +350,14 @@ nav a {
 #modal-search-input:focus {
   outline: 2px solid #d7e0cd !important;
   outline-offset: 2px !important;
-  border-radius: 2px !important;
+  border-radius: 9999px !important; /* rounded-full */
   box-shadow: none !important;
   border-color: transparent !important;
 }
 #search-bar:focus {
   outline: 2px solid #d7e0cd !important;
   outline-offset: 2px !important;
-  border-radius: 2px !important;
+  border-radius: 9999px !important; /* rounded-full */
   box-shadow: none !important;
   border-color: transparent !important;
 }
@@ -578,11 +591,13 @@ table tr.dark-gray-hover:hover {
 #tags-dropdown-menu {
   right: 0;
   left: auto;
+  border-radius: 0.75rem !important; /* rounded-xl - ensure it's applied */
 }
 
 #dropdown-menu {
   right: 0;
   left: auto;
+  border-radius: 0.75rem !important; /* rounded-xl - ensure it's applied */
 }
 /* Example for Sort Dropdown */
 #dropdown-menu a:hover {
@@ -607,9 +622,58 @@ table tr.dark-gray-hover:hover {
 
 /* Example for Tags Dropdown */
 .dropdown-menu a:hover,
-.tags-dropdown-menu a:hover {
+.tags-dropdown-menu a:hover,
+.sort-dropdown-menu a:hover {
     background-color: #252A19;
     color: white;
+}
+
+/* Rounded corners for first and last items in dropdowns */
+#tags-dropdown-menu a:first-child,
+#dropdown-menu a:first-child {
+    border-top-left-radius: 0.75rem; /* rounded-t-xl */
+    border-top-right-radius: 0.75rem;
+}
+
+#tags-dropdown-menu a:last-child,
+#dropdown-menu a:last-child {
+    border-bottom-left-radius: 0.75rem; /* rounded-b-xl */
+    border-bottom-right-radius: 0.75rem;
+}
+
+/* Ensure hover state preserves the rounded corners */
+#tags-dropdown-menu a:first-child:hover,
+#dropdown-menu a:first-child:hover {
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+}
+
+#tags-dropdown-menu a:last-child:hover,
+#dropdown-menu a:last-child:hover {
+    border-bottom-left-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+}
+
+/* Prevent focus rings on dropdown menu items - more comprehensive */
+#tags-dropdown-menu a:focus, 
+#tags-dropdown-menu a:focus-visible,
+#tags-dropdown-menu a:focus-within,
+#tags-dropdown-menu a:active,
+#dropdown-menu a:focus,
+#dropdown-menu a:focus-visible,
+#dropdown-menu a:focus-within,
+#dropdown-menu a:active {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+
+/* Ensure dropdown items don't get the focus styles even with the custom class */
+#tags-dropdown-menu a.dropdown-focused,
+#dropdown-menu a.dropdown-focused {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: transparent !important;
 }
 .bg-gray-blue {
   background-color: #24262F;
@@ -645,6 +709,10 @@ table tr.dark-gray-hover:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: calc(infinity * 1px);
+}
+#mobile-search-button:hover {
+  background-color: #343a29;
 }
 
 @media (min-width: 768px) {

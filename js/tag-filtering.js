@@ -17,31 +17,67 @@ document.addEventListener('DOMContentLoaded', function() {
   const closeAllDropdowns = () => {
     tagsDropdownMenu?.classList.add('hidden');
     sortDropdownMenu?.classList.add('hidden');
+    
+    // Reset aria-expanded states and remove focus styling
+    if (tagsDropdownButton) {
+      tagsDropdownButton.setAttribute('aria-expanded', 'false');
+      tagsDropdownButton.classList.remove('dropdown-focused');
+    }
+    
+    if (sortDropdownButton) {
+      sortDropdownButton.setAttribute('aria-expanded', 'false');
+      sortDropdownButton.classList.remove('dropdown-focused');
+    }
   };
   
   // Function to toggle a specific dropdown and close others
-  const toggleDropdown = (dropdownToToggle, otherDropdown) => {
+  const toggleDropdown = (dropdownToToggle, otherDropdown, buttonElement) => {
     // If the dropdown we're toggling is currently hidden
     if (dropdownToToggle?.classList.contains('hidden')) {
       // Close the other dropdown first
       otherDropdown?.classList.add('hidden');
+      // Update the other dropdown button's aria-expanded if it exists
+      const otherButton = otherDropdown?.id === 'tags-dropdown-menu' ? 
+        document.getElementById('tags-dropdown-button') : 
+        document.getElementById('dropdown-button');
+      if (otherButton) {
+        otherButton.setAttribute('aria-expanded', 'false');
+        otherButton.classList.remove('dropdown-focused');
+      }
+      
       // Then open this one
       dropdownToToggle?.classList.remove('hidden');
+      // Update aria-expanded and add focus styling
+      if (buttonElement) {
+        buttonElement.setAttribute('aria-expanded', 'true');
+        buttonElement.classList.add('dropdown-focused');
+        
+        // Ensure focus styles never apply to dropdown items when dropdown opens
+        const dropdownLinks = dropdownToToggle.querySelectorAll('a');
+        dropdownLinks.forEach(link => {
+          link.classList.remove('dropdown-focused');
+        });
+      }
     } else {
       // Otherwise just close this dropdown
       dropdownToToggle?.classList.add('hidden');
+      // Update aria-expanded and remove focus styling
+      if (buttonElement) {
+        buttonElement.setAttribute('aria-expanded', 'false');
+        buttonElement.classList.remove('dropdown-focused');
+      }
     }
   };
   
   // Toggle dropdowns with improved behavior
   tagsDropdownButton?.addEventListener('click', function(e) {
     e.stopPropagation();
-    toggleDropdown(tagsDropdownMenu, sortDropdownMenu);
+    toggleDropdown(tagsDropdownMenu, sortDropdownMenu, this);
   });
   
   sortDropdownButton?.addEventListener('click', function(e) {
     e.stopPropagation();
-    toggleDropdown(sortDropdownMenu, tagsDropdownMenu);
+    toggleDropdown(sortDropdownMenu, tagsDropdownMenu, this);
   });
   
   // Handle tag selection
@@ -49,8 +85,37 @@ document.addEventListener('DOMContentLoaded', function() {
     tagsDropdownMenu.addEventListener('click', function(e) {
       e.stopPropagation(); // Prevent closing the dropdown
       
+      // Blur any focused element to remove focus ring
+      if (document.activeElement) {
+        document.activeElement.blur();
+      }
+      
+      // Remove focus class from all links
+      const allLinks = tagsDropdownMenu.querySelectorAll('a');
+      allLinks.forEach((link, index) => {
+        link.classList.remove('dropdown-focused');
+        // Ensure links never get focus styling
+        link.style.outline = 'none';
+        link.style.boxShadow = 'none';
+        
+        // Don't override border-radius for first and last items
+        if (index !== 0 && index !== allLinks.length - 1) {
+          link.style.borderRadius = '0';
+        }
+      });
+      
       const tagLink = e.target.closest('[data-tag]');
       if (tagLink) {
+        // Ensure this specific link never gets focus styling
+        tagLink.style.outline = 'none';
+        tagLink.style.boxShadow = 'none';
+        
+        // Only remove border radius if it's not first or last
+        const allLinks = Array.from(tagsDropdownMenu.querySelectorAll('a'));
+        const index = allLinks.indexOf(tagLink);
+        if (index !== 0 && index !== allLinks.length - 1) {
+          tagLink.style.borderRadius = '0';
+        }
         const tagName = tagLink.getAttribute('data-tag');
         const tagText = tagLink.textContent.trim();
         
@@ -78,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
           // Add the tag
           const newTag = document.createElement('span');
-          newTag.className = 'inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-sm text-sm font-medium bg-[#2e3523] capitalize text-off-white mr-3 mb-3 cursor-pointer';
+          newTag.className = 'inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-sm font-medium bg-[#2e3523] capitalize text-off-white mr-3 mb-3 cursor-pointer';
           newTag.setAttribute('data-tag', tagName);
           newTag.innerHTML = `${tagText} <button class="ml-1.5 text-off-white hover:text-white" aria-label="Remove ${tagText} filter">&times;</button>`;
           
