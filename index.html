@@ -840,6 +840,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       showRecipesForPage(1);
       setupInfiniteScroll();
+      
+      // Make sure to update the recipe count when all filters are removed
+      updateRecipeCount();
     } else {
       console.log('Filtering by tags:', selectedTags);
       
@@ -1019,6 +1022,11 @@ document.addEventListener('DOMContentLoaded', function() {
               // Remove active class from dropdown item
               tagLink.classList.remove('bg-[#232717]');
               tagLink.classList.add('hover:bg-[#252A19]');
+              
+              // Check if this was the last tag and trigger tag filtering
+              if (selectedTagsContainer.querySelectorAll('span').length === 0) {
+                handleTagFiltering(); // This will update the count and show all recipes
+              }
             }
           } else {
             // Add the tag
@@ -1035,6 +1043,11 @@ document.addEventListener('DOMContentLoaded', function() {
               if (dropdownItem) {
                 dropdownItem.classList.remove('bg-[#232717]');
                 dropdownItem.classList.add('hover:bg-[#252A19]');
+              }
+              
+              // Check if this was the last tag and trigger tag filtering
+              if (selectedTagsContainer.querySelectorAll('span').length === 0) {
+                handleTagFiltering(); // This will update the count and show all recipes
               }
             });
             
