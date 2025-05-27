@@ -311,7 +311,8 @@
                 'brussels': ['vegetable'],
                 'beets': ['vegetable'],
                 'sweet-potato': ['vegetable'],
-                'green-sauce': ['condiments', 'spicy', 'vegetable']
+                'green-sauce': ['condiments', 'spicy', 'vegetable'],
+                'brown-butter': ['breakfast', 'condiments', 'quick']
             };
             
             // Extract potential tags from slug
@@ -341,7 +342,8 @@
                 'white-bean-wraps': 'assets/img/white-bean-wraps.jpg',
                 'falafels': 'assets/img/falafals.jpg',
                 'citrus-vinaigrette': 'assets/img/citrus-vinaigrette.jpg',
-                'spiced-green-sauce': 'assets/img/spiced-green-sauce.jpg'
+                'spiced-green-sauce': 'assets/img/spiced-green-sauce.jpg',
+                'brown-butter': 'assets/img/brown-butter.jpg'
             };
             
             return specialCases[slug] || `assets/img/${slug}.jpg`;
@@ -409,6 +411,7 @@
                 'honey': ['sweet', 'natural', 'syrup'],
                 'potato': ['potatoes', 'starch', 'vegetable'],
                 'butter': ['dairy', 'fat', 'creamy'],
+                'brown butter': ['beurre noisette', 'nutty', 'toasted', 'sauce', 'fat', 'cooking fat', 'condiment'],
                 'garlic': ['allium', 'flavor', 'seasoning'],
                 'lentil': ['legume', 'protein', 'vegetarian'],
                 'sweet potato': ['yam', 'starchy', 'vegetable', 'orange']
@@ -508,6 +511,7 @@
                 { title: "Pistachio Butter", link: "pistachio-butter", img: "assets/img/pistachio-butter.jpg", tags: ["condiments", "gluten-free", "healthy", "quick", "vegan", "vegetarian"], searchTerms: "condiment" },
                 { title: "Citrus Vinaigrette", link: "citrus-vinaigrette", img: "assets/img/citrus-vinaigrette.jpg", tags: ["condiments", "gluten-free", "healthy", "quick", "seafood", "vegetable", "vegetarian"], searchTerms: "condiment sauce dressing salad orange lemon lime" },
                 { title: "Spiced Green Sauce", link: "spiced-green-sauce", img: "assets/img/spiced-green-sauce.jpg", tags: ["condiments", "gluten-free", "healthy", "meat", "spicy", "vegan", "vegetable", "vegetarian"], searchTerms: "condiment sauce middle eastern skhug green chile cilantro parsley spices" },
+                { title: "Brown Butter", link: "brown-butter", img: "assets/img/brown-butter.jpg", tags: ["breakfast", "condiments", "gluten-free", "quick", "vegetarian"], searchTerms: "condiment sauce butter nutty noisette beurre noisette pancakes fish crepe cooking fat" },
                 { title: "Beet Slaw", link: "beet-slaw", img: "assets/img/beet-slaw.jpg", tags: ["vegetable", "vegan", "vegetarian", "healthy"], searchTerms: "vegetable side" },
                 { title: "Ratatouille", link: "ratatouille", img: "assets/img/ratatouille.jpg", tags: ["vegetable", "vegan", "vegetarian", "gluten-free", "healthy"], searchTerms: "vegetable" },
                 { title: "Eggplant with Buttermilk Sauce", link: "eggplant-with-buttermilk-sauce", img: "assets/img/eggplant-with-buttermilk-sauce.jpg", tags: ["vegetable", "vegetarian", "gluten-free", "healthy"], searchTerms: "vegetable" },
