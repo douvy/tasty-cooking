@@ -7,19 +7,44 @@
  * - Tag UI interactions
  */
 document.addEventListener('DOMContentLoaded', function() {
-  // Toggle dropdowns
-  document.getElementById('tags-dropdown-button')?.addEventListener('click', function(e) {
+  // Get references to dropdown elements
+  const tagsDropdownButton = document.getElementById('tags-dropdown-button');
+  const tagsDropdownMenu = document.getElementById('tags-dropdown-menu');
+  const sortDropdownButton = document.getElementById('dropdown-button');
+  const sortDropdownMenu = document.getElementById('dropdown-menu');
+  
+  // Function to close all dropdowns
+  const closeAllDropdowns = () => {
+    tagsDropdownMenu?.classList.add('hidden');
+    sortDropdownMenu?.classList.add('hidden');
+  };
+  
+  // Function to toggle a specific dropdown and close others
+  const toggleDropdown = (dropdownToToggle, otherDropdown) => {
+    // If the dropdown we're toggling is currently hidden
+    if (dropdownToToggle?.classList.contains('hidden')) {
+      // Close the other dropdown first
+      otherDropdown?.classList.add('hidden');
+      // Then open this one
+      dropdownToToggle?.classList.remove('hidden');
+    } else {
+      // Otherwise just close this dropdown
+      dropdownToToggle?.classList.add('hidden');
+    }
+  };
+  
+  // Toggle dropdowns with improved behavior
+  tagsDropdownButton?.addEventListener('click', function(e) {
     e.stopPropagation();
-    document.getElementById('tags-dropdown-menu')?.classList.toggle('hidden');
+    toggleDropdown(tagsDropdownMenu, sortDropdownMenu);
   });
   
-  document.getElementById('dropdown-button')?.addEventListener('click', function(e) {
+  sortDropdownButton?.addEventListener('click', function(e) {
     e.stopPropagation();
-    document.getElementById('dropdown-menu')?.classList.toggle('hidden');
+    toggleDropdown(sortDropdownMenu, tagsDropdownMenu);
   });
   
   // Handle tag selection
-  const tagsDropdownMenu = document.getElementById('tags-dropdown-menu');
   if (tagsDropdownMenu) {
     tagsDropdownMenu.addEventListener('click', function(e) {
       e.stopPropagation(); // Prevent closing the dropdown
@@ -84,18 +109,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
+  // Handle sort dropdown clicks - ensure they don't close it
+  sortDropdownMenu?.addEventListener('click', function(e) {
+    e.stopPropagation();
+  });
+  
   // Close dropdowns when clicking outside
   document.addEventListener('click', function(e) {
-    // Don't close tags dropdown if clicking inside it or on a selected tag
-    if (!e.target.closest('#tags-dropdown-menu') && 
-        !e.target.closest('#tags-dropdown-button') && 
-        !e.target.closest('#selected-tags')) {
-      document.getElementById('tags-dropdown-menu')?.classList.add('hidden');
-    }
+    // Don't close tags dropdown if clicking inside it, its button, or a selected tag
+    const isTagsDropdownClick = e.target.closest('#tags-dropdown-menu') || 
+                               e.target.closest('#tags-dropdown-button') || 
+                               e.target.closest('#selected-tags');
     
-    // Always close sort dropdown when clicking outside
-    if (!e.target.closest('#dropdown-menu') && !e.target.closest('#dropdown-button')) {
-      document.getElementById('dropdown-menu')?.classList.add('hidden');
+    // Don't close sort dropdown if clicking inside it or its button
+    const isSortDropdownClick = e.target.closest('#dropdown-menu') || 
+                               e.target.closest('#dropdown-button');
+    
+    // If click is outside both dropdowns, close all
+    if (!isTagsDropdownClick && !isSortDropdownClick) {
+      closeAllDropdowns();
+    }
+  });
+  
+  // Also close dropdowns when user presses Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeAllDropdowns();
     }
   });
 });
