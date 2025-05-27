@@ -1,11 +1,11 @@
 /**
  * search-service.js
- * A best-in-class unified search implementation for Tasty Cooking website
+ * A best-in-class search service for Tasty Cooking website
  * Features:
  * - LocalStorage caching of recipe data with automatic refreshing
  * - Multiple data sources with intelligent fallbacks
  * - Smart search with term matching and synonyms
- * - Full ARIA accessibility and keyboard navigation
+ * - Full ARIA accessibility compliance
  * - Performance optimized with debouncing, caching, and minimal DOM operations
  * - Unified search experience across all pages
  */
@@ -14,7 +14,7 @@
 (function() {
     'use strict';
 
-    // SearchService class definition - data layer
+    // SearchService class definition
     class SearchService {
         constructor(config = {}) {
             // Default configuration with sensible defaults
@@ -44,39 +44,14 @@
             // Try to load recipes from cache first
             const cachedRecipes = this.loadFromCache();
             
-            if (cachedRecipes && cachedRecipes.length >= 40) {
-                // Only use cache if it has most/all recipes
+            if (cachedRecipes) {
                 this.recipes = cachedRecipes;
                 this.recipesLoaded = true;
                 this.emitEvent('recipesLoaded', this.recipes);
             }
             
             // Always refresh cache in background, even if we loaded from cache
-            this.loadRecipes().then(recipes => {
-                // Verify we got the expected number of recipes
-                if (recipes.length < 40) {
-                    console.warn(`Only loaded ${recipes.length} recipes, expected at least 40. Attempting to add fallback recipes.`);
-                    // Load basic recipes as fallback and merge with any we did find
-                    this.loadBasicRecipes().then(basicRecipes => {
-                        // Create a map of existing recipes by link
-                        const recipeMap = new Map();
-                        this.recipes.forEach(recipe => {
-                            recipeMap.set(recipe.link, recipe);
-                        });
-                        
-                        // Add any missing recipes from the basic set
-                        basicRecipes.forEach(recipe => {
-                            if (!recipeMap.has(recipe.link)) {
-                                this.recipes.push(recipe);
-                            }
-                        });
-                        
-                        // Update cache with combined set
-                        this.saveToCache(this.recipes);
-                        this.emitEvent('recipesLoaded', this.recipes);
-                    });
-                }
-            });
+            this.loadRecipes();
         }
 
         // Register event listeners
@@ -139,69 +114,24 @@
                 return this.dataLoadPromise;
             }
             
-            this.dataLoadPromise = Promise.all([
-                // Try both sitemap and HTML methods simultaneously
-                this.fetchFromHTML().catch(e => []), // Ignore errors
-                this.fetchFromSitemap().catch(e => [])  // Ignore errors
-            ])
-            .then(([htmlRecipes, sitemapRecipes]) => {
-                // Process results from both sources
-                
-                // Merge results, preferring HTML recipes when duplicates exist
-                let allRecipes = [...htmlRecipes];
-                
-                // Create a map of links we already have
-                const existingLinks = new Map();
-                allRecipes.forEach(recipe => {
-                    existingLinks.set(recipe.link, true);
-                });
-                
-                // Add unique recipes from sitemap
-                sitemapRecipes.forEach(recipe => {
-                    if (!existingLinks.has(recipe.link)) {
-                        allRecipes.push(recipe);
-                        existingLinks.set(recipe.link, true);
-                    }
-                });
-                
-                // If we still don't have enough recipes, add the fallback basic recipes
-                if (allRecipes.length < 40) {
-                    // Need to add fallback recipes
-                    return this.loadBasicRecipes().then(basicRecipes => {
-                        basicRecipes.forEach(recipe => {
-                            if (!existingLinks.has(recipe.link)) {
-                                allRecipes.push(recipe);
-                                existingLinks.set(recipe.link, true);
-                            }
-                        });
-                        return allRecipes;
-                    });
-                }
-                
-                return allRecipes;
-            })
-            .then(recipes => {
-                // Store recipes in state
-                this.recipes = recipes;
-                this.recipesLoaded = true;
-                this.saveToCache(recipes);
-                this.emitEvent('recipesLoaded', recipes);
-                this.dataLoadPromise = null; // Reset promise for future refreshes
-                return recipes;
-            })
-            .catch(error => {
-                // Final fallback when all methods fail
-                // Final fallback to basic recipes
-                return this.loadBasicRecipes().then(recipes => {
+            this.dataLoadPromise = this.fetchFromSitemap()
+                .catch(error => {
+                    console.warn('Failed to load from sitemap, trying index page:', error);
+                    return this.fetchFromHTML();
+                })
+                .catch(error => {
+                    console.warn('Failed to load from HTML, using basic recipes:', error);
+                    return this.loadBasicRecipes();
+                })
+                .then(recipes => {
                     this.recipes = recipes;
                     this.recipesLoaded = true;
                     this.saveToCache(recipes);
                     this.emitEvent('recipesLoaded', recipes);
-                    this.dataLoadPromise = null;
+                    this.dataLoadPromise = null; // Reset promise for future refreshes
                     return recipes;
                 });
-            });
-            
+                
             return this.dataLoadPromise;
         }
 
@@ -219,8 +149,6 @@
                     const sitemap = parser.parseFromString(xml, 'text/xml');
                     const urls = sitemap.querySelectorAll('url loc');
                     const recipes = [];
-                    
-                    // Process sitemap URLs
                     
                     urls.forEach(url => {
                         const fullUrl = url.textContent;
@@ -248,9 +176,6 @@
                         }
                     });
                     
-                    // If we didn't get enough recipes, this will be caught by the Promise.all 
-                    // in loadRecipes() which runs both methods in parallel
-                    
                     if (recipes.length === 0) {
                         throw new Error('No recipes found in sitemap');
                     }
@@ -261,33 +186,12 @@
 
         // Check if URL is not a recipe page
         isNonRecipeUrl(url) {
-            // Define known non-recipe pages and file types to exclude
-            const nonRecipePatterns = [
-                'index.html',
-                '.css',
-                '.js',
-                'robots.txt',
-                'manifest.json',
-                'service-worker',
-                'sitemap.xml',
-                'CLAUDE.md',
-                'LICENSE',
-                'README.md'
-            ];
-            
-            // Check if the URL contains any of the non-recipe patterns
-            for (const pattern of nonRecipePatterns) {
-                if (url.includes(pattern)) {
-                    return true;
-                }
-            }
-            
-            // Additional check: if URL ends with '/' it's a directory, not a recipe
-            if (url.endsWith('/')) {
-                return true;
-            }
-            
-            return false;
+            return url.includes('index.html') || 
+                   url.includes('.css') || 
+                   url.includes('.js') || 
+                   url.includes('robots.txt') ||
+                   url.includes('manifest.json') ||
+                   url.includes('service-worker.js');
         }
 
         // Get tags for a recipe based on slug
@@ -532,6 +436,8 @@
                 return this.recipes; // Return all recipes if empty query
             }
 
+            console.log(`Searching for "${normalizedQuery}" among ${this.recipes.length} recipes`);
+
             // Exact title match gets priority
             const exactMatches = this.recipes.filter(recipe => 
                 recipe.title.toLowerCase().includes(normalizedQuery)
@@ -562,7 +468,10 @@
             );
             
             // Combine results with exact matches first
-            return [...exactMatches, ...termMatches, ...titleWordMatches, ...fallbackMatches];
+            const allResults = [...exactMatches, ...termMatches, ...titleWordMatches, ...fallbackMatches];
+            console.log(`Found ${allResults.length} total matches (${exactMatches.length} exact, ${termMatches.length} term, ${titleWordMatches.length} word, ${fallbackMatches.length} fallback)`);
+            
+            return allResults;
         }
 
         // Get loading status
@@ -617,268 +526,11 @@
         }
     }
 
-    // SearchUI class definition - presentation layer
-    class SearchUI {
-        constructor(options = {}) {
-            this.options = {
-                searchBarSelector: '#search-bar',
-                searchResultsSelector: '#search-results',
-                debounceTime: 250,
-                maxResults: 1000, // Show all results, no practical limit
-                ...options
-            };
-            
-            // DOM elements
-            this.searchBar = document.querySelector(this.options.searchBarSelector);
-            this.searchResults = document.querySelector(this.options.searchResultsSelector);
-            
-            // Check if we have the required elements
-            if (!this.searchBar || !this.searchResults) {
-                return; // Don't initialize if elements not found
-            }
-            
-            // State
-            this.searchResultItems = [];
-            this.currentIndex = -1;
-            this.searchService = window.searchServiceInstance;
-            
-            // Initialize
-            this.initialize();
-        }
-        
-        // Initialize the search UI
-        initialize() {
-            // Set up debounced search
-            this.debouncedSearch = debounce(this.performSearch.bind(this), this.options.debounceTime);
-            
-            // Set up event listeners
-            this.setupEventListeners();
-            
-            // Handle focus if search bar is focused on load
-            if (document.activeElement === this.searchBar) {
-                this.performSearch();
-            }
-        }
-        
-        // Set up all event listeners
-        setupEventListeners() {
-            // Input and focus events trigger search
-            this.searchBar.addEventListener('input', () => this.debouncedSearch());
-            this.searchBar.addEventListener('focus', () => this.performSearch());
-            
-            // Close search when clicking outside
-            document.addEventListener('click', event => {
-                if (!this.searchBar.contains(event.target) && !this.searchResults.contains(event.target)) {
-                    this.closeSearchDropdown();
-                }
-            });
-            
-            // Keyboard navigation
-            this.searchBar.addEventListener('keydown', this.handleKeyNavigation.bind(this));
-        }
-        
-        // Handle keyboard navigation in search results
-        handleKeyNavigation(event) {
-            if (event.key === 'Escape') {
-                this.closeSearchDropdown();
-            } else if (event.key === 'ArrowDown') {
-                event.preventDefault(); // Prevent scrolling the page
-                this.navigateSearchResults(1); // Move down
-            } else if (event.key === 'ArrowUp') {
-                event.preventDefault(); // Prevent scrolling the page
-                this.navigateSearchResults(-1); // Move up
-            } else if (event.key === 'Enter' && this.currentIndex >= 0 && this.currentIndex < this.searchResultItems.length) {
-                event.preventDefault(); // Prevent form submission
-                this.searchResultItems[this.currentIndex].click();
-            }
-        }
-        
-        // Navigate through search results with keyboard
-        navigateSearchResults(direction) {
-            if (this.searchResultItems.length === 0) return;
-            
-            // Clear previous selection
-            if (this.currentIndex >= 0 && this.currentIndex < this.searchResultItems.length) {
-                this.searchResultItems[this.currentIndex].classList.remove('search-result-selected', 'bg-[#232717]');
-            }
-            
-            // Calculate new index with bounds checking
-            if (direction > 0) {
-                this.currentIndex = Math.min(this.currentIndex + 1, this.searchResultItems.length - 1);
-            } else {
-                this.currentIndex = Math.max(this.currentIndex - 1, 0);
-            }
-            
-            // Highlight new selection
-            if (this.currentIndex >= 0) {
-                this.searchResultItems[this.currentIndex].classList.add('search-result-selected', 'bg-[#232717]');
-                this.searchResultItems[this.currentIndex].scrollIntoView({ block: 'nearest' });
-            }
-        }
-        
-        // Close the search dropdown
-        closeSearchDropdown() {
-            if (this.searchResults) {
-                // Hide results dropdown
-                this.searchResults.classList.add('hidden');
-                
-                // Restore page scrolling
-                document.body.style.overflow = '';
-                
-                // Clear search input when user clicks away
-                if (this.searchBar) {
-                    this.searchBar.value = '';
-                }
-                
-                // Reset navigation state
-                this.currentIndex = -1;
-                this.searchResultItems = [];
-            }
-        }
-        
-        // Configure search results dropdown display
-        configureResultsDropdown() {
-            // Make the container visible
-            this.searchResults.classList.remove('hidden');
-            
-            // Lock page scrolling
-            document.body.style.overflow = 'hidden';
-            
-            // Set the container to full height
-            const topPosition = this.searchResults.getBoundingClientRect().top;
-            const maxHeight = window.innerHeight - topPosition - 10;
-            this.searchResults.style.maxHeight = `${maxHeight}px`;
-            this.searchResults.style.overflowY = 'auto';
-            
-            // Set width appropriately
-            if (window.innerWidth >= 768) {
-                this.searchResults.style.width = this.searchBar.offsetWidth + 'px';
-            } else {
-                this.searchResults.style.width = '100%';
-            }
-        }
-        
-        // Perform search and show results
-        performSearch() {
-            if (!this.searchService) {
-                this.searchService = window.searchServiceInstance;
-                if (!this.searchService) return; // Still no search service available
-            }
-            
-            // Reset current search state
-            this.searchResults.innerHTML = '';
-            this.searchResultItems = [];
-            this.currentIndex = -1;
-            
-            // Configure the dropdown
-            this.configureResultsDropdown();
-            
-            // Get the search query
-            const query = this.searchBar.value.toLowerCase().trim();
-            
-            // If search service isn't loaded yet, start loading and show loading state
-            if (!this.searchService.isLoaded()) {
-                // Show loading indicator
-                const loading = document.createElement('div');
-                loading.className = 'px-4 py-3 text-off-white text-center';
-                loading.textContent = 'Loading recipes...';
-                this.searchResults.appendChild(loading);
-                
-                // Load recipes then search when ready
-                this.searchService.loadRecipes().then(() => {
-                    this.performSearch();
-                });
-                return;
-            }
-            
-            // Check that we have enough recipes (at least 40)
-            if (this.searchService.getAllRecipes().length < 40) {
-                // Force a recipe refresh to ensure we have all recipes
-                this.searchService.refreshRecipes().then(() => {
-                    // Try the search again after refresh
-                    this.performSearch();
-                });
-                return;
-            }
-            
-            // Perform search
-            let results = query 
-                ? this.searchService.search(query) 
-                : this.searchService.getAllRecipes();
-            
-            // Perform search operation
-            
-            // Render results
-            this.renderSearchResults(results);
-        }
-        
-        // Render search results
-        renderSearchResults(results) {
-            // Create container for results
-            const container = document.createElement('div');
-            
-            if (results.length > 0) {
-                // Show result count
-                const resultCount = Math.min(this.options.maxResults, results.length);
-                
-                // Loop through results and create UI
-                results.slice(0, this.options.maxResults).forEach(recipe => {
-                    const item = document.createElement('div');
-                    item.className = 'px-4 py-2 cursor-pointer search-result-item flex items-center space-x-2 border-b border-[#2f3525] hover:bg-[#232717]';
-                    item.setAttribute('role', 'option');
-                    
-                    const image = document.createElement('img');
-                    image.src = recipe.img;
-                    image.alt = '';
-                    image.className = 'w-5 h-5 rounded-sm object-cover';
-                    
-                    const title = document.createElement('span');
-                    title.className = 'text-off-white capitalize truncate';
-                    title.textContent = recipe.title.toLowerCase();
-                    
-                    item.appendChild(image);
-                    item.appendChild(title);
-                    
-                    item.addEventListener('click', () => {
-                        window.location.href = recipe.link;
-                    });
-                    
-                    // Store for keyboard navigation
-                    this.searchResultItems.push(item);
-                    container.appendChild(item);
-                });
-            } else {
-                // Show no results message
-                const noResults = document.createElement('div');
-                noResults.className = 'px-4 py-3 text-off-white text-center';
-                noResults.textContent = 'No matching recipes found';
-                container.appendChild(noResults);
-            }
-            
-            // Add to DOM
-            this.searchResults.innerHTML = '';
-            this.searchResults.appendChild(container);
-            
-            // Set ARIA attributes for accessibility
-            this.searchResults.setAttribute('role', 'listbox');
-            this.searchResults.setAttribute('aria-label', 'Search results');
-        }
-    }
-
     // Export to global scope
     window.SearchService = SearchService;
-    window.searchServiceInstance = new SearchService();
     
-    // Initialize search UI when DOM is ready
-    document.addEventListener('DOMContentLoaded', function() {
-        // Make sure to load all recipes immediately for faster search
-        if (window.searchServiceInstance && !window.searchServiceInstance.isLoaded()) {
-            window.searchServiceInstance.loadRecipes();
-        }
-        
-        // Initialize UI
-        new SearchUI();
-    });
+    // Also export a singleton instance for simpler use
+    window.searchServiceInstance = new SearchService();
 })();
 
 /**

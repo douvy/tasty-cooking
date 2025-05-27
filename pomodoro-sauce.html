@@ -46,7 +46,7 @@
                 <div class="text-base relative z-10 w-full">
                     <div class="relative">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <i class="far fa-search text-off-white fa-sm"></i>
+                            <i class="far fa-search text-[#f2ede4] fa-sm"></i>
                         </span>
                         <input type="text" placeholder="Search recipes" class="w-full md:w-64 pl-10 pr-4 py-2 rounded-sm bg-[#2e3523] text-off-white placeholder:text-[#8B9168] focus:outline-none focus:ring-0 focus:border-none" id="search-bar" autocomplete="off">
                     </div>
@@ -129,6 +129,8 @@
         </div>
     </section>
     
+    <!-- No hidden recipe grid needed for new unified search -->
+
     <footer class="bg-[#2f3220] w-full border-t border-dark-gray-top z-50 pt-3 pb-3">
         <div class="container mx-auto flex items-center justify-between px-4">
             <ul class="text-xs font-normal text-light-gray flex items-center w-full">
@@ -141,7 +143,20 @@
     
       
 <script src="js/search-service.js"></script>
-<script src="js/recipe-search.js"></script>
+<script>
+  // Register Service Worker for offline functionality
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/js/service-worker.js')
+        .then(registration => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch(error => {
+          console.error('Service Worker registration failed:', error);
+        });
+    });
+  }
+</script>
 </body>
 
 </html>

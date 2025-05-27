@@ -73,9 +73,8 @@ footer a:hover {
   color: #c1c1c1;
   font-size: 90%;
 }
-#search-results div:hover {
-  background-color: #252A19;
-}
+/* Remove the global hover style that affects all divs in search results */
+/* Individual result items will handle their own hover states */
 #dropdown-menu a, 
 #tags-dropdown-menu a {
   font-family: 'GT Flexa', arial;
@@ -573,6 +572,16 @@ table tr.dark-gray-hover:hover {
 #dropdown-menu a.bg-\[\#232717\]:hover,
 #tags-dropdown-menu a.bg-\[\#232717\]:hover {
   background-color: #232717 !important;
+}
+
+/* Add new style for search result hover */
+#search-results .search-result-item:hover {
+  background-color: #262a1b !important; 
+}
+
+/* Style for keyboard navigation selected item */
+#search-results .search-result-selected {
+  background-color: #232618 !important;
 }
 
 /* Example for Tags Dropdown */
