@@ -310,7 +310,8 @@
                 'broccolini': ['vegetable', 'healthy'],
                 'brussels': ['vegetable'],
                 'beets': ['vegetable'],
-                'sweet-potato': ['vegetable']
+                'sweet-potato': ['vegetable'],
+                'green-sauce': ['condiments', 'spicy', 'vegetable']
             };
             
             // Extract potential tags from slug
@@ -339,7 +340,8 @@
                 'avocado-wraps': 'assets/img/black-bean-avocado-wraps.jpg',
                 'white-bean-wraps': 'assets/img/white-bean-wraps.jpg',
                 'falafels': 'assets/img/falafals.jpg',
-                'citrus-vinaigrette': 'assets/img/citrus-vinaigrette.jpg'
+                'citrus-vinaigrette': 'assets/img/citrus-vinaigrette.jpg',
+                'spiced-green-sauce': 'assets/img/spiced-green-sauce.jpg'
             };
             
             return specialCases[slug] || `assets/img/${slug}.jpg`;
@@ -395,6 +397,14 @@
                 'lemon': ['citrus', 'fruit', 'juice', 'sour'],
                 'lime': ['citrus', 'fruit', 'juice', 'sour'],
                 'vinaigrette': ['dressing', 'salad', 'sauce', 'condiment'],
+                'spiced': ['seasoned', 'flavored', 'aromatic', 'spicy'],
+                'green sauce': ['herb sauce', 'fresh sauce', 'chimichurri', 'skhug', 'condiment'],
+                'cilantro': ['coriander', 'herb', 'fresh', 'green'],
+                'parsley': ['herb', 'fresh', 'green'],
+                'chile': ['chili', 'pepper', 'spicy', 'hot'],
+                'cardamom': ['spice', 'aromatic', 'middle eastern'],
+                'coriander': ['spice', 'cilantro seed', 'aromatic'],
+                'cumin': ['spice', 'aromatic', 'earthy'],
                 'tofu': ['soy', 'vegetarian', 'protein', 'bean curd'],
                 'honey': ['sweet', 'natural', 'syrup'],
                 'potato': ['potatoes', 'starch', 'vegetable'],
@@ -497,6 +507,7 @@
                 { title: "Roasted Garlic Lentil Soup", link: "roasted-garlic-lentil-soup", img: "assets/img/roasted-garlic-lentil-soup.jpg", tags: ["healthy", "meat", "spicy"], searchTerms: "soup" },
                 { title: "Pistachio Butter", link: "pistachio-butter", img: "assets/img/pistachio-butter.jpg", tags: ["condiments", "gluten-free", "healthy", "quick", "vegan", "vegetarian"], searchTerms: "condiment" },
                 { title: "Citrus Vinaigrette", link: "citrus-vinaigrette", img: "assets/img/citrus-vinaigrette.jpg", tags: ["condiments", "gluten-free", "healthy", "quick", "seafood", "vegetable", "vegetarian"], searchTerms: "condiment sauce dressing salad orange lemon lime" },
+                { title: "Spiced Green Sauce", link: "spiced-green-sauce", img: "assets/img/spiced-green-sauce.jpg", tags: ["condiments", "gluten-free", "healthy", "meat", "spicy", "vegan", "vegetable", "vegetarian"], searchTerms: "condiment sauce middle eastern skhug green chile cilantro parsley spices" },
                 { title: "Beet Slaw", link: "beet-slaw", img: "assets/img/beet-slaw.jpg", tags: ["vegetable", "vegan", "vegetarian", "healthy"], searchTerms: "vegetable side" },
                 { title: "Ratatouille", link: "ratatouille", img: "assets/img/ratatouille.jpg", tags: ["vegetable", "vegan", "vegetarian", "gluten-free", "healthy"], searchTerms: "vegetable" },
                 { title: "Eggplant with Buttermilk Sauce", link: "eggplant-with-buttermilk-sauce", img: "assets/img/eggplant-with-buttermilk-sauce.jpg", tags: ["vegetable", "vegetarian", "gluten-free", "healthy"], searchTerms: "vegetable" },
