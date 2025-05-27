@@ -591,13 +591,13 @@ table tr.dark-gray-hover:hover {
 #tags-dropdown-menu {
   right: 0;
   left: auto;
-  border-radius: 0.75rem !important; /* rounded-xl - ensure it's applied */
+  border-radius: 0.75rem !important; /* rounded-3xl - ensure it's applied */
 }
 
 #dropdown-menu {
   right: 0;
   left: auto;
-  border-radius: 0.75rem !important; /* rounded-xl - ensure it's applied */
+  border-radius: 0.75rem !important; /* rounded-3xl - ensure it's applied */
 }
 /* Example for Sort Dropdown */
 #dropdown-menu a:hover {

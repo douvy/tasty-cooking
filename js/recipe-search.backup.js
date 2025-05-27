@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const image = document.createElement('img');
             image.src = recipe.img;
             image.alt = '';
-            image.className = 'w-5 h-5 rounded-xl object-cover';
+            image.className = 'w-5 h-5 rounded-3xl object-cover';
             
             const title = document.createElement('span');
             title.className = 'text-off-white capitalize truncate';
