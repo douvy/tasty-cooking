@@ -993,7 +993,7 @@ document.addEventListener('DOMContentLoaded', function() {
         noResultsMsg.id = 'no-results-message';
         noResultsMsg.className = 'absolute inset-0 flex flex-col items-center text-center text-off-white w-full';
         noResultsMsg.style.paddingTop = '100px'; // Position higher on the screen
-        noResultsMsg.innerHTML = '<div class="max-w-xl mx-auto px-4"><p class="text-2xl sm:text-3xl font-windsor-bold">No recipes match the selected filters</p><p class="mt-2 text-lg sm:text-xl">Try removing some tags to see more results</p></div>';
+        noResultsMsg.innerHTML = '<div class="max-w-xl mx-auto px-4"><p class="text-2xl sm:text-3xl font-windsor-bold">No matching recipes</p><p class="mt-2 text-lg sm:text-xl">Try removing some tags</p></div>';
         elements.recipeGrid.appendChild(noResultsMsg);
       } else {
         noResultsMsg.style.display = '';
