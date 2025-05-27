@@ -922,11 +922,38 @@
                     resultsContainer.appendChild(item);
                 });
             } else {
-                // Show no results message
-                const noResults = document.createElement('div');
-                noResults.className = 'px-4 py-6 text-off-white text-center';
-                noResults.textContent = 'No matching recipes found';
-                resultsContainer.appendChild(noResults);
+                // Show enhanced no results message for mobile
+                const noResultsContainer = document.createElement('div');
+                noResultsContainer.className = 'px-4 py-8 flex flex-col items-center justify-center space-y-4';
+                
+                // Message text
+                const noResultsMessage = document.createElement('p');
+                noResultsMessage.className = 'text-off-white text-xl font-medium';
+                noResultsMessage.textContent = 'No recipes found';
+                
+                // Clear button
+                const clearButton = document.createElement('button');
+                clearButton.className = 'px-4 py-2 bg-[#e0d394] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-sm text-base font-medium';
+                clearButton.textContent = 'Clear search';
+                clearButton.addEventListener('click', () => {
+                    // Clear the search input in the modal
+                    const modalInput = document.getElementById('modal-search-input');
+                    if (modalInput) {
+                        // First clear the input
+                        modalInput.value = '';
+                        
+                        // Use the same method that's called initially for empty search
+                        this.performModalSearch('');
+                        
+                        // Keep focus on search bar
+                        modalInput.focus();
+                    }
+                });
+                
+                // Append elements
+                noResultsContainer.appendChild(noResultsMessage);
+                noResultsContainer.appendChild(clearButton);
+                resultsContainer.appendChild(noResultsContainer);
             }
         }
         
@@ -1119,11 +1146,39 @@
                     container.appendChild(item);
                 });
             } else {
-                // Show no results message
-                const noResults = document.createElement('div');
-                noResults.className = 'px-4 py-3 text-off-white text-center';
-                noResults.textContent = 'No matching recipes found';
-                container.appendChild(noResults);
+                // Show enhanced no results message
+                const noResultsContainer = document.createElement('div');
+                noResultsContainer.className = 'px-4 py-6 flex flex-col items-center justify-center space-y-4';
+                
+                // Message text
+                const noResultsMessage = document.createElement('p');
+                noResultsMessage.className = 'text-off-white text-xl font-medium';
+                noResultsMessage.textContent = 'No recipes found';
+                
+                // Clear button
+                const clearButton = document.createElement('button');
+                clearButton.className = 'px-4 py-2 bg-[#e0d394] hover:bg-[#eae0b1] text-[#141416] transition-colors duration-200 rounded-sm text-base font-medium';
+                clearButton.textContent = 'Clear search';
+                clearButton.addEventListener('click', () => {
+                    // Clear the search input
+                    if (this.searchBar) {
+                        // First clear the search input value
+                        this.searchBar.value = '';
+                        
+                        // Instead of trying to manually reproduce the behavior,
+                        // simply call performSearch() - the exact same method that's called
+                        // when clicking into the search bar initially
+                        this.performSearch();
+                        
+                        // Keep focus on the search bar
+                        this.searchBar.focus();
+                    }
+                });
+                
+                // Append elements
+                noResultsContainer.appendChild(noResultsMessage);
+                noResultsContainer.appendChild(clearButton);
+                container.appendChild(noResultsContainer);
             }
             
             // Add to DOM
