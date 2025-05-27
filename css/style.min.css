@@ -68,6 +68,13 @@ footer a:hover {
   margin-left: 0px;
   margin-top: 0;
 }
+
+/* Add 10px buffer above search dropdown on desktop */
+@media (min-width: 768px) {
+  #search-results {
+    margin-top: 10px;
+  }
+}
 #search-results div {
   border-top: none;
   color: #c1c1c1;
