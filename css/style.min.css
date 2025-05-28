@@ -16,7 +16,7 @@
   font-display: swap;
 }
 body {
-  font-family: 'GT Flexa', arial;
+  font-family: 'GT Flexa', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   letter-spacing: 1px;
   color: #929292;
   background-color: #383d23;
@@ -25,7 +25,7 @@ body {
   overflow-x: hidden; /* Prevent horizontal scroll */
 }
 .font-windsor-bold {
-  font-family: 'Windsor Bold', arial;
+  font-family: 'Windsor Bold', 'Times New Roman', Georgia, 'Droid Serif', serif;
   font-weight: bold;
 }
 /* color palette */
@@ -90,7 +90,7 @@ footer a:hover {
 /* Individual result items will handle their own hover states */
 #dropdown-menu a, 
 #tags-dropdown-menu a {
-  font-family: 'GT Flexa', arial;
+  font-family: 'GT Flexa', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
 }
 
 #dropdown-menu a:hover {
