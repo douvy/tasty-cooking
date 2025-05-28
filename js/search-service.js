@@ -314,7 +314,8 @@
                 'green-sauce': ['condiments', 'spicy', 'vegetable'],
                 'radishes': ['vegetable', 'gluten-free', 'healthy'],
                 'brown-butter': ['breakfast', 'condiments', 'quick'],
-                'alla-diavola-butter': ['condiments', 'gluten-free', 'quick', 'spicy', 'vegetarian']
+                'alla-diavola-butter': ['condiments', 'gluten-free', 'quick', 'spicy', 'vegetarian'],
+                'almonds': ['gluten-free', 'healthy', 'vegan', 'vegetarian']
             };
             
             // Extract potential tags from slug
@@ -347,7 +348,8 @@
                 'spiced-green-sauce': 'assets/img/spiced-green-sauce.jpg',
                 'roasted-radishes': 'assets/img/roasted-radishes.jpg',
                 'brown-butter': 'assets/img/brown-butter.jpg',
-                'alla-diavola-butter': 'assets/img/placeholder.jpg'
+                'alla-diavola-butter': 'assets/img/placeholder.jpg',
+                'almonds': 'assets/img/almonds.jpg'
             };
             
             return specialCases[slug] || `assets/img/${slug}.jpg`;
@@ -421,7 +423,8 @@
                 'alla diavola butter': ['compound butter', 'spicy', 'devil-style', 'italian', 'paprika', 'chile', 'pepperoncini', 'condiment'],
                 'garlic': ['allium', 'flavor', 'seasoning'],
                 'lentil': ['legume', 'protein', 'vegetarian'],
-                'sweet potato': ['yam', 'starchy', 'vegetable', 'orange']
+                'sweet potato': ['yam', 'starchy', 'vegetable', 'orange'],
+                'almonds': ['nuts', 'snack', 'brined', 'roasted', 'protein', 'healthy', 'crunchy', 'salty', 'kosher salt', 'rome', 'american academy']
             };
             
             // Add relevant alternative terms based on slug and title
@@ -500,6 +503,7 @@
             return Promise.resolve([
                 { title: "Sesame Green Beans", link: "sesame-green-beans", img: "assets/img/sesame-green-beans.jpg", tags: ["gluten-free", "healthy", "quick", "vegan", "vegetable", "vegetarian"], searchTerms: "vegetables side dish" },
                 { title: "Guacamole", link: "guacamole", img: "assets/img/guacamole.jpg", tags: ["condiments", "gluten-free", "healthy", "quick", "vegan", "vegetarian"], searchTerms: "avocado dip mexican" },
+                { title: "Brined and Roasted Almonds", link: "almonds", img: "assets/img/almonds.jpg", tags: ["gluten-free", "healthy", "vegan", "vegetarian"], searchTerms: "snack nuts roasted salted brined american academy rome" },
                 { title: "Alla Diavola Butter", link: "alla-diavola-butter", img: "assets/img/placeholder.jpg", tags: ["condiments", "gluten-free", "quick", "spicy", "vegetarian"], searchTerms: "italian spicy devil-style compound butter paprika chile flakes pepperoncini hot sauce tabasco" },
                 { title: "Roasted Cauliflower", link: "roasted-cauliflower", img: "assets/img/roasted-cauliflower.jpg", tags: ["gluten-free", "healthy", "quick", "vegan", "vegetable", "vegetarian"], searchTerms: "vegetables side dish" },
                 { title: "Roasted Broccolini", link: "roasted-broccolini", img: "assets/img/grilled-broccolini.jpg", tags: ["meat", "vegetable", "spicy"], searchTerms: "vegetables side dish" },
