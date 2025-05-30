@@ -348,7 +348,7 @@
                 'spiced-green-sauce': 'assets/img/spiced-green-sauce.jpg',
                 'roasted-radishes': 'assets/img/roasted-radishes.jpg',
                 'brown-butter': 'assets/img/brown-butter.jpg',
-                'alla-diavola-butter': 'assets/img/placeholder.jpg',
+                'alla-diavola-butter': 'assets/img/alla-diavola-butter.jpg',
                 'green-garlic-butter': 'assets/img/green-garlic-butter.jpg',
                 'almonds': 'assets/img/almonds.jpg'
             };
@@ -507,7 +507,7 @@
                 { title: "Guacamole", link: "guacamole", img: "assets/img/guacamole.jpg", tags: ["condiments", "gluten-free", "healthy", "quick", "vegan", "vegetarian"], searchTerms: "avocado dip mexican" },
                 { title: "Brined and Roasted Almonds", link: "almonds", img: "assets/img/almonds.jpg", tags: ["gluten-free", "healthy", "vegan", "vegetarian"], searchTerms: "snack nuts roasted salted brined american academy rome" },
                 { title: "Green Garlic Butter", link: "green-garlic-butter", img: "assets/img/green-garlic-butter.jpg", tags: ["condiments", "gluten-free", "vegetarian"], searchTerms: "compound butter spring garlic immature garlic herb butter cooking fat" },
-                { title: "Alla Diavola Butter", link: "alla-diavola-butter", img: "assets/img/placeholder.jpg", tags: ["condiments", "gluten-free", "quick", "spicy", "vegetarian"], searchTerms: "italian spicy devil-style compound butter paprika chile flakes pepperoncini hot sauce tabasco" },
+                { title: "Alla Diavola Butter", link: "alla-diavola-butter", img: "assets/img/alla-diavola-butter.jpg", tags: ["condiments", "gluten-free", "quick", "spicy", "vegetarian"], searchTerms: "italian spicy devil-style compound butter paprika chile flakes pepperoncini hot sauce tabasco" },
                 { title: "Roasted Cauliflower", link: "roasted-cauliflower", img: "assets/img/roasted-cauliflower.jpg", tags: ["gluten-free", "healthy", "quick", "vegan", "vegetable", "vegetarian"], searchTerms: "vegetables side dish" },
                 { title: "Roasted Broccolini", link: "roasted-broccolini", img: "assets/img/grilled-broccolini.jpg", tags: ["meat", "vegetable", "spicy"], searchTerms: "vegetables side dish" },
                 { title: "Charred Brussels Sprouts", link: "charred-brussels-sprouts", img: "assets/img/charred-brussels-sprouts.jpg", tags: ["gluten-free", "healthy", "meat", "quick", "vegetable"], searchTerms: "vegetables side dish" },
