@@ -27,7 +27,6 @@ export const RECIPE_CUSTOM_ORDER = [
   'chimichurri',
   'roasted-chicken',
   'eggplant-with-buttermilk-sauce',
-  'sesame-orange-chicken',
   'cucumber-salad',
   'sweet-potato-cakes',
   'black-pepper-tofu',
@@ -43,6 +42,7 @@ export const RECIPE_CUSTOM_ORDER = [
   'citrus-vinaigrette',
   'spiced-green-sauce',
   'roasted-radishes',
+  'kale-salad',
   'green-garlic-butter',
   'alla-diavola-butter',
   'almonds',
@@ -56,10 +56,12 @@ export const RECIPE_CUSTOM_ORDER = [
   'mojo-de-ajo',
   'romesco',
   'quesadillas',
+  'sesame-orange-chicken',
   'white-bean-wraps',
   'garlic-confit',
   'pineapple-kimchi',
   'pomodoro-sauce',
   'spaghetti-pomodoro',
-  'grilled-buffalo-wings'
+  'grilled-buffalo-wings',
+  'tomato-confit'
 ];
