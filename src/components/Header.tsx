@@ -49,12 +49,14 @@ const Header: React.FC = () => {
     }
   }, [showMobileSearch, searchQuery]);
 
-  // Apply focus trap to the mobile search modal
+  // Apply focus trap to the mobile search modal without auto-focusing
   useFocusTrap(
     showMobileSearch,
     searchModalRef,
     modalSearchInputRef,
-    mobileSearchButtonRef
+    mobileSearchButtonRef,
+    0,  // No delay
+    false // Don't auto-focus
   );
 
   // Handle click outside search results and lock body scroll
@@ -335,13 +337,8 @@ const Header: React.FC = () => {
                               // Keep the search results visible
                               setShowResults(true);
                               
-                              // Use a setTimeout to ensure the focus action comes after state updates
+                              // Use a setTimeout to ensure state updates are applied
                               setTimeout(() => {
-                                // Focus back on the search bar
-                                if (searchBarRef.current) {
-                                  searchBarRef.current.focus();
-                                }
-                                
                                 // Make a second setTimeout to ensure the results stay visible
                                 setTimeout(() => {
                                   setShowResults(true);
@@ -486,11 +483,8 @@ const Header: React.FC = () => {
                     // Keep mobile search open
                     setShowMobileSearch(true);
                     
-                    // Return focus to the search input after clearing
+                    // Keep mobile search open without focusing
                     setTimeout(() => {
-                      if (modalSearchInputRef.current) {
-                        modalSearchInputRef.current.focus();
-                      }
                       setShowMobileSearch(true);
                     }, 100);
                   }}

@@ -9,13 +9,15 @@ import { useRef, useEffect, MutableRefObject, RefObject } from 'react';
  * @param initialFocusRef Optional ref to the element that should receive focus when the trap activates
  * @param returnFocusRef Optional ref to the element that should receive focus when the trap deactivates
  * @param focusAfterDelay Optional delay in ms before focusing the initial element
+ * @param autoFocus Optional flag to control whether elements should be auto-focused (default: false)
  */
 export function useFocusTrap(
   isActive: boolean,
   containerRef: RefObject<HTMLElement>,
   initialFocusRef?: RefObject<HTMLElement>,
   returnFocusRef?: RefObject<HTMLElement>,
-  focusAfterDelay: number = 0
+  focusAfterDelay: number = 0,
+  autoFocus: boolean = false // Added parameter to control auto-focusing
 ): void {
   // Store the element that had focus before the trap was activated
   const previousActiveElement = useRef<HTMLElement | null>(null);
@@ -26,29 +28,32 @@ export function useFocusTrap(
     // Save the currently focused element to restore later
     previousActiveElement.current = document.activeElement as HTMLElement;
 
-    // Focus the initial element after a delay if provided, otherwise focus the container
-    const focusInitialElement = () => {
-      if (initialFocusRef?.current) {
-        initialFocusRef.current.focus();
-      } else if (containerRef.current) {
-        // If no initial element is specified, focus the container itself
-        // if it doesn't have tabindex, set it temporarily so it can receive focus
-        const containerHadTabIndex = containerRef.current.hasAttribute('tabindex');
-        if (!containerHadTabIndex) {
-          containerRef.current.setAttribute('tabindex', '-1');
+    // Only auto-focus if the autoFocus parameter is true
+    if (autoFocus) {
+      // Focus the initial element after a delay if provided, otherwise focus the container
+      const focusInitialElement = () => {
+        if (initialFocusRef?.current) {
+          initialFocusRef.current.focus();
+        } else if (containerRef.current) {
+          // If no initial element is specified, focus the container itself
+          // if it doesn't have tabindex, set it temporarily so it can receive focus
+          const containerHadTabIndex = containerRef.current.hasAttribute('tabindex');
+          if (!containerHadTabIndex) {
+            containerRef.current.setAttribute('tabindex', '-1');
+          }
+          containerRef.current.focus();
+          // Remove tabindex if we added it
+          if (!containerHadTabIndex) {
+            containerRef.current.removeAttribute('tabindex');
+          }
         }
-        containerRef.current.focus();
-        // Remove tabindex if we added it
-        if (!containerHadTabIndex) {
-          containerRef.current.removeAttribute('tabindex');
-        }
-      }
-    };
+      };
 
-    if (focusAfterDelay > 0) {
-      setTimeout(focusInitialElement, focusAfterDelay);
-    } else {
-      focusInitialElement();
+      if (focusAfterDelay > 0) {
+        setTimeout(focusInitialElement, focusAfterDelay);
+      } else {
+        focusInitialElement();
+      }
     }
 
     return () => {
@@ -59,7 +64,7 @@ export function useFocusTrap(
         previousActiveElement.current.focus();
       }
     };
-  }, [isActive, containerRef, initialFocusRef, returnFocusRef, focusAfterDelay]);
+  }, [isActive, containerRef, initialFocusRef, returnFocusRef, focusAfterDelay, autoFocus]);
 
   useEffect(() => {
     if (!isActive || !containerRef.current) return;
