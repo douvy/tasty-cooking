@@ -279,6 +279,7 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ initialRecipes = [] }) => {
                   opacity: (recipe as any).newlyLoaded ? 0.65 : 1,
                   transition: 'opacity 1000ms ease-in-out'
                 }}
+                index={index}
               />
             ))
           ) : (

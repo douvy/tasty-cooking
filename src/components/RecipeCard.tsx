@@ -8,12 +8,14 @@ interface RecipeCardProps {
   recipe: Recipe;
   className?: string;
   style?: CSSProperties;
+  index?: number; // Add index prop to identify first 6 cards
 }
 
 const RecipeCard: React.FC<RecipeCardProps> = ({ 
   recipe, 
   className = '',
-  style = {}
+  style = {},
+  index = -1
 }) => {
   // Ensure image path always has leading slash
   const imagePath = recipe.img.startsWith('/') ? recipe.img : `/${recipe.img}`;
@@ -41,18 +43,30 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
       data-tags={recipe.tags.join(' ')}
       style={style}
     >
-      <div className="relative w-full h-full">
-        <Image 
-          src={imagePath}
-          alt={recipe.title}
-          fill
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-          className={`object-cover transition-all duration-500 group-hover:opacity-90 ${isLoaded ? 'opacity-100' : 'opacity-0 blur-sm'}`}
-          loading="lazy"
-          placeholder="blur"
-          blurDataURL={BLUR_DATA_URL}
-          onLoad={() => setIsLoaded(true)}
-        />
+      <div className="relative w-full h-full bg-[#2A2F1E]">
+        {index < 6 ? (
+          <Image 
+            src={imagePath}
+            alt={recipe.title}
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="object-cover transition-all duration-500 group-hover:opacity-90"
+            priority={true}
+            placeholder="empty"
+            onLoad={() => setIsLoaded(true)}
+          />
+        ) : (
+          <Image 
+            src={imagePath}
+            alt={recipe.title}
+            fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className={`object-cover transition-all duration-500 group-hover:opacity-90 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+            loading="lazy"
+            placeholder="empty"
+            onLoad={() => setIsLoaded(true)}
+          />
+        )}
       </div>
       <div className="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
         <div className="w-11/12 mx-auto border-grayish-orange-all py-2 bg-[#e2d7a0] rounded-3xl transition-colors duration-500 group-hover:bg-[#eadfae]">

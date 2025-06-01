@@ -232,16 +232,29 @@ const Header: React.FC = () => {
                             aria-selected={index === selectedIndex}
                           >
                             <div className="w-8 h-8 rounded-full relative overflow-hidden flex-shrink-0 bg-[#2A2F1E]">
-                              <Image
-                                src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
-                                alt=""
-                                width={32}
-                                height={32}
-                                sizes="32px"
-                                className="object-cover w-full h-full"
-                                placeholder="empty"
-                                loading="lazy"
-                              />
+                              {index < 6 ? (
+                                <Image
+                                  src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
+                                  alt=""
+                                  width={32}
+                                  height={32}
+                                  sizes="32px"
+                                  className="object-cover w-full h-full"
+                                  priority={true}
+                                  unoptimized={true}
+                                />
+                              ) : (
+                                <Image
+                                  src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
+                                  alt=""
+                                  width={32}
+                                  height={32}
+                                  sizes="32px"
+                                  className="object-cover w-full h-full"
+                                  placeholder="empty"
+                                  loading="lazy"
+                                />
+                              )}
                             </div>
                             <span className="text-off-white truncate text-base font-medium">{recipe.title}</span>
                           </div>
@@ -342,7 +355,7 @@ const Header: React.FC = () => {
             {isSearching ? (
               <div className="px-4 py-3 text-off-white text-center">Loading recipes...</div>
             ) : searchQuery.trim() === '' || searchResults.length > 0 ? (
-              searchResults.map((recipe) => (
+              searchResults.map((recipe, index) => (
                 <div
                   key={recipe.link}
                   className="px-4 py-3 cursor-pointer flex items-center space-x-3 border-b border-[#2f3525] hover:bg-[#232717] transition-colors duration-200"
@@ -352,16 +365,29 @@ const Header: React.FC = () => {
                   }}
                 >
                   <div className="w-10 h-10 rounded-full relative overflow-hidden flex-shrink-0 bg-[#2A2F1E]">
-                    <Image
-                      src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
-                      alt=""
-                      width={40}
-                      height={40}
-                      sizes="40px"
-                      className="object-cover w-full h-full"
-                      placeholder="empty"
-                      loading="lazy"
-                    />
+                    {index < 6 ? (
+                      <Image
+                        src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
+                        alt=""
+                        width={40}
+                        height={40}
+                        sizes="40px"
+                        className="object-cover w-full h-full"
+                        priority={true}
+                        unoptimized={true}
+                      />
+                    ) : (
+                      <Image
+                        src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
+                        alt=""
+                        width={40}
+                        height={40}
+                        sizes="40px"
+                        className="object-cover w-full h-full"
+                        placeholder="empty"
+                        loading="lazy"
+                      />
+                    )}
                   </div>
                   <span className="text-off-white text-base font-medium">{recipe.title}</span>
                 </div>
