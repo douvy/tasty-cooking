@@ -70,7 +70,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
       </div>
       <div className="absolute bottom-0 left-0 w-full text-center py-4 pb-0">
         <div className="w-11/12 mx-auto border-grayish-orange-all py-2 bg-[#e2d7a0] rounded-3xl transition-colors duration-500 group-hover:bg-[#eadfae]">
-          <div className="font-bold text-[#141416] text-xs uppercase pt-2 pb-2 recipe-title">
+          <div className="font-bold text-[#141416] text-xs uppercase pt-2 pb-2 recipe-title leading-2 sm:leading-5">
             {getDisplayTitle(recipe.link, recipe.title)}
           </div>
         </div>
