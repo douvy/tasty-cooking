@@ -388,7 +388,7 @@ const Header: React.FC = () => {
                       />
                     )}
                   </div>
-                  <span className="text-off-white text-base font-medium">{recipe.title}</span>
+                  <span className="text-off-white text-base font-medium truncate max-w-[80%]">{recipe.title}</span>
                 </div>
               ))
             ) : (
