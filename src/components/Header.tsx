@@ -231,7 +231,7 @@ const Header: React.FC = () => {
                             role="option"
                             aria-selected={index === selectedIndex}
                           >
-                            <div className="w-8 h-8 rounded-full relative overflow-hidden flex-shrink-0">
+                            <div className="w-8 h-8 rounded-full relative overflow-hidden flex-shrink-0 bg-[#2A2F1E]">
                               <Image
                                 src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
                                 alt=""
@@ -239,8 +239,7 @@ const Header: React.FC = () => {
                                 height={32}
                                 sizes="32px"
                                 className="object-cover w-full h-full"
-                                placeholder="blur"
-                                blurDataURL={BLUR_DATA_URL}
+                                placeholder="empty"
                                 loading="lazy"
                               />
                             </div>
@@ -352,7 +351,7 @@ const Header: React.FC = () => {
                     setShowMobileSearch(false);
                   }}
                 >
-                  <div className="w-10 h-10 rounded-full relative overflow-hidden flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full relative overflow-hidden flex-shrink-0 bg-[#2A2F1E]">
                     <Image
                       src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
                       alt=""
@@ -360,8 +359,7 @@ const Header: React.FC = () => {
                       height={40}
                       sizes="40px"
                       className="object-cover w-full h-full"
-                      placeholder="blur"
-                      blurDataURL={BLUR_DATA_URL}
+                      placeholder="empty"
                       loading="lazy"
                     />
                   </div>
