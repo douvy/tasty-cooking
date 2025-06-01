@@ -1,4 +1,4 @@
-# Tasty Cooking - Next.js Version
+# Tasty Cooking
 
 A modern recipe collection website optimized for performance, accessibility, and visual appeal with no clutter, built with Next.js and TypeScript.
 
@@ -81,6 +81,7 @@ npm start
 - [Next.js](https://nextjs.org/) - React framework for production
 - [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript at scale
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [MDX](https://mdxjs.com/) - Markdown for the component era (used for recipe content)
 
 ## Project Structure
 
