@@ -1,28 +1,28 @@
-# Tasty Cooking
+# Tasty Cooking - Next.js Version
 
-A modern recipe collection website optimized for performance, accessibility, and visual appeal with no clutter.
-
+A modern recipe collection website optimized for performance, accessibility, and visual appeal with no clutter, built with Next.js and TypeScript.
 
 ## [Live Demo](https://www.tasty.cooking/)
 
-![Tasty Cooking Homepage](assets/img/screenshot-home.jpg)
+![Tasty Cooking Homepage](/public/assets/img/screenshot-home.jpg)
 
 ## Features
 
-- **Lightning Fast**: Optimized with compression, modern caching strategies, and minimal JS
+- **Lightning Fast**: Built with Next.js for server-side rendering and static generation
+- **Type Safety**: Fully typed with TypeScript for better developer experience and fewer bugs
 - **Fully Responsive**: Beautiful on all devices from mobile to desktop
 - **Accessible**: WCAG compliant with proper semantic HTML and keyboard navigation
 - **SEO Optimized**: Rich metadata, JSON-LD Schema.org markup, and optimized for search engines
 - **Progressive Web App**: Works offline and can be installed on mobile devices
 - **Beautiful Typography**: Custom fonts with attention to readability and aesthetics
-- **High-Quality Images**: Optimized for fast loading with WebP format support
+- **High-Quality Images**: Optimized for fast loading with Next.js Image component
 - **Clean Architecture**: Well-organized code structure for easy maintenance
 
 ## Screenshots
 
 <div align="center">
-  <img src="assets/img/screenshot-recipe.jpg" alt="Recipe Page" width="45%">
-  <img src="assets/img/screenshot-recipe-mobile.jpg" alt="Mobile View" width="25%">
+  <img src="/public/assets/img/screenshot-recipe.jpg" alt="Recipe Page" width="45%">
+  <img src="/public/assets/img/screenshot-recipe-mobile.jpg" alt="Mobile View" width="25%">
 </div>
 
 ## Design Philosophy
@@ -54,7 +54,7 @@ Tasty Cooking was built with these principles in mind:
 1. Clone the repository
 ```bash
 git clone https://github.com/username/tasty-cooking.git
-cd tasty-cooking
+cd tasty-cooking-nextjs
 ```
 
 2. Install dependencies
@@ -62,70 +62,55 @@ cd tasty-cooking
 npm install
 ```
 
-3. Start the development server
+3. Run the development server
 ```bash
-npm start
+npm run dev
 ```
 
 4. Open your browser and visit http://localhost:3000
 
+## Building for Production
+
+```bash
+npm run build
+npm start
+```
+
 ## Built With
 
-- [Express](https://expressjs.com/) - Fast, unopinionated web framework for Node.js
-- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework
-- Pure JavaScript - No heavy frameworks
+- [Next.js](https://nextjs.org/) - React framework for production
+- [TypeScript](https://www.typescriptlang.org/) - Typed JavaScript at scale
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 
 ## Project Structure
 
 ```
-tasty-cooking/
-├── assets/            # Static assets (images, fonts)
-│   ├── fonts/         # Custom web fonts
-│   └── img/           # Recipe and UI images
-├── css/               # Stylesheets
-├── js/                # JavaScript files
-├── *.html             # Recipe pages
-├── server.js          # Express server for serving content
-└── package.json       # Project dependencies and scripts
+tasty-cooking-nextjs/
+├── public/            # Static assets (images, fonts)
+│   ├── assets/
+│   │   ├── fonts/     # Custom web fonts
+│   │   └── img/       # Recipe and UI images
+│   ├── manifest.json  # PWA manifest
+│   └── robots.txt     # Robots file
+├── src/               # Source code
+│   ├── components/    # React components
+│   ├── lib/           # Utility functions and services
+│   ├── pages/         # Next.js pages
+│   │   ├── api/       # API routes
+│   │   └── recipe/    # Recipe page templates
+│   ├── styles/        # CSS styles
+│   └── types/         # TypeScript type definitions
+├── next.config.js     # Next.js configuration
+├── package.json       # Project dependencies and scripts
+└── tsconfig.json      # TypeScript configuration
 ```
-
-## Performance Optimizations
-
-- **Compression**: All responses are compressed with gzip/brotli
-- **Caching Strategy**: Intelligent cache headers based on content type
-- **Font Loading**: Preloaded critical fonts with font-display:swap
-- **Image Optimization**: WebP format with appropriate sizing
-- **CSS Minification**: Reduced CSS file size
-- **JavaScript**: Minimal, non-blocking scripts
-
-## SEO Features
-
-- Schema.org structured data for recipes
-- Open Graph and Twitter card meta tags
-- Semantic HTML structure
-- Optimized meta descriptions and titles
-- XML sitemap and robots.txt
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
-
-- Icons from [Font Awesome](https://fontawesome.com)
-
 ---
 
 If you found this project helpful, please consider giving it a star!
 
-[Back to top](#tasty-cooking)
+[Back to top](#tasty-cooking---nextjs-version)

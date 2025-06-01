@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'GT Flexa';
+  src: url('/assets/fonts/GT-Flexa-Standard-Regular.woff2') format('woff2'),
+       url('/assets/fonts/GT-Flexa-Standard-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Windsor Bold';
+  src: url('/assets/fonts/WindsorBold.woff2') format('woff2'),
+       url('/assets/fonts/WindsorBold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: 'GT Flexa', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 1px;
+  color: #929292;
+  background-color: #383d23;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.font-windsor-bold {
+  font-family: 'Windsor Bold', 'Times New Roman', Georgia, 'Droid Serif', serif;
+  font-weight: bold;
+}
+
+/* Additional Typography Styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Windsor Bold', serif;
+  color: #222222;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.recipe-title {
+  font-family: 'Windsor Bold', serif;
+  font-size: 16px !important; /* 16px for mobile */
+  position: relative;
+  text-transform: none !important;
+  top: 4px; /* Nudge text down slightly without changing box dimensions */
+  letter-spacing: 0.03em;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .recipe-title {
+    font-size: 19.2px !important; /* Exact size for desktop */
+  }
+}
+
+/* Enhanced accessibility - focus styles */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible:not(#search-bar),
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #d7e0cd;
+  outline-offset: 2px;
+  border-radius: 9999px; /* rounded-full */
+}
+
+/* Ensure focus styles show on all interactive elements */
+.dropdown-button:focus-visible,
+.dropdown-button:focus,
+[data-tag]:focus-visible,
+[data-tag]:focus,
+[data-sort]:focus-visible,
+[data-sort]:focus {
+  outline: 2px solid #d7e0cd;
+  outline-offset: 2px;
+  border-radius: 9999px; /* rounded-full */
+  box-shadow: 0 0 0 2px rgba(215, 224, 204, 0.25);
+}
+
+/* Custom focus class for dropdown buttons */
+.dropdown-focused {
+  outline: 2px solid #d7e0cd !important;
+  outline-offset: 2px !important;
+  border-radius: 9999px !important; /* rounded-full */
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.border-dark-gray-all {
+  border-bottom: 1px solid #31351c;
+  border-left: 1px solid #31351c;
+  border-top: 1px solid #31351c;
+  border-right: 1px solid #31351c;
+}
+
+.border-light-grayish-orange-all {
+  border-bottom: 1px solid #d7e0cc;
+  border-left: 1px solid #d7e0cc;
+  border-top: 1px solid #d7e0cc;
+  border-right: 1px solid #d7e0cc;
+  transition: all 0.3s ease;
+}
+
+.border-grayish-orange-all {
+  border: 1px solid #b6ad9d;
+}
+
+.border-divider-b {
+  border-bottom: 1px solid #31351c;
+}
+
+.border-dark-gray-top {
+  border-top: 1px solid #31351c;
+}
+
+/* Skip to content link for accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  z-index: 50;
+  background-color: #383d23;
+  color: #e2d0c2;
+  outline: 2px solid #e2d0c2;
+  border-radius: 9999px;
+}
+
+/* Style search result hover */
+#search-results .search-result-item:hover {
+  background-color: #262a1b !important; 
+}
+
+/* Style for keyboard navigation selected item */
+#search-results .search-result-selected {
+  background-color: #232618 !important;
+}
+
+/* Infinite scrolling animation styles */
+.recipe-card {
+  transition-property: opacity, transform;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+/* Custom loading spinner for infinite scrolling */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+/* Custom scrollbar styles for dropdowns */
+#search-results::-webkit-scrollbar,
+.tags-dropdown-menu::-webkit-scrollbar,
+.sort-dropdown-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+#search-results::-webkit-scrollbar-track,
+.tags-dropdown-menu::-webkit-scrollbar-track,
+.sort-dropdown-menu::-webkit-scrollbar-track {
+  background: #252a19;
+  border-radius: 10px;
+}
+
+#search-results::-webkit-scrollbar-thumb,
+.tags-dropdown-menu::-webkit-scrollbar-thumb,
+.sort-dropdown-menu::-webkit-scrollbar-thumb {
+  background: #3a4228;
+  border-radius: 10px;
+}
+
+#search-results::-webkit-scrollbar-thumb:hover,
+.tags-dropdown-menu::-webkit-scrollbar-thumb:hover,
+.sort-dropdown-menu::-webkit-scrollbar-thumb:hover {
+  background: #4a5238;
+}
