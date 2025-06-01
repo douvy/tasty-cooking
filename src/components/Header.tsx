@@ -344,7 +344,6 @@ const Header: React.FC = () => {
                 autoComplete="off"
                 value={searchQuery}
                 onChange={handleSearchChange}
-                autoFocus
               />
             </div>
           </div>
