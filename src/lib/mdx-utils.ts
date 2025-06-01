@@ -17,8 +17,11 @@ const RECIPES_DIRECTORY = getRecipesDirectory();
 // Safety check for production environment
 let IS_DIRECTORY_AVAILABLE = false;
 try {
+  // Check if recipes directory exists and is actually a directory
   IS_DIRECTORY_AVAILABLE = fs.existsSync(RECIPES_DIRECTORY) && fs.statSync(RECIPES_DIRECTORY).isDirectory();
 } catch (error) {
+  // If any filesystem error occurs, set the flag to false
+  // This enables proper fallback to static data in serverless environments
   IS_DIRECTORY_AVAILABLE = false;
 }
 
@@ -56,7 +59,8 @@ export function getRecipeSlugs(): string[] {
     
     return files;
   } catch (error) {
-    // Fall back to static list if available
+    // If we encounter any error reading the filesystem (permission issues, not available in serverless, etc.)
+    // Fall back to the static recipe list if available, otherwise return empty array
     return RECIPE_CUSTOM_ORDER || [];
   }
 }
@@ -171,6 +175,8 @@ Please visit https://www.tasty.cooking/${slug} to view the complete recipe.`;
       readingTime: readingTime(content)
     };
   } catch (error) {
+    // If there's an error parsing or accessing the recipe file, return null
+    // This will trigger proper 404 handling in the frontend
     return null;
   }
 }

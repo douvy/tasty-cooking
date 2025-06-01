@@ -219,8 +219,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
       fallback: false // Return 404 for paths not returned by getStaticPaths
     };
   } catch (error) {
+    // When getStaticPaths encounters an error (e.g., filesystem issues),
+    // implement graceful degradation by using fallback data
     
-    // If there's an error but we have the custom order, use that as fallback
+    // If we have the custom recipe order, use that as primary fallback
     if (RECIPE_CUSTOM_ORDER && RECIPE_CUSTOM_ORDER.length > 0) {
       const paths = RECIPE_CUSTOM_ORDER.map(slug => ({
         params: { slug }
@@ -232,6 +234,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       };
     }
     
+    // Final fallback: return empty paths array which will result in 404s
     return { paths: [], fallback: false };
   }
 };
@@ -290,6 +293,8 @@ export const getStaticProps: GetStaticProps<RecipeProps> = async ({ params }) =>
       revalidate: 3600 // Revalidate every hour
     };
   } catch (error) {
+    // Handle any errors with static generation by returning a 404 response
+    // This will trigger Next.js to show the 404 page
     return { notFound: true };
   }
 };

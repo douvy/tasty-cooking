@@ -69,6 +69,11 @@ function scanDirectory(dir: string, depth: number = 1): any {
     
     return result;
   } catch (error) {
-    return { error: 'Error scanning directory' };
+    // Return structured error information that's safe to expose to clients
+    // without revealing sensitive implementation details or stack traces
+    return { 
+      error: 'Error scanning directory',
+      path: dir
+    };
   }
 }

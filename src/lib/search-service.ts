@@ -110,6 +110,8 @@ export class SearchService {
       }
       return false;
     } catch (error) {
+      // If localStorage is not available or throws an error (private browsing mode, quota exceeded)
+      // Simply return false to indicate caching failed - application will still work without cache
       return false;
     }
   }
@@ -132,6 +134,8 @@ export class SearchService {
       
       return recipes;
     } catch (error) {
+      // Handle any errors with localStorage (unavailable, quota exceeded, parsing errors)
+      // Return null to trigger fresh data load instead of using potentially corrupted cache
       return null;
     }
   }
@@ -160,12 +164,19 @@ export class SearchService {
         throw new Error('No recipes returned from API');
       })
       .catch(apiError => {
+        // When the API endpoint fails, implement robust fallback strategy
         
         // Fallback to the original methods
         return Promise.all([
           // Try both sitemap and HTML methods simultaneously
-          this.fetchFromHTML().catch(e => []), // Ignore errors
-          this.fetchFromSitemap().catch(e => [])  // Ignore errors
+          this.fetchFromHTML().catch(htmlError => {
+            // Return empty array when HTML fetch fails
+            return [];
+          }),
+          this.fetchFromSitemap().catch(sitemapError => {
+            // Return empty array when sitemap fetch fails
+            return [];
+          })
         ])
         .then(([htmlRecipes, sitemapRecipes]) => {
           // Merge results, preferring HTML recipes when duplicates exist
@@ -212,7 +223,8 @@ export class SearchService {
         return recipes;
       })
       .catch(error => {
-        // Final fallback when all methods fail
+        // Final fallback when all previous recipe loading methods fail
+        // This ensures users always get recipe data even in worst-case scenarios
         return this.loadBasicRecipes().then(recipes => {
           this.state.recipes = recipes;
           this.state.recipesLoaded = true;
