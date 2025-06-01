@@ -10,6 +10,7 @@ A modern recipe collection website optimized for performance, accessibility, and
 
 - **Lightning Fast**: Built with Next.js for server-side rendering and static generation
 - **Type Safety**: Fully typed with TypeScript for better developer experience and fewer bugs
+- **Content as Code**: Recipes stored as MDX files for easy editing and version control
 - **Fully Responsive**: Beautiful on all devices from mobile to desktop
 - **Accessible**: WCAG compliant with proper semantic HTML and keyboard navigation
 - **SEO Optimized**: Rich metadata, JSON-LD Schema.org markup, and optimized for search engines
@@ -95,10 +96,12 @@ tasty-cooking-nextjs/
 │   └── robots.txt     # Robots file
 ├── src/               # Source code
 │   ├── components/    # React components
+│   ├── content/       # MDX content files
+│   │   └── recipes/   # Recipe MDX files
 │   ├── lib/           # Utility functions and services
 │   ├── pages/         # Next.js pages
 │   │   ├── api/       # API routes
-│   │   └── recipe/    # Recipe page templates
+│   │   └── [slug].tsx # Dynamic recipe pages
 │   ├── styles/        # CSS styles
 │   └── types/         # TypeScript type definitions
 ├── next.config.js     # Next.js configuration

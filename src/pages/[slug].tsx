@@ -6,7 +6,8 @@ import path from 'path';
 import matter from 'gray-matter';
 import Layout from '@/components/Layout';
 import SEO from '@/components/SEO';
-import { BLUR_DATA_URL } from '@/lib/constants';
+import { BLUR_DATA_URL, RECIPE_CUSTOM_ORDER } from '@/lib/constants';
+import { getRecipeSlugs, getRecipeBySlug } from '@/lib/mdx-utils';
 
 
 interface IngredientSubsection {
@@ -205,29 +206,33 @@ const RecipePage = ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   try {
-    // Path to recipes directory
-    const recipesDir = path.join(process.cwd(), 'src/content/recipes');
-    
-    // Check if directory exists
-    if (!fs.existsSync(recipesDir)) {
-      return { paths: [], fallback: 'blocking' };
-    }
-    
-    // Get all MDX files
-    const recipeFiles = fs.readdirSync(recipesDir)
-      .filter(file => file.endsWith('.mdx'));
+    // Get slugs from the utility function that has fallback mechanisms
+    const slugs = getRecipeSlugs();
     
     // Create paths array
-    const paths = recipeFiles.map(file => ({
-      params: { slug: file.replace(/\.mdx$/, '') }
+    const paths = slugs.map(slug => ({
+      params: { slug }
     }));
     
     return {
       paths,
-      fallback: 'blocking'
+      fallback: 'blocking' // Enable blocking fallback for server-side generation
     };
   } catch (error) {
     console.error('Error generating recipe paths:', error);
+    
+    // If there's an error but we have the custom order, use that as fallback
+    if (RECIPE_CUSTOM_ORDER && RECIPE_CUSTOM_ORDER.length > 0) {
+      const paths = RECIPE_CUSTOM_ORDER.map(slug => ({
+        params: { slug }
+      }));
+      
+      return {
+        paths,
+        fallback: 'blocking'
+      };
+    }
+    
     return { paths: [], fallback: 'blocking' };
   }
 };
@@ -239,51 +244,50 @@ export const getStaticProps: GetStaticProps<RecipeProps> = async ({ params }) =>
     }
     
     const slug = params.slug as string;
-    const filePath = path.join(process.cwd(), 'src/content/recipes', `${slug}.mdx`);
     
-    // Check if file exists
-    if (!fs.existsSync(filePath)) {
+    // Use the utility function that has fallback mechanisms
+    const recipeData = getRecipeBySlug(slug);
+    
+    // If no recipe data found, return 404
+    if (!recipeData) {
+      console.warn(`Recipe not found for slug: ${slug}`);
       return { notFound: true };
     }
     
-    // Read the file
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const { data } = matter(fileContents);
+    // Extract data from the recipe
+    const { frontmatter } = recipeData;
     
     // Handle image path
-    let imgSrc = data.imgSrc || `/assets/img/${slug}.jpg`;
+    let imgSrc = frontmatter.imgSrc || `/assets/img/${slug}.jpg`;
     if (!imgSrc.startsWith('/')) {
       imgSrc = `/${imgSrc}`;
     }
     
-    // Ensure arrays
-    const tags = Array.isArray(data.tags) ? data.tags : [];
-    const ingredients = Array.isArray(data.ingredients) ? data.ingredients : [];
-    const ingredients_subsections = Array.isArray(data.ingredients_subsections) ? data.ingredients_subsections : [];
-    const instructions = Array.isArray(data.instructions) ? data.instructions : [];
-    
     // Handle date serialization (convert Date objects to strings)
-    const date = data.date ? (data.date instanceof Date ? data.date.toISOString() : String(data.date)) : '';
-    const lastUpdated = data.lastUpdated 
-      ? (data.lastUpdated instanceof Date ? data.lastUpdated.toISOString() : String(data.lastUpdated)) 
+    const date = frontmatter.date 
+      ? (typeof frontmatter.date === 'object' ? new Date(frontmatter.date as any).toISOString() : String(frontmatter.date)) 
+      : '';
+      
+    const lastUpdated = frontmatter.lastUpdated 
+      ? (typeof frontmatter.lastUpdated === 'object' ? new Date(frontmatter.lastUpdated as any).toISOString() : String(frontmatter.lastUpdated)) 
       : date;
     
     return {
       props: {
         slug,
-        title: data.title || '',
-        description: data.description || '',
+        title: frontmatter.title || '',
+        description: frontmatter.description || '',
         date,
         lastUpdated,
         imgSrc,
-        imgAlt: data.imgAlt || '',
-        prepTime: data.prepTime || '',
-        readyTime: data.readyTime || '',
-        servings: data.servings || '',
-        tags,
-        ingredients,
-        ingredients_subsections,
-        instructions
+        imgAlt: frontmatter.imgAlt || '',
+        prepTime: frontmatter.prepTime || '',
+        readyTime: frontmatter.readyTime || '',
+        servings: frontmatter.servings || '',
+        tags: frontmatter.tags || [],
+        ingredients: frontmatter.ingredients || [],
+        ingredients_subsections: frontmatter.ingredients_subsections || [],
+        instructions: frontmatter.instructions || []
       },
       revalidate: 3600 // Revalidate every hour
     };

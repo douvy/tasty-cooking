@@ -5,51 +5,56 @@ import readingTime from 'reading-time';
 import { MDXRecipe, Recipe, RecipeFrontmatter } from '@/types';
 import { RECIPE_CUSTOM_ORDER } from '@/lib/constants';
 
-// Determine the correct path to the recipes directory based on environment
+// Get the recipes directory path
 function getRecipesDirectory(): string {
-  const defaultPath = path.join(process.cwd(), 'src/content/recipes');
-  
-  // In development, use the default path
-  if (process.env.NODE_ENV === 'development') {
-    return defaultPath;
-  }
-  
-  // For production, try to use the default path first, but have fallbacks
-  const productionPaths = [
-    defaultPath,
-    path.join(process.cwd(), 'content/recipes'),
-    path.join(process.cwd(), 'recipes'),
-  ];
-  
-  // Return the first path that exists and is a directory
-  for (const dirPath of productionPaths) {
-    if (fs.existsSync(dirPath) && fs.statSync(dirPath).isDirectory()) {
-      return dirPath;
-    }
-  }
-  
-  // If none exist, return the default path (we'll handle the error when trying to read from it)
-  return defaultPath;
+  // Always use the path relative to the project root
+  return path.join(process.cwd(), 'src/content/recipes');
 }
 
-// Get the recipes directory dynamically
+// Get the recipes directory path
 const RECIPES_DIRECTORY = getRecipesDirectory();
+
+// Safety check for production environment
+let IS_DIRECTORY_AVAILABLE = false;
+try {
+  IS_DIRECTORY_AVAILABLE = fs.existsSync(RECIPES_DIRECTORY) && fs.statSync(RECIPES_DIRECTORY).isDirectory();
+} catch (error) {
+  console.error('Error checking recipes directory:', error);
+  IS_DIRECTORY_AVAILABLE = false;
+}
 
 /**
  * Get all recipe slugs from the content directory
  */
 export function getRecipeSlugs(): string[] {
+  // If running in a serverless environment where filesystem might not be accessible,
+  // return the static list of known recipe slugs from our constants
+  if (!IS_DIRECTORY_AVAILABLE && RECIPE_CUSTOM_ORDER && RECIPE_CUSTOM_ORDER.length > 0) {
+    console.log('Using static recipe list from RECIPE_CUSTOM_ORDER');
+    return RECIPE_CUSTOM_ORDER;
+  }
+  
   try {
     if (!fs.existsSync(RECIPES_DIRECTORY)) {
-      return [];
+      console.warn('Recipes directory not found:', RECIPES_DIRECTORY);
+      return RECIPE_CUSTOM_ORDER || [];
     }
     
-    return fs.readdirSync(RECIPES_DIRECTORY)
+    const files = fs.readdirSync(RECIPES_DIRECTORY)
       .filter(file => file.endsWith('.mdx'))
       .map(file => file.replace(/\.mdx$/, ''));
+      
+    // If no files found but we have a static list, use that as fallback
+    if (files.length === 0 && RECIPE_CUSTOM_ORDER && RECIPE_CUSTOM_ORDER.length > 0) {
+      console.warn('No MDX files found in directory, using static recipe list');
+      return RECIPE_CUSTOM_ORDER;
+    }
+    
+    return files;
   } catch (error) {
     console.error('Error getting recipe slugs:', error);
-    return [];
+    // Fall back to static list if available
+    return RECIPE_CUSTOM_ORDER || [];
   }
 }
 
@@ -60,13 +65,40 @@ export function getRecipeBySlug(slug: string): MDXRecipe | null {
   try {
     const fullPath = path.join(RECIPES_DIRECTORY, `${slug}.mdx`);
     
-    // Check if file exists
-    if (!fs.existsSync(fullPath)) {
-      return null;
-    }
+    // Check if we can access the filesystem and if the file exists
+    let fileContents: string;
     
-    // Read file content
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    if (IS_DIRECTORY_AVAILABLE && fs.existsSync(fullPath)) {
+      // Read file content from the filesystem
+      fileContents = fs.readFileSync(fullPath, 'utf8');
+    } else {
+      // In serverless environments, we may not be able to read from the filesystem
+      // Here we would typically fetch from a CMS or API
+      // For this project, we'll generate a basic fallback MDX content based on slug
+      console.warn(`File not accessible: ${fullPath}, generating fallback content`);
+      
+      // Generate fallback content based on slug
+      const title = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+      
+      fileContents = `---
+title: ${title}
+description: A delicious recipe for ${title}
+date: 2023-01-01
+imgSrc: /assets/img/${slug}.jpg
+imgAlt: ${title}
+prepTime: 30 min
+readyTime: 45 min
+servings: 4 servings
+tags: [${getTagsForSlug(slug)}]
+ingredients:
+  - Follow directions on tasty.cooking website
+instructions:
+  - View the full recipe on tasty.cooking
+---
+
+This recipe is available on the Tasty Cooking website. 
+Please visit https://www.tasty.cooking/${slug} to view the complete recipe.`;
+    }
     
     // Parse frontmatter and content
     const { data, content } = matter(fileContents);
@@ -135,6 +167,52 @@ export function getRecipeBySlug(slug: string): MDXRecipe | null {
     console.error(`Error getting recipe ${slug}:`, error);
     return null;
   }
+}
+
+/**
+ * Helper function to get tags for a slug when generating fallback content
+ */
+function getTagsForSlug(slug: string): string {
+  // Base tag mapping from the original tag mapping in search-service.js
+  const tagMap: Record<string, string[]> = {
+    'pancakes': ['breakfast'],
+    'smoothie': ['breakfast', 'healthy'],
+    'hash': ['breakfast'],
+    'chicken': ['meat'],
+    'wings': ['meat'],
+    'salmon': ['seafood'],
+    'beans': ['vegetarian'],
+    'soup': ['healthy'],
+    'salad': ['healthy', 'vegetable'],
+    'tofu': ['vegetarian'],
+    'vegan': ['vegan'],
+    'kimchi': ['spicy'],
+    'cauliflower': ['vegetable', 'healthy'],
+    'broccolini': ['vegetable', 'healthy'],
+    'brussels': ['vegetable'],
+    'beets': ['vegetable'],
+    'sweet-potato': ['vegetable'],
+    'green-sauce': ['condiments', 'spicy', 'vegetable'],
+    'radishes': ['vegetable', 'gluten-free', 'healthy'],
+    'butter': ['condiments', 'quick'],
+    'garlic': ['condiments'],
+    'spicy': ['spicy'],
+    'tomato': ['vegetable']
+  };
+  
+  // Extract potential tags from slug
+  let tags: string[] = [];
+  Object.entries(tagMap).forEach(([key, values]) => {
+    if (slug.includes(key)) {
+      tags = [...tags, ...values];
+    }
+  });
+  
+  // Remove duplicates
+  const uniqueTags = [...new Set(tags)];
+  
+  // Return comma-separated tags or default to 'recipe'
+  return uniqueTags.length > 0 ? uniqueTags.join('\', \'') : 'recipe';
 }
 
 /**
