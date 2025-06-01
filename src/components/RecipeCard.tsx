@@ -21,19 +21,23 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
   const imagePath = recipe.img.startsWith('/') ? recipe.img : `/${recipe.img}`;
   const [isLoaded, setIsLoaded] = useState(false);
   
+  // Map of shortened display titles for the homepage cards
+  const displayTitleMap: Record<string, string> = {
+    'roasted-cauliflower': 'Roasted Cauliflower',
+    'roasted-broccolini': 'Roasted Broccolini',
+    'charred-brussels-sprouts': 'Charred Brussels Sprouts',
+    'eggplant-with-buttermilk-sauce': 'Eggplant w/ Buttermilk Sauce',
+    'cucumber-salad': 'Cucumber Salad',
+    'roasted-beets': 'Roasted Beets',
+    'beet-slaw': 'Beet Slaw',
+    'roasted-radishes': 'Roasted Radishes',
+    'almonds': 'Brined & Roasted Almonds',
+    'white-bean-wraps': 'White Bean Wraps'
+  };
+
   // Get homepage display title (shorter version for specific recipes)
   const getDisplayTitle = (slug: string, originalTitle: string): string => {
-    // Only modify specific recipes that need shortened titles
-    if (slug === 'cucumber-salad') {
-      return 'Cucumber Salad';
-    }
-    else if (slug === 'beet-slaw') {
-      return 'Beet Slaw';
-    }
-    // Add more specific cases here as needed
-    
-    // Default: return the original title
-    return originalTitle;
+    return displayTitleMap[slug] || originalTitle;
   };
   
   return (
