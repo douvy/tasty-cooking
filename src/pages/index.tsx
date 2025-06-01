@@ -50,7 +50,6 @@ export const getStaticProps: GetStaticProps = async () => {
   if (mdxRecipes.length > 0) {
     recipes = convertMDXToRecipeList(mdxRecipes);
     // Log count of MDX recipes for debugging
-    console.log(`Found ${recipes.length} MDX recipes`);
   }
   
   // If no MDX recipes, we'll return an empty array and let client-side loading handle it

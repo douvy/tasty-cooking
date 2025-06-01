@@ -10,7 +10,6 @@ export function handleApiError(
   statusCode = 500,
   message = 'Internal server error'
 ) {
-  console.error(error);
   res.status(statusCode).json({
     error: message,
     details: process.env.NODE_ENV === 'development' ? error.message : undefined

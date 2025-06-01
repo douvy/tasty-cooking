@@ -83,7 +83,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     });
     
   } catch (error: any) {
-    console.error('MDX Debug API Error:', error);
     res.status(500).json({ 
       error: 'Internal Server Error', 
       message: error.message,

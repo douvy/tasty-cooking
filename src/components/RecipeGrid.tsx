@@ -35,7 +35,6 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ initialRecipes = [] }) => {
   useEffect(() => {
     // If we already have initial recipes from SSR/SSG, we're ready to go
     if (initialRecipes.length > 0) {
-      console.log(`Using ${initialRecipes.length} initial MDX recipes`);
       
       // Initialize search service with our MDX recipes
       const searchService = getSearchService();
@@ -51,7 +50,6 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ initialRecipes = [] }) => {
     }
     
     // Otherwise load recipes from search service (should only happen if no MDX recipes)
-    console.log("No initial recipes found, loading from search service");
     const searchService = getSearchService();
     
     if (!searchService.isLoaded()) {

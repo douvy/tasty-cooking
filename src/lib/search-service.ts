@@ -57,7 +57,6 @@ export class SearchService {
     this.loadRecipes().then(recipes => {
       // Verify we got the expected number of recipes
       if (recipes.length < 40) {
-        console.warn(`Only loaded ${recipes.length} recipes, expected at least 40. Attempting to add fallback recipes.`);
         // Load basic recipes as fallback and merge with any we did find
         this.loadBasicRecipes().then(basicRecipes => {
           // Create a map of existing recipes by link
@@ -111,7 +110,6 @@ export class SearchService {
       }
       return false;
     } catch (error) {
-      console.warn('Failed to save recipes to cache:', error);
       return false;
     }
   }
@@ -134,7 +132,6 @@ export class SearchService {
       
       return recipes;
     } catch (error) {
-      console.warn('Failed to load recipes from cache:', error);
       return null;
     }
   }
@@ -163,7 +160,6 @@ export class SearchService {
         throw new Error('No recipes returned from API');
       })
       .catch(apiError => {
-        console.warn('Error fetching from API, falling back to HTML/sitemap methods:', apiError);
         
         // Fallback to the original methods
         return Promise.all([
@@ -216,7 +212,6 @@ export class SearchService {
         return recipes;
       })
       .catch(error => {
-        console.error('All recipe loading methods failed:', error);
         // Final fallback when all methods fail
         return this.loadBasicRecipes().then(recipes => {
           this.state.recipes = recipes;

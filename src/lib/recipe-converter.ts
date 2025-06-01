@@ -72,7 +72,6 @@ export function saveRecipeAsMDX(recipe: RecipeDetail): void {
   const filePath = path.join(RECIPES_DIRECTORY, `${recipe.slug}.mdx`);
   fs.writeFileSync(filePath, mdxContent);
 
-  console.log(`Recipe saved to: ${filePath}`);
 }
 
 /**
@@ -83,9 +82,7 @@ export function batchConvertRecipes(recipes: RecipeDetail[]): void {
     try {
       saveRecipeAsMDX(recipe);
     } catch (error) {
-      console.error(`Failed to convert recipe ${recipe.slug}:`, error);
     }
   });
 
-  console.log(`Converted ${recipes.length} recipes to MDX format`);
 }

@@ -19,7 +19,6 @@ let IS_DIRECTORY_AVAILABLE = false;
 try {
   IS_DIRECTORY_AVAILABLE = fs.existsSync(RECIPES_DIRECTORY) && fs.statSync(RECIPES_DIRECTORY).isDirectory();
 } catch (error) {
-  console.error('Error checking recipes directory:', error);
   IS_DIRECTORY_AVAILABLE = false;
 }
 
@@ -30,13 +29,11 @@ export function getRecipeSlugs(): string[] {
   // If running in a serverless environment where filesystem might not be accessible,
   // return the static list of known recipe slugs from our constants
   if (!IS_DIRECTORY_AVAILABLE && RECIPE_CUSTOM_ORDER && RECIPE_CUSTOM_ORDER.length > 0) {
-    console.log('Using static recipe list from RECIPE_CUSTOM_ORDER');
     return RECIPE_CUSTOM_ORDER;
   }
   
   try {
     if (!fs.existsSync(RECIPES_DIRECTORY)) {
-      console.warn('Recipes directory not found:', RECIPES_DIRECTORY);
       return RECIPE_CUSTOM_ORDER || [];
     }
     
@@ -46,13 +43,11 @@ export function getRecipeSlugs(): string[] {
       
     // If no files found but we have a static list, use that as fallback
     if (files.length === 0 && RECIPE_CUSTOM_ORDER && RECIPE_CUSTOM_ORDER.length > 0) {
-      console.warn('No MDX files found in directory, using static recipe list');
       return RECIPE_CUSTOM_ORDER;
     }
     
     return files;
   } catch (error) {
-    console.error('Error getting recipe slugs:', error);
     // Fall back to static list if available
     return RECIPE_CUSTOM_ORDER || [];
   }
@@ -75,7 +70,6 @@ export function getRecipeBySlug(slug: string): MDXRecipe | null {
       // In serverless environments, we may not be able to read from the filesystem
       // Here we would typically fetch from a CMS or API
       // For this project, we'll generate a basic fallback MDX content based on slug
-      console.warn(`File not accessible: ${fullPath}, generating fallback content`);
       
       // Generate fallback content based on slug
       const title = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
@@ -164,7 +158,6 @@ Please visit https://www.tasty.cooking/${slug} to view the complete recipe.`;
       readingTime: readingTime(content)
     };
   } catch (error) {
-    console.error(`Error getting recipe ${slug}:`, error);
     return null;
   }
 }
@@ -288,7 +281,6 @@ function generateSearchTerms(recipe: MDXRecipe): string {
   terms.push(...frontmatter.ingredients.map(ingredient => {
     // Make sure ingredient is a string before using string methods
     if (typeof ingredient !== 'string') {
-      console.warn(`Non-string ingredient found: ${JSON.stringify(ingredient)}`);
       return '';
     }
     

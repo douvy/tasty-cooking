@@ -179,8 +179,6 @@ recipes.forEach(recipe => {
   try {
     saveRecipeAsMDX(recipe);
   } catch (error) {
-    console.error(`Error converting recipe ${recipe.slug}:`, error);
   }
 });
 
-console.log(`Successfully created ${recipes.length} MDX recipe files.`);

@@ -219,7 +219,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
       fallback: 'blocking' // Enable blocking fallback for server-side generation
     };
   } catch (error) {
-    console.error('Error generating recipe paths:', error);
     
     // If there's an error but we have the custom order, use that as fallback
     if (RECIPE_CUSTOM_ORDER && RECIPE_CUSTOM_ORDER.length > 0) {
@@ -250,7 +249,6 @@ export const getStaticProps: GetStaticProps<RecipeProps> = async ({ params }) =>
     
     // If no recipe data found, return 404
     if (!recipeData) {
-      console.warn(`Recipe not found for slug: ${slug}`);
       return { notFound: true };
     }
     
@@ -292,7 +290,6 @@ export const getStaticProps: GetStaticProps<RecipeProps> = async ({ params }) =>
       revalidate: 3600 // Revalidate every hour
     };
   } catch (error) {
-    console.error(`Error generating props for ${params?.slug}:`, error);
     return { notFound: true };
   }
 };
