@@ -87,43 +87,85 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ initialRecipes = [] }) => {
     }
   }, [initialRecipes]);
   
-  // Load more recipes for infinite scroll
+  // Load more recipes for infinite scroll with proper state management
   const loadMoreRecipes = useCallback(() => {
+    // Guard clause to prevent concurrent loading
     if (isLoadingMore) return;
     
     setIsLoadingMore(true);
     
-    // Use setTimeout to simulate a network request and add a slight delay
-    setTimeout(() => {
-      const startIndex = currentPage * recipesPerPage;
+    // Calculate next batch indices based on current page
+    const calculateNextBatch = (currentPageNumber: number): Recipe[] => {
+      const startIndex = currentPageNumber * recipesPerPage;
       const endIndex = startIndex + recipesPerPage;
-      const nextBatch = filteredRecipes.slice(startIndex, endIndex);
-      
-      if (nextBatch.length > 0) {
-        // New recipes to add with opacity data
+      return filteredRecipes.slice(startIndex, endIndex);
+    };
+    
+    // Core loading logic wrapped in a function for delayed execution
+    const loadNextBatch = () => {
+      // Use functional update to ensure we have the latest state
+      setCurrentPage(prevPage => {
+        const nextBatch = calculateNextBatch(prevPage);
+        
+        // If no more recipes to load, reset loading state and exit early
+        if (nextBatch.length === 0) {
+          setIsLoadingMore(false);
+          return prevPage; // Keep current page unchanged
+        }
+        
+        // Prepare new recipes with opacity transition flag
         const newRecipes = nextBatch.map(recipe => ({
           ...recipe,
-          newlyLoaded: true // Mark as newly loaded for opacity effect
+          newlyLoaded: true
         }));
         
-        // Update visible recipes
-        setVisibleRecipes(prev => [...prev, ...newRecipes]);
-        setCurrentPage(prev => prev + 1);
+        // Update visible recipes with new batch
+        setVisibleRecipes(prevVisible => [...prevVisible, ...newRecipes]);
         
-        // Remove the newlyLoaded flag after animation completes
-        setTimeout(() => {
-          setVisibleRecipes(prev => 
-            prev.map(recipe => ({
+        // Schedule opacity transition to complete after animation duration
+        const transitionTimeoutId = window.setTimeout(() => {
+          setVisibleRecipes(currentVisible => 
+            currentVisible.map(recipe => ({
               ...recipe,
               newlyLoaded: false
             }))
           );
-        }, 1000);
+        }, 1000); // Match the transition duration in the style
+        
+        // Store timeout ID for cleanup
+        timeoutRef.current = transitionTimeoutId;
+        
+        // Complete loading state after a short delay to ensure UI updates smoothly
+        window.setTimeout(() => {
+          setIsLoadingMore(false);
+        }, 50);
+        
+        // Return incremented page number
+        return prevPage + 1;
+      });
+    };
+    
+    // Apply a small delay before loading for better UX
+    const loadTimeoutId = window.setTimeout(loadNextBatch, 250);
+    loadingTimeoutRef.current = loadTimeoutId;
+    
+  }, [filteredRecipes, isLoadingMore, recipesPerPage]);
+  
+  // Refs to store timeout IDs for cleanup
+  const timeoutRef = useRef<number | null>(null);
+  const loadingTimeoutRef = useRef<number | null>(null);
+  
+  // Clean up timeouts when component unmounts
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
       }
-      
-      setIsLoadingMore(false);
-    }, 250); // Small delay before loading more
-  }, [currentPage, filteredRecipes, isLoadingMore]);
+      if (loadingTimeoutRef.current) {
+        window.clearTimeout(loadingTimeoutRef.current);
+      }
+    };
+  }, []);
   
   // Set up infinite scrolling
   useEffect(() => {
@@ -150,8 +192,20 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ initialRecipes = [] }) => {
     }
     
     return () => {
+      // Clean up IntersectionObserver
       if (observerTarget.current) {
         observer.unobserve(observerTarget.current);
+      }
+      
+      // Clean up any active timeouts
+      if (timeoutRef.current) {
+        window.clearTimeout(timeoutRef.current);
+        timeoutRef.current = null;
+      }
+      
+      if (loadingTimeoutRef.current) {
+        window.clearTimeout(loadingTimeoutRef.current);
+        loadingTimeoutRef.current = null;
       }
     };
   }, [loading, visibleRecipes, filteredRecipes, isLoadingMore, loadMoreRecipes]);
@@ -274,7 +328,7 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ initialRecipes = [] }) => {
                 recipe={recipe}
                 className="recipe-card"
                 style={{ 
-                  opacity: (recipe as any).newlyLoaded ? 0.65 : 1,
+                  opacity: recipe.newlyLoaded ? 0.65 : 1,
                   transition: 'opacity 1000ms ease-in-out'
                 }}
                 index={index}

@@ -5,6 +5,7 @@ export interface Recipe {
   tags: string[];
   searchTerms?: string;
   ingredients_subsections?: IngredientSubsection[];
+  newlyLoaded?: boolean;
 }
 
 export interface RecipeDetail {
