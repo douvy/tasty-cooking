@@ -60,18 +60,24 @@ const Header: React.FC = () => {
   // Handle click outside search results and lock body scroll
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      // Safely check if event target is an Element before using as HTMLElement
+      if (!(event.target instanceof Element)) {
+        return;
+      }
+      
+      const target = event.target;
+      
       // Skip if clicked element is a button with class containing 'search'
-      const target = event.target as HTMLElement;
       if (target.tagName === 'BUTTON' && 
-          (target.className.includes('search') || target.innerText === 'Clear search')) {
+          (target.className.includes('search') || target.textContent === 'Clear search')) {
         return;
       }
       
       if (
         searchBarRef.current && 
-        !searchBarRef.current.contains(event.target as Node) &&
+        !searchBarRef.current.contains(target) &&
         searchResultsRef.current && 
-        !searchResultsRef.current.contains(event.target as Node)
+        !searchResultsRef.current.contains(target)
       ) {
         setShowResults(false);
       }
@@ -277,7 +283,7 @@ const Header: React.FC = () => {
                             <div className="w-8 h-8 rounded-full relative overflow-hidden flex-shrink-0 bg-[#2A2F1E]">
                               {index < 6 ? (
                                 <Image
-                                  src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
+                                  src={recipe.img ? (recipe.img.startsWith('/') ? recipe.img : `/${recipe.img}`) : '/assets/img/placeholder.jpg'}
                                   alt=""
                                   width={32}
                                   height={32}
@@ -288,7 +294,7 @@ const Header: React.FC = () => {
                                 />
                               ) : (
                                 <Image
-                                  src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
+                                  src={recipe.img ? (recipe.img.startsWith('/') ? recipe.img : `/${recipe.img}`) : '/assets/img/placeholder.jpg'}
                                   alt=""
                                   width={32}
                                   height={32}
@@ -428,7 +434,7 @@ const Header: React.FC = () => {
                   <div className="w-10 h-10 rounded-full relative overflow-hidden flex-shrink-0 bg-[#2A2F1E]">
                     {index < 6 ? (
                       <Image
-                        src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
+                        src={recipe.img ? (recipe.img.startsWith('/') ? recipe.img : `/${recipe.img}`) : '/assets/img/placeholder.jpg'}
                         alt=""
                         width={40}
                         height={40}
@@ -439,7 +445,7 @@ const Header: React.FC = () => {
                       />
                     ) : (
                       <Image
-                        src={recipe.img?.startsWith('/') ? recipe.img : `/${recipe.img}`}
+                        src={recipe.img ? (recipe.img.startsWith('/') ? recipe.img : `/${recipe.img}`) : '/assets/img/placeholder.jpg'}
                         alt=""
                         width={40}
                         height={40}

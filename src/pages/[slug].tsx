@@ -8,6 +8,7 @@ import Layout from '@/components/Layout';
 import SEO from '@/components/SEO';
 import { BLUR_DATA_URL, RECIPE_CUSTOM_ORDER } from '@/lib/constants';
 import { getRecipeSlugs, getRecipeBySlug } from '@/lib/mdx-utils';
+import { formatDateValue } from '@/lib/utils';
 
 
 interface IngredientSubsection {
@@ -264,13 +265,13 @@ export const getStaticProps: GetStaticProps<RecipeProps> = async ({ params }) =>
       imgSrc = `/${imgSrc}`;
     }
     
-    // Handle date serialization (convert Date objects to strings)
+    // Handle date serialization with type-safe conversion
     const date = frontmatter.date 
-      ? (typeof frontmatter.date === 'object' ? new Date(frontmatter.date as any).toISOString() : String(frontmatter.date)) 
+      ? formatDateValue(frontmatter.date)
       : '';
       
     const lastUpdated = frontmatter.lastUpdated 
-      ? (typeof frontmatter.lastUpdated === 'object' ? new Date(frontmatter.lastUpdated as any).toISOString() : String(frontmatter.lastUpdated)) 
+      ? formatDateValue(frontmatter.lastUpdated)
       : date;
     
     return {

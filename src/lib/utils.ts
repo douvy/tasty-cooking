@@ -4,10 +4,15 @@
 
 /**
  * Debounce function to limit how often a function can be called
+ * Type-safe implementation that preserves parameter types
  */
-export function debounce<F extends (...args: any[]) => any>(func: F, wait = 250): (...args: Parameters<F>) => void {
+export function debounce<T extends unknown[]>(
+  func: (...args: T) => void,
+  wait = 250
+): (...args: T) => void {
   let timeout: ReturnType<typeof setTimeout>;
-  return function executedFunction(...args: Parameters<F>): void {
+  
+  return function executedFunction(...args: T): void {
     const later = () => {
       clearTimeout(timeout);
       func(...args);
@@ -32,6 +37,28 @@ export function slugToTitle(slug: string): string {
  */
 export function formatDate(date: Date): string {
   return date.toISOString().split('T')[0];
+}
+
+/**
+ * Safely convert various date formats to ISO string
+ */
+export function formatDateValue(dateValue: string | Date | unknown): string {
+  if (dateValue instanceof Date) {
+    return dateValue.toISOString();
+  }
+  if (typeof dateValue === 'string') {
+    return dateValue;
+  }
+  if (dateValue && typeof dateValue === 'object') {
+    // Try to convert the object to a Date
+    const date = new Date(String(dateValue));
+    // Check if the date is valid
+    if (!isNaN(date.getTime())) {
+      return date.toISOString();
+    }
+  }
+  // Return empty string for invalid values
+  return String(dateValue || '');
 }
 
 /**

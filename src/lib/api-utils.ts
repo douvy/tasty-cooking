@@ -1,18 +1,23 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Recipe } from '@/types';
+import { Recipe, RecipeDetail } from '@/types';
 
 /**
  * Handle API errors consistently
  */
 export function handleApiError(
   res: NextApiResponse,
-  error: any,
+  error: Error | unknown,
   statusCode = 500,
   message = 'Internal server error'
 ) {
+  // Extract error message safely based on the error type
+  const errorMessage = error instanceof Error 
+    ? error.message 
+    : String(error);
+    
   res.status(statusCode).json({
     error: message,
-    details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
   });
 }
 
@@ -82,7 +87,7 @@ export function searchRecipes(recipes: Recipe[], query: string): Recipe[] {
 /**
  * Get detailed recipe data from MDX files
  */
-export async function getRecipeDetails(slug: string): Promise<any> {
+export async function getRecipeDetails(slug: string): Promise<RecipeDetail> {
   // Import the getRecipeBySlug function directly to avoid circular dependencies
   const { getRecipeBySlug } = await import('./mdx-utils');
   

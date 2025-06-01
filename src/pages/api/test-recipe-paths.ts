@@ -37,20 +37,36 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       nodeEnv: process.env.NODE_ENV,
       srcContents
     });
-  } catch (error: any) {
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : String(error);
     res.status(500).json({ 
       error: 'Error testing recipe paths',
-      message: error.message
+      message: errorMessage
     });
   }
 }
 
+// Define types for directory scanning
+type FileInfo = {
+  size: number;
+  modified: Date;
+};
+
+type DirectoryContents = {
+  [key: string]: DirectoryContents | FileInfo | string | DirectoryError;
+};
+
+type DirectoryError = {
+  error: string;
+  path: string;
+};
+
 // Helper function to scan a directory recursively
-function scanDirectory(dir: string, depth: number = 1): any {
+function scanDirectory(dir: string, depth: number = 1): DirectoryContents | string | DirectoryError {
   if (depth < 0) return '...'; // Stop recursion at max depth
   
   try {
-    const result: Record<string, any> = {};
+    const result: DirectoryContents = {};
     const files = fs.readdirSync(dir);
     
     for (const file of files) {
