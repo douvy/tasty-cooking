@@ -96,13 +96,13 @@ const RecipePage = ({
       
       {/* Make header transparent on recipe pages */}
       <style jsx global>{`
-        .container-fluid.border-divider-b.sticky.absolute.top-0.left-0.z-30.bg-primary {
+        .container-fluid.border-divider-b.absolute.top-0.left-0.w-full.z-30.bg-primary {
           background-color: rgba(56, 61, 35, 0.85) !important;
         }
       `}</style>
       
-      {/* Hero Section - pulled up under header */}
-      <section className="relative -mt-20">
+      {/* Hero Section - no negative margin needed now */}
+      <section className="relative mt-0">
         <div className="relative w-full h-[400px]">
           <Image 
             src={imgSrc}

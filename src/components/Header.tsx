@@ -146,9 +146,12 @@ const Header: React.FC = () => {
     }
   };
   
+  // Check if we're on a recipe page
+  const isRecipePage = router.pathname === '/[slug]';
+  
   return (
     <>
-      <div className="container-fluid border-divider-b sticky absolute top-0 left-0 z-30 bg-primary">
+      <div className={`container-fluid border-divider-b ${isRecipePage ? 'absolute' : 'sticky'} top-0 left-0 w-full z-30 bg-primary`}>
         <header className="container mx-auto flex items-center p-4 px-4">
           {/* Logo and Navigation - Desktop version */}
           <div className="flex-none mr-auto flex items-center space-x-4">
