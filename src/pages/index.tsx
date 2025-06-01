@@ -5,11 +5,27 @@ import { Recipe } from '@/types';
 import SEO from '@/components/SEO';
 import { getAllRecipes, convertMDXToRecipeList } from '@/lib/mdx-utils';
 
+// Constants for revalidation times
+const REVALIDATION_TIME = {
+  NORMAL: 60 * 60, // 1 hour in seconds
+  ERROR: 60,       // 1 minute in seconds
+};
+
+/**
+ * Home page props interface
+ */
 interface HomeProps {
   initialRecipes: Recipe[];
 }
 
-export default function Home({ initialRecipes }: HomeProps) {
+/**
+ * Home page component
+ * Displays a grid of recipe cards
+ */
+export default function Home({ initialRecipes }: HomeProps): JSX.Element {
+  const pageTitle = "Home • Tasty Cooking";
+  const pageDescription = "A collection of delicious and easy-to-follow recipes with a clean, modern web interface.";
+  
   // Schema.org data for SEO
   const schemaData = {
     "@context": "https://schema.org",
@@ -17,7 +33,7 @@ export default function Home({ initialRecipes }: HomeProps) {
     "name": "Tasty Cooking",
     "url": "https://www.tasty.cooking",
     "logo": "https://www.tasty.cooking/assets/img/favicon.png",
-    "description": "A collection of delicious and easy-to-follow recipes with a clean, modern web interface.",
+    "description": pageDescription,
     "sameAs": [
       "https://www.instagram.com/tastycooking",
       "https://www.pinterest.com/tastycooking",
@@ -26,13 +42,10 @@ export default function Home({ initialRecipes }: HomeProps) {
   };
 
   return (
-    <Layout
-      title="Home • Tasty Cooking"
-      description="A collection of delicious and easy-to-follow recipes with a clean, modern web interface."
-    >
+    <Layout>
       <SEO
-        title="Home • Tasty Cooking"
-        description="A collection of delicious and easy-to-follow recipes with a clean, modern web interface."
+        title={pageTitle}
+        description={pageDescription}
         schemaData={schemaData}
       />
       <RecipeGrid initialRecipes={initialRecipes} />
@@ -40,26 +53,34 @@ export default function Home({ initialRecipes }: HomeProps) {
   );
 }
 
+/**
+ * Static site generation function for the home page
+ * Fetches all recipes from MDX files
+ */
 export const getStaticProps: GetStaticProps = async () => {
-  // Get recipes from MDX files
-  const mdxRecipes = getAllRecipes();
-  
-  // Convert MDX recipes to the Recipe format used by RecipeGrid
-  let recipes: Recipe[] = [];
-  
-  if (mdxRecipes.length > 0) {
-    recipes = convertMDXToRecipeList(mdxRecipes);
-    // Log count of MDX recipes for debugging
+  try {
+    // Get recipes from MDX files
+    const mdxRecipes = getAllRecipes();
+    
+    // Convert MDX recipes to the Recipe format used by RecipeGrid
+    const recipes = convertMDXToRecipeList(mdxRecipes);
+    
+    return {
+      props: { 
+        initialRecipes: recipes 
+      },
+      revalidate: REVALIDATION_TIME.NORMAL
+    };
+  } catch (error: unknown) {
+    // In a production app, we would use a proper logging service here
+    // instead of console.error
+    console.error('Failed to load recipes:', error instanceof Error ? error.message : String(error));
+    
+    return {
+      props: { 
+        initialRecipes: [] 
+      },
+      revalidate: REVALIDATION_TIME.ERROR
+    };
   }
-  
-  // If no MDX recipes, we'll return an empty array and let client-side loading handle it
-  // This maintains backward compatibility during the transition to MDX
-  
-  return {
-    props: {
-      initialRecipes: recipes
-    },
-    // Revalidate every hour
-    revalidate: 3600
-  };
-}
+};
