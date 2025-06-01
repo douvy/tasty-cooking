@@ -26,7 +26,7 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tasty.cooking https://www.tasty.cooking; font-src 'self'; connect-src 'self'; media-src 'self'; object-src 'none'; frame-src 'self'; worker-src 'self'; form-action 'self'; base-uri 'self'; sandbox;",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline' https://pro.fontawesome.com; img-src 'self' data: https://*.tasty.cooking https://www.tasty.cooking https://pro.fontawesome.com; font-src 'self' https://pro.fontawesome.com; connect-src 'self'; media-src 'self'; object-src 'none'; frame-src 'self'; worker-src 'self'; form-action 'self'; base-uri 'self'; sandbox;",
     minimumCacheTTL: 60,
   },
   env: {
@@ -48,12 +48,12 @@ const nextConfig = {
               "default-src 'self'",
               // Scripts - only allow from same origin (unsafe-eval needed for Next.js)
               "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-              // Styles - allow inline styles for Next.js
-              "style-src 'self' 'unsafe-inline'",
+              // Styles - allow inline styles for Next.js and Font Awesome
+              "style-src 'self' 'unsafe-inline' https://pro.fontawesome.com",
               // Images - allow from our domain and data URIs (for optimized images)
-              "img-src 'self' data: https://*.tasty.cooking https://www.tasty.cooking",
-              // Fonts - allow from our origin
-              "font-src 'self'",
+              "img-src 'self' data: https://*.tasty.cooking https://www.tasty.cooking https://pro.fontawesome.com",
+              // Fonts - allow from our origin and Font Awesome
+              "font-src 'self' https://pro.fontawesome.com",
               // Connect - only allow to our API endpoints
               "connect-src 'self'",
               // Media - allow from our origin
