@@ -216,7 +216,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     
     return {
       paths,
-      fallback: 'blocking' // Enable blocking fallback for server-side generation
+      fallback: false // Return 404 for paths not returned by getStaticPaths
     };
   } catch (error) {
     
@@ -228,11 +228,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
       
       return {
         paths,
-        fallback: 'blocking'
+        fallback: false
       };
     }
     
-    return { paths: [], fallback: 'blocking' };
+    return { paths: [], fallback: false };
   }
 };
 

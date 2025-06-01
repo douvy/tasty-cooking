@@ -23,6 +23,14 @@ try {
 }
 
 /**
+ * Check if a slug is a valid recipe slug by comparing against the custom order list
+ * This ensures we don't generate fallback content for non-existent recipes
+ */
+function isValidRecipeSlug(slug: string): boolean {
+  return RECIPE_CUSTOM_ORDER.includes(slug);
+}
+
+/**
  * Get all recipe slugs from the content directory
  */
 export function getRecipeSlugs(): string[] {
@@ -67,9 +75,14 @@ export function getRecipeBySlug(slug: string): MDXRecipe | null {
       // Read file content from the filesystem
       fileContents = fs.readFileSync(fullPath, 'utf8');
     } else {
+      // For invalid slugs (not in our recipe list), return null to trigger 404
+      if (!isValidRecipeSlug(slug)) {
+        return null;
+      }
+      
       // In serverless environments, we may not be able to read from the filesystem
       // Here we would typically fetch from a CMS or API
-      // For this project, we'll generate a basic fallback MDX content based on slug
+      // For this project, we'll generate a basic fallback MDX content for valid recipe slugs
       
       // Generate fallback content based on slug
       const title = slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');

@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function ServerError() {
   return (
     <Layout title="Server Error • Tasty Cooking" description="An unexpected error occurred.">
-      <div className="container mx-auto px-4 py-16 text-center">
+      <div className="container mx-auto px-4 py-16 text-center min-h-[80vh] flex flex-col items-center justify-center">
         <h1 className="text-4xl font-windsor-bold text-off-white mb-6">Server Error</h1>
         <p className="text-xl text-off-white mb-8">Sorry, an unexpected error occurred. Please try again later.</p>
         <Link 
