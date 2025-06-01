@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { Recipe } from '@/types';
 import { getSearchService, debounce } from '@/lib/search-service';
 import { BLUR_DATA_URL } from '@/lib/constants';
+import { useFocusTrap } from '@/hooks/useFocusTrap';
 
 const Header: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,6 +19,11 @@ const Header: React.FC = () => {
   const searchBarRef = useRef<HTMLInputElement>(null);
   const searchResultsRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  
+  // References for focus management
+  const searchModalRef = useRef<HTMLDivElement>(null);
+  const modalSearchInputRef = useRef<HTMLInputElement>(null);
+  const mobileSearchButtonRef = useRef<HTMLButtonElement>(null);
   
   // Check if on mobile on mount and window resize
   useEffect(() => {
@@ -42,6 +48,14 @@ const Header: React.FC = () => {
       setSearchResults(searchService.getAllRecipes());
     }
   }, [showMobileSearch, searchQuery]);
+
+  // Apply focus trap to the mobile search modal
+  useFocusTrap(
+    showMobileSearch,
+    searchModalRef,
+    modalSearchInputRef,
+    mobileSearchButtonRef
+  );
 
   // Handle click outside search results and lock body scroll
   useEffect(() => {
@@ -100,6 +114,14 @@ const Header: React.FC = () => {
     }
   };
   
+  // Handle keyboard events in the mobile search modal
+  const handleModalKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      setShowMobileSearch(false);
+    }
+  };
+  
   const debouncedSearch = debounce((query: string) => {
     const searchService = getSearchService();
     
@@ -149,6 +171,26 @@ const Header: React.FC = () => {
   // Check if we're on a recipe page
   const isRecipePage = router.pathname === '/[slug]';
   
+  // Effect to disable scrolling when the modal is open
+  useEffect(() => {
+    if (showMobileSearch) {
+      // Save the current scroll position
+      const scrollY = window.scrollY;
+      // Apply fixed positioning to the body
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      
+      // When modal closes, restore scroll position
+      return () => {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [showMobileSearch]);
+  
   return (
     <>
       <div className={`container-fluid border-divider-b ${isRecipePage ? 'absolute' : 'sticky'} top-0 left-0 w-full z-30 bg-primary`}>
@@ -179,6 +221,7 @@ const Header: React.FC = () => {
                   className="w-[45px] h-[45px] bg-[#2e3523] rounded-full flex items-center justify-center ml-3"
                   aria-label="Search recipes"
                   onClick={() => setShowMobileSearch(true)}
+                  ref={mobileSearchButtonRef}
                 >
                   <i className="far fa-search text-[#f2ede4] fa-sm"></i>
                 </button>
@@ -323,7 +366,14 @@ const Header: React.FC = () => {
           id="search-modal"
           className="fixed inset-0 bg-[#3f4427] z-50 flex flex-col"
           style={{ height: '100%', transform: 'translateY(0)' }}
+          ref={searchModalRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="search-modal-title"
+          onKeyDown={handleModalKeyDown}
+          tabIndex={-1}
         >
+          <div className="sr-only" id="search-modal-title">Recipe Search</div>
           <div className="bg-[#3f4427] border-b border-[#2f3525] p-4 flex items-center">
             <button
               className="text-off-white mr-4"
@@ -344,12 +394,15 @@ const Header: React.FC = () => {
                 autoComplete="off"
                 value={searchQuery}
                 onChange={handleSearchChange}
+                ref={modalSearchInputRef}
               />
             </div>
           </div>
           <div
             id="modal-search-results"
             className="flex-1 overflow-y-auto bg-[#2A2F1E]"
+            role="region"
+            aria-label="Search results"
           >
             {isSearching ? (
               <div className="px-4 py-3 text-off-white text-center">Loading recipes...</div>
@@ -361,6 +414,15 @@ const Header: React.FC = () => {
                   onClick={() => {
                     router.push(`/${recipe.link}`);
                     setShowMobileSearch(false);
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      router.push(`/${recipe.link}`);
+                      setShowMobileSearch(false);
+                    }
                   }}
                 >
                   <div className="w-10 h-10 rounded-full relative overflow-hidden flex-shrink-0 bg-[#2A2F1E]">
@@ -418,8 +480,11 @@ const Header: React.FC = () => {
                     // Keep mobile search open
                     setShowMobileSearch(true);
                     
-                    // Ensure the state update is applied
+                    // Return focus to the search input after clearing
                     setTimeout(() => {
+                      if (modalSearchInputRef.current) {
+                        modalSearchInputRef.current.focus();
+                      }
                       setShowMobileSearch(true);
                     }, 100);
                   }}
@@ -427,6 +492,7 @@ const Header: React.FC = () => {
                     // Prevent the mousedown event from bubbling up
                     e.stopPropagation();
                   }}
+                  aria-label="Clear search and show all recipes"
                 >
                   Clear search
                 </button>
