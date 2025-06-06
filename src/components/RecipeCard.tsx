@@ -32,7 +32,8 @@ const RecipeCard: React.FC<RecipeCardProps> = ({
     'beet-slaw': 'Beet Slaw',
     'roasted-radishes': 'Roasted Radishes',
     'almonds': 'Brined & Roasted Almonds',
-    'white-bean-wraps': 'White Bean Wraps'
+    'white-bean-wraps': 'White Bean Wraps',
+    'crushed-fried-potatoes': 'Crushed & Fried Potatoes'
   };
 
   // Get homepage display title (shorter version for specific recipes)
