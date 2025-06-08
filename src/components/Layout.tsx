@@ -18,25 +18,9 @@ const Layout: React.FC<LayoutProps> = ({
     <>
       <Head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content={description} />
         <meta name="keywords" content="recipes, cooking, food, healthy recipes, quick meals, vegetarian, vegan, gluten-free" />
         <meta name="author" content="Tasty Cooking" />
         <meta name="theme-color" content="#383d23" />
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.tasty.cooking/" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content="https://www.tasty.cooking/assets/img/tasty-cooking.jpg" />
-        
-        {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://www.tasty.cooking/" />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
-        <meta property="twitter:image" content="https://www.tasty.cooking/assets/img/hero.png" />
         
         {/* PWA support */}
         <link rel="manifest" href="/manifest.json" />
@@ -51,8 +35,6 @@ const Layout: React.FC<LayoutProps> = ({
         <link rel="mask-icon" href="/assets/img/favicon.png" color="#383d23" />
         <meta name="msapplication-TileColor" content="#383d23" />
         <meta name="theme-color" content="#383d23" />
-        
-        <title>{title}</title>
       </Head>
       
       {/* Skip to content link for accessibility */}
