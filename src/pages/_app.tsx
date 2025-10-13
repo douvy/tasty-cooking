@@ -28,6 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <MDXProvider>
       <Component {...pageProps} />
+      <Analytics />
     </MDXProvider>
   );
 }
