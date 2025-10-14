@@ -52,6 +52,11 @@ const RecipePage = ({
 }: RecipeProps) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   // Create Schema.org Recipe JSON-LD data
+  // Calculate cookTime safely
+  const prepTimeNum = parseInt(prepTime) || 0;
+  const readyTimeNum = parseInt(readyTime) || 0;
+  const cookTimeNum = readyTimeNum > prepTimeNum ? readyTimeNum - prepTimeNum : 0;
+
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "Recipe",
@@ -70,15 +75,17 @@ const RecipePage = ({
     "dateModified": lastUpdated || date,
     "description": description,
     "prepTime": `PT${prepTime.replace(' min', 'M')}`,
+    "cookTime": cookTimeNum > 0 ? `PT${cookTimeNum}M` : undefined,
     "totalTime": `PT${readyTime.replace(' min', 'M')}`,
     "recipeYield": servings,
-    "recipeIngredient": ingredients,
+    "recipeIngredient": ingredients.length > 0 ? ingredients : ingredients_subsections.flatMap(s => s.items),
     "recipeInstructions": instructions.map((step) => ({
       "@type": "HowToStep",
       "text": step
     })),
     "keywords": tags.join(", ").toLowerCase(),
-    "recipeCategory": "Recipe"
+    "recipeCategory": tags.find(t => ['appetizer', 'main', 'side', 'dessert', 'snack', 'breakfast', 'lunch', 'dinner'].includes(t.toLowerCase())) || "Recipe",
+    "recipeCuisine": tags.find(t => ['american', 'italian', 'mexican', 'asian', 'japanese', 'chinese', 'indian', 'mediterranean'].includes(t.toLowerCase())) || undefined
   };
 
   return (
@@ -93,6 +100,13 @@ const RecipePage = ({
         url={`https://www.tasty.cooking/${slug}`}
         type="article"
         schemaData={schemaData}
+        publishedTime={date}
+        modifiedTime={lastUpdated || date}
+        breadcrumbs={[
+          { name: 'Home', url: 'https://www.tasty.cooking' },
+          { name: 'Recipes', url: 'https://www.tasty.cooking' },
+          { name: title, url: `https://www.tasty.cooking/${slug}` }
+        ]}
       />
       
       {/* Make header transparent on recipe pages */}
@@ -105,9 +119,9 @@ const RecipePage = ({
       {/* Hero Section - no negative margin needed now */}
       <section className="relative mt-0">
         <div className="relative w-full h-[400px]">
-          <Image 
+          <Image
             src={imgSrc}
-            alt={imgAlt || title} 
+            alt={imgAlt || `${title} - ${description.substring(0, 100)}`}
             fill
             className={`object-cover transition-opacity duration-500 ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
             sizes="100vw"

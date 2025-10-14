@@ -26,20 +26,34 @@ export default function Home({ initialRecipes }: HomeProps): JSX.Element {
   const pageTitle = "Home • Tasty Cooking";
   const pageDescription = "A collection of delicious and easy-to-follow recipes with a clean, modern web interface.";
   
-  // Schema.org data for SEO
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Tasty Cooking",
-    "url": "https://www.tasty.cooking",
-    "logo": "https://www.tasty.cooking/assets/img/favicon.png",
-    "description": pageDescription,
-    "sameAs": [
-      "https://www.instagram.com/tastycooking",
-      "https://www.pinterest.com/tastycooking",
-      "https://www.youtube.com/tastycooking"
-    ]
-  };
+  // Schema.org data for SEO - combine Organization and WebPage schemas
+  const schemaData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Tasty Cooking",
+      "url": "https://www.tasty.cooking",
+      "logo": "https://www.tasty.cooking/assets/img/favicon.png",
+      "description": pageDescription,
+      "sameAs": [
+        "https://www.instagram.com/tastycooking",
+        "https://www.pinterest.com/tastycooking",
+        "https://www.youtube.com/tastycooking"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": pageTitle,
+      "url": "https://www.tasty.cooking",
+      "description": pageDescription,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Tasty Cooking",
+        "url": "https://www.tasty.cooking"
+      }
+    }
+  ];
 
   return (
     <Layout>

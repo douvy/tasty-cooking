@@ -1,4 +1,6 @@
 import { GetServerSideProps } from 'next';
+import fs from 'fs';
+import path from 'path';
 import { formatDate } from '@/lib/utils';
 import { getRecipeSlugs } from '@/lib/mdx-utils';
 
@@ -10,7 +12,18 @@ function SiteMap() {
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   // Get recipe slugs from MDX files
   const mdxSlugs = getRecipeSlugs();
-  
+
+  // Get file modification dates for each recipe
+  const getLastModified = (slug: string): Date => {
+    try {
+      const recipePath = path.join(process.cwd(), 'src/content/recipes', `${slug}.mdx`);
+      const stats = fs.statSync(recipePath);
+      return stats.mtime;
+    } catch {
+      return new Date();
+    }
+  };
+
   // Fallback recipe slugs if no MDX files yet
   const fallbackSlugs = [
     'sesame-green-beans',
@@ -69,7 +82,16 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   // Combine both sources, remove duplicates
   const allSlugs = Array.from(new Set([...mdxSlugs, ...fallbackSlugs]));
   
-  // Generate sitemap XML
+  // Generate sitemap XML with proper escaping
+  const escapeXml = (unsafe: string): string => {
+    return unsafe
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&apos;');
+  };
+
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
@@ -79,8 +101,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   </url>
   ${allSlugs.map(slug => `
   <url>
-    <loc>https://www.tasty.cooking/${slug}</loc>
-    <lastmod>${formatDate(new Date())}</lastmod>
+    <loc>https://www.tasty.cooking/${escapeXml(slug)}</loc>
+    <lastmod>${formatDate(getLastModified(slug))}</lastmod>
     <priority>0.8</priority>
   </url>
   `).join('')}
