@@ -13,7 +13,8 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ initialRecipes = [] }) => {
   const [recipes, setRecipes] = useState<Recipe[]>(initialRecipes);
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>(initialRecipes);
   const [loading, setLoading] = useState(initialRecipes.length === 0);
-  const [visibleRecipes, setVisibleRecipes] = useState<Recipe[]>(initialRecipes.slice(0, 12));
+  // Show all recipes initially for SEO - Google needs to see all links in server-rendered HTML
+  const [visibleRecipes, setVisibleRecipes] = useState<Recipe[]>(initialRecipes);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [sortOrder, setSortOrder] = useState<'default' | 'alphabetical'>('default');
@@ -38,14 +39,13 @@ const RecipeGrid: React.FC<RecipeGridProps> = ({ initialRecipes = [] }) => {
       
       // Initialize search service with our MDX recipes
       const searchService = getSearchService();
-      
+
       // Store default order (already done in state initializer)
       setRecipes(initialRecipes);
       setFilteredRecipes(initialRecipes);
       setLoading(false);
-      
-      // Load first page
-      setVisibleRecipes(initialRecipes.slice(0, recipesPerPage));
+
+      // Show all recipes for SEO (already set in initial state)
       return;
     }
     

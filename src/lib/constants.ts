@@ -47,6 +47,7 @@ export const RECIPE_CUSTOM_ORDER = [
   'green-garlic-butter',
   'alla-diavola-butter',
   'almonds',
+  'smoked-barbecue-cashews',
   'brown-butter',
   'pineapple-ginger-smoothie',
   'roasted-sweet-potato-salad',
