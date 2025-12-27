@@ -26,6 +26,7 @@ export const RECIPE_CUSTOM_ORDER = [
   'crunchy-pappardelle',
   'chimichurri',
   'roasted-chicken',
+  'asian-pork',
   'eggplant-with-buttermilk-sauce',
   'crushed-fried-potatoes',
   'cucumber-salad',
