@@ -34,12 +34,7 @@ export default function Home({ initialRecipes }: HomeProps): JSX.Element {
       "name": "Tasty Cooking",
       "url": "https://www.tasty.cooking",
       "logo": "https://www.tasty.cooking/assets/img/favicon.png",
-      "description": pageDescription,
-      "sameAs": [
-        "https://www.instagram.com/tastycooking",
-        "https://www.pinterest.com/tastycooking",
-        "https://www.youtube.com/tastycooking"
-      ]
+      "description": pageDescription
     },
     {
       "@context": "https://schema.org",
