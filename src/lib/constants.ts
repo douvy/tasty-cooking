@@ -13,6 +13,7 @@ export const IMAGE_LOAD_THRESHOLD = 0.1; // Start loading when 10% of the image 
 
 // Custom recipe order
 export const RECIPE_CUSTOM_ORDER = [
+  'spaghetti-carbonara',
   'sesame-green-beans',
   'guacamole',
   'roasted-cauliflower',
